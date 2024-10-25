@@ -1,0 +1,526 @@
+{
+
+    "events" :
+    [
+        {
+            "id" : 1,
+            "description" : "Super soupe du samedi",
+            "local" : "2F10",
+            "date" : "2021-01-02"
+        },
+        {
+            "id" : 2,
+            "description" : "Super soupe du dimanche",
+            "local" : "2F10",
+            "date" : "2021-01-03"
+        },
+        {
+            "id" : 3,
+            "description" : "Super soupe du lundi",
+            "local" : "2F10",
+            "date" : "2021-01-04"
+        },
+        {
+            "id" : 4,
+            "description" : "Super soupe du mardi",
+            "local" : "2F10",
+            "date" : "2021-01-05"
+        },
+        {
+            "id" : 5,
+            "description" : "Super soupe du mercredi",
+            "local" : "2F10",
+            "date" : "2021-01-06"
+        },
+        {
+            "id" : 6,
+            "description" : "Super soupe du jeudi",
+            "local" : "2F10",
+            "date" : "2021-01-07"
+        },
+        {
+            "id" : 7,
+            "description" : "Super soupe du vendredi",
+            "local" : "2F10",
+            "date" : "2021-01-08"
+        }
+    ],
+
+    "calendar" : 
+    {
+        "01_0830_1140": "Cours dinfo au 2F10",
+        "01_1140_1230": "Pause dejeuner",
+        "01_1230_1530": "Cours de math au 2F10",
+        "01_1530_1630": "Cours de francais au 2F10",
+        "02_0830_1140": "Cours dinfo au 2F10",
+        "03_0830_1140": "Cours dinfo au 2F10",
+        "04_0830_1140": "Cours dinfo au 2F10",
+        "04_1140_1230": "Pause dejeuner",
+        "04_1230_1530": "Cours de math au 2F10",
+        "07_0830_1140": "Cours dinfo au 2F10",
+        "07_1140_1230": "Pause dejeuner",
+        "07_1230_1530": "Cours de math au 2F10",
+        "07_1530_1630": "Cours de francais au 2F10",
+        "08_0830_1140": "Cours dinfo au 2F10",
+        "08_1140_1230": "Pause dejeuner",
+        "08_1230_1530": "Cours de math au 2F10",
+        "09_0830_1140": "Cours dinfo au 2F10",
+        "10_0830_1140": "Cours dinfo au 2F10",
+        "11_0830_1140": "Cours dinfo au 2F10",
+        "11_1140_1230": "Pause dejeuner",
+        "11_1230_1530": "Cours de math au 2F10",
+        "11_1530_1630": "Cours de francais au 2F10",
+        "14_0830_1140": "Cours dinfo au 2F10",
+        "14_1140_1230": "Pause dejeuner",
+        "14_1230_1530": "Cours de math au 2F10",
+        "15_0830_1140": "Cours dinfo au 2F10",
+        "16_0830_1140": "Cours dinfo au 2F10",
+        "17_0830_1140": "Cours dinfo au 2F10",
+        "18_0830_1140": "Cours dinfo au 2F10",
+        "18_1140_1230": "Pause dejeuner",
+        "18_1230_1530": "Cours de math au 2F10",
+        "18_1530_1630": "Cours de francais au 2F10",
+        "21_0830_1140": "Cours dinfo au 2F10",
+        "21_1140_1230": "Pause dejeuner",
+        "21_1230_1530": "Cours de math au 2F10",
+        "22_0830_1140": "Cours dinfo au 2F10",
+        "23_0830_1140": "Cours dinfo au 2F10",
+        "24_0830_1140": "Cours dinfo au 2F10",
+        "25_0830_1140": "Cours dinfo au 2F10",
+        "25_1140_1230": "Pause dejeuner",
+        "25_1230_1530": "Cours de math au 2F10",
+        "25_1530_1630": "Cours de francais au 2F10",
+        "28_0830_1140": "Cours dinfo au 2F10",
+        "28_1140_1230": "Pause dejeuner",
+        "28_1230_1530": "Cours de math au 2F10",
+        "29_0830_1140": "Cours dinfo au 2F10",
+        "30_0830_1140": "Cours dinfo au 2F10",
+        "31_0830_1140": "Cours dinfo au 2F10"
+    },
+
+    "students": [
+        {
+            "id": "20231",
+            "name": "Jean",
+            "surname": "Dupont",
+            "messenger": "https://messenger.com/jeandupont",
+            "discord": "https://discord.com/jeandupont",
+            "outlook": "https://outlook.com/jean.dupont",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/jeandupont"
+        },
+        {
+            "id": "20232",
+            "name": "Marie",
+            "surname": "Lefevre",
+            "messenger": "https://messenger.com/marielefevre",
+            "discord": "https://discord.com/marielefevre",
+            "outlook": "https://outlook.com/marie.lefevre",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/marielefevre"
+        },
+        {
+            "id": "20233",
+            "name": "Luc",
+            "surname": "Martin",
+            "messenger": "https://messenger.com/lucmartin",
+            "discord": "https://discord.com/lucmartin",
+            "outlook": "https://outlook.com/luc.martin",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/lucmartin"
+        },
+        {
+            "id": "20234",
+            "name": "Claire",
+            "surname": "Bernard",
+            "messenger": "https://messenger.com/clairebernard",
+            "discord": "https://discord.com/clairebernard",
+            "outlook": "https://outlook.com/claire.bernard",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/clairebernard"
+        },
+        {
+            "id": "20235",
+            "name": "Hugo",
+            "surname": "Moreau",
+            "messenger": "https://messenger.com/hugomoreau",
+            "discord": "https://discord.com/hugomoreau",
+            "outlook": "https://outlook.com/hugo.moreau",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/hugomoreau"
+        },
+        {
+            "id": "20236",
+            "name": "Sophie",
+            "surname": "Dubois",
+            "messenger": "https://messenger.com/sophiedubois",
+            "discord": "https://discord.com/sophiedubois",
+            "outlook": "https://outlook.com/sophie.dubois",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/sophiedubois"
+        },
+        {
+            "id": "20237",
+            "name": "Julien",
+            "surname": "Petit",
+            "messenger": "https://messenger.com/julienpetit",
+            "discord": "https://discord.com/julienpetit",
+            "outlook": "https://outlook.com/julien.petit",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/julienpetit"
+        },
+        {
+            "id": "20238",
+            "name": "Emma",
+            "surname": "Renard",
+            "messenger": "https://messenger.com/emmarenard",
+            "discord": "https://discord.com/emmarenard",
+            "outlook": "https://outlook.com/emma.renard",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/emmarenard"
+        },
+        {
+            "id": "20239",
+            "name": "Lucas",
+            "surname": "Garcia",
+            "messenger": "https://messenger.com/lucasgarcia",
+            "discord": "https://discord.com/lucasgarcia",
+            "outlook": "https://outlook.com/lucas.garcia",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/lucasgarcia"
+        },
+        {
+            "id": "2023010",
+            "name": "Amelie",
+            "surname": "Perret",
+            "messenger": "https://messenger.com/amelieperret",
+            "discord": "https://discord.com/amelieperret",
+            "outlook": "https://outlook.com/amelie.perret",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/amelieperret"
+        },
+        {
+            "id": "2023011",
+            "name": "Leo",
+            "surname": "Rousseau",
+            "messenger": "https://messenger.com/leorousseau",
+            "discord": "https://discord.com/leorousseau",
+            "outlook": "https://outlook.com/leo.rousseau",
+            "dark_light": true,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/leorousseau"
+        },
+        {
+            "id": "2023012",
+            "name": "Alice",
+            "surname": "Fontaine",
+            "messenger": "https://messenger.com/alicefontaine",
+            "discord": "https://discord.com/alicefontaine",
+            "outlook": "https://outlook.com/alice.fontaine",
+            "dark_light": false,
+            "lang": "fr",
+            "PP_URL": "https://example.com/pp/alicefontaine"
+        }
+
+    ],
+    
+    "grades": [
+        {
+            "student_id": "20231",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 12,
+                        "mark_sept": 14,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 14,
+                        "mark_sept": 16,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 10,
+                        "mark_sept": 12,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20232",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 15,
+                        "mark_sept": 13,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 16,
+                        "mark_sept": 17,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 11,
+                        "mark_sept": 13,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20233",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 13,
+                        "mark_sept": 15,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 14,
+                        "mark_sept": 14,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 12,
+                        "mark_sept": 13,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20234",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 11,
+                        "mark_sept": 12,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 15,
+                        "mark_sept": 14,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 14,
+                        "mark_sept": 15,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20235",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 16,
+                        "mark_sept": 17,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 13,
+                        "mark_sept": 15,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 10,
+                        "mark_sept": 12,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20236",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 14,
+                        "mark_sept": 16,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 16,
+                        "mark_sept": 17,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 13,
+                        "mark_sept": 14,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        },
+        {
+            "student_id": "20237",
+            "grades": [
+                {
+                    "subject": "Math",
+                    "grade": {
+                        "mark_juin": 12,
+                        "mark_sept": 13,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Info",
+                    "grade": {
+                        "mark_juin": 15,
+                        "mark_sept": 16,
+                        "mark_janvier": -1
+                    }
+                },
+                {
+                    "subject": "Francais",
+                    "grade": {
+                        "mark_juin": 14,
+                        "mark_sept": 15,
+                        "mark_janvier": -1
+                    }
+                }
+            ]
+        }
+    ],
+
+    "courses": [
+        {
+            "professor": "M. Dupont",
+            "subject": "Math",
+            "id": 1,
+            "email": "coucou@ecam.be",
+            "pdf_cours": "https://example.com/pdf/cours_math",
+            "students": [
+                "20231",
+                "20232",
+                "20233",
+                "20234",
+                "20235",
+                "20236",
+                "20237"
+            ]
+        },
+        {
+            "professor": "Mme Lefevre",
+            "subject": "Informatique",
+            "id": 2,
+            "email": "informatique@ecam.be",
+            "pdf_cours": "https://example.com/pdf/cours_info",
+            "students": [
+                "20231",
+                "20232",
+                "20233",
+                "20235",
+                "20236",
+                "20237",
+                "20238"
+            ]
+        },
+        {
+            "professor": "M. Martin",
+            "subject": "Francais",
+            "id": 3,
+            "email": "francais@ecam.be",
+            "pdf_cours": "https://example.com/pdf/cours_francais",
+            "students": [
+                "20232",
+                "20233",
+                "20234",
+                "20235",
+                "20236",
+                "20237",
+                "20238"
+            ]
+        },
+        {
+            "professor": "Mme Bernard",
+            "subject": "Physique",
+            "id": 4,
+            "email": "physique@ecam.be",
+            "pdf_cours": "https://example.com/pdf/cours_physique",
+            "students": [
+                "20231",
+                "20234",
+                "20235",
+                "20236",
+                "20237",
+                "20239",
+                "2023010"
+            ]
+        },
+        {
+            "professor": "Dr Moreau",
+            "subject": "Chimie",
+            "id": 5,
+            "email": "chimie@ecam.be",
+            "pdf_cours": "https://example.com/pdf/cours_chimie",
+            "students": [
+                "20233",
+                "20235",
+                "20236",
+                "20237",
+                "20238",
+                "20239",
+                "2023011"
+            ]
+        }
+    ]
+
+}   
