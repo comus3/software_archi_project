@@ -36,6 +36,12 @@ def get_student(matricule):
     else:
         abort(404, description="Student not found")
 
+@app.route('/students', methods=['GET'])
+def get_students():
+    return jsonify(db.get("students", []))
+
+
+
 # Route pour récupérer les notes d'un étudiant par matricule
 @app.route('/grades/<matricule>', methods=['GET'])
 def get_grades(matricule):
