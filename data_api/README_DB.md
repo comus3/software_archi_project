@@ -1,3 +1,5 @@
+pip install flask
+
 localhost:3323/events:
 return tous l'attribut events
 localhost:3323/calendar
