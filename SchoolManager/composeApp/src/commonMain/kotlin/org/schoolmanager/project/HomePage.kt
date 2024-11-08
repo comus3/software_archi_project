@@ -17,7 +17,7 @@ class HomePage {
             text= "Hello, $name!",
             style= TextStyle(
                 color= Color.Black,
-                fontSize= 28.sp,
+                fontSize= 30.sp,
                 fontWeight= FontWeight.Bold,
                 textDecoration= TextDecoration.Underline
             )
