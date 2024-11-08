@@ -1,13 +1,11 @@
-package org.schoolmanager.project
+package org.schoolmanager.project.ui.contacts
+import org.schoolmanager.project.data.model.Contact
 
-
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,10 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
-fun ContactsScreen(onContactClick: (Contact) -> Unit) {
+fun ContactsScreen(viewModel: ContactsViewModel = viewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,18 +38,11 @@ fun ContactsScreen(onContactClick: (Contact) -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         TextField(
-            value = "",
-            onValueChange = { /* TODO : implémenter la logique de recherche */ },
+            value = viewModel.searchQuery.value,
+            onValueChange = viewModel::onSearchQueryChanged,
             placeholder = { Text("Search here...") },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search Icon"
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+            leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon") },
+            modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
@@ -61,16 +52,9 @@ fun ContactsScreen(onContactClick: (Contact) -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val contacts = listOf(
-            Contact("Olivier Dehareng", "Student"),
-            Contact("John Doe", "Student"),
-            Contact("Jane Smith", "Personal"),
-            Contact("Alice Johnson", "Student")
-        )
-
         LazyColumn {
-            items(contacts) { contact ->
-                ContactCard(contact, onContactClick) // Passe le callback ici
+            items(viewModel.filteredContacts) { contact ->
+                ContactCard(contact = contact, onClick = { viewModel.onContactSelected(contact) })
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
@@ -78,33 +62,25 @@ fun ContactsScreen(onContactClick: (Contact) -> Unit) {
 }
 
 @Composable
-fun ContactCard(contact: Contact, onContactClick: (Contact) -> Unit) {
+fun ContactCard(contact: Contact, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .clickable { onContactClick(contact) } // Appelle onContactClick avec le contact cliqué
+            .clickable { onClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)
         ) {
-            Spacer(modifier = Modifier.width(12.dp))
-
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = contact.name, fontWeight = FontWeight.Bold)
                 Text(text = contact.type, color = Color.Gray)
             }
 
-            Icon(
-                imageVector = Icons.Default.ArrowForward,
-                contentDescription = "Arrow Icon"
-            )
+            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon")
         }
     }
 }
-
-// Modèle de données pour un contact
-data class Contact(val name: String, val type: String)
