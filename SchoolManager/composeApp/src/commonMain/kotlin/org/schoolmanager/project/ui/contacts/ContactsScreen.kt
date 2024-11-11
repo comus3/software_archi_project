@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.sp
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
-fun ContactsScreen(viewModel: ContactsViewModel = viewModel()) {
+fun ContactsScreen() {
+    val viewModel = ContactsViewModel()
+
     Column(
         modifier = Modifier
             .fillMaxSize()

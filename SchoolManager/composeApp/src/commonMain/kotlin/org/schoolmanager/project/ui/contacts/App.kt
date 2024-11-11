@@ -7,14 +7,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
 @Preview
-fun App(viewModel: ContactsViewModel = viewModel()) {
+fun App() {
+    val viewModel = ContactsViewModel()
     MaterialTheme {
         Column(
             Modifier.fillMaxWidth(),
@@ -27,7 +28,7 @@ fun App(viewModel: ContactsViewModel = viewModel()) {
             }
 
             AnimatedVisibility(visible = viewModel.selectedContact.value == null) {
-                ContactsScreen(viewModel)
+                ContactsScreen()
             }
 
             AnimatedVisibility(visible = viewModel.selectedContact.value != null) {
