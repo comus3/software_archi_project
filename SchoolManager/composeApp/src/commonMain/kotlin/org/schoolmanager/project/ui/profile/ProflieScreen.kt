@@ -1,6 +1,7 @@
 package org.schoolmanager.project.ui.profile
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,6 +30,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.viewmodel.ProfileViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.discord
+import schoolmanager.composeapp.generated.resources.iconcontact
 import schoolmanager.composeapp.generated.resources.mail
 import schoolmanager.composeapp.generated.resources.profilePicture
 
@@ -37,7 +39,7 @@ import schoolmanager.composeapp.generated.resources.profilePicture
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(BackHomePage: ()-> Unit, GoToSettings: ()-> Unit) {
     val viewModel = ProfileViewModel()
 
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -48,17 +50,14 @@ fun ProfileScreen() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Button to the left of "John Doe"
-            Button(
-                onClick = { /* Handle left button click */ },
-                modifier = Modifier
-                    .padding(start = 16.dp) // Add padding to the left button
-                    .width(70.dp), // Set specific width for the button
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White), // Blue background color
-                shape = MaterialTheme.shapes.medium // Rounded corners
-            ) {
-                Text("Back")
-            }
+            Image(
+                painter= painterResource(Res.drawable.iconcontact),
+                contentDescription= "Settings",
+                modifier= Modifier
+                    .size(40.dp)
+                    .clickable {BackHomePage()}
+                    .padding(bottom = 16.dp)
+            )
 
             // "John Doe" Text
             Text(
@@ -67,17 +66,14 @@ fun ProfileScreen() {
                 fontWeight = FontWeight.Bold
             )
 
-            // Button to the right of the student name
-            Button(
-                onClick = { /* Handle right button click */ },
-                modifier = Modifier
-                    .padding(start = 16.dp) // Add padding to the left button
-                    .width(100.dp), // Set specific width for the button
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White), // Green background color
-                shape = MaterialTheme.shapes.medium // Rounded corners
-            ) {
-                Text("Settings")
-            }
+            Image(
+                painter= painterResource(Res.drawable.iconcontact),
+                contentDescription= "Settings",
+                modifier= Modifier
+                    .size(40.dp)
+                    .clickable {GoToSettings()}
+                    .padding(bottom = 16.dp)
+            )
         }
 
         Image(

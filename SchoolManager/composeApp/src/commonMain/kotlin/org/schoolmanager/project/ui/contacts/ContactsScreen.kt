@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
-fun ContactsScreen() {
+fun ContactsScreen(GoToContactDetailScreen: ()-> Unit) {
     val viewModel = ContactsViewModel()
 
     Column(
@@ -56,7 +56,7 @@ fun ContactsScreen() {
 
         LazyColumn {
             items(viewModel.filteredContacts) { contact ->
-                ContactCard(contact = contact, onClick = { viewModel.onContactSelected(contact) })
+                ContactCard(contact = contact, GoToContactDetailScreen)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
@@ -64,14 +64,14 @@ fun ContactsScreen() {
 }
 
 @Composable
-fun ContactCard(contact: Contact, onClick: () -> Unit) {
+fun ContactCard(contact: Contact, GoToContactDetailScreen: ()-> Unit) {
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .clickable { onClick() }
+            .clickable {GoToContactDetailScreen()}
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -82,7 +82,7 @@ fun ContactCard(contact: Contact, onClick: () -> Unit) {
                 Text(text = contact.type, color = Color.Gray)
             }
 
-            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon")
+            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon", )
         }
     }
 }
