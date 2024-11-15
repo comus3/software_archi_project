@@ -1,13 +1,10 @@
-package org.schoolmanager.project
+package org.schoolmanager.project.ui.homepage
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import schoolmanager.composeapp.generated.resources.compose_multiplatform
 import androidx.compose.material.MaterialTheme
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import schoolmanager.composeapp.generated.resources.Res
@@ -65,7 +62,7 @@ fun App(){
             "Home"-> HomePage(
                 GoToProfile= {SelectedScreen= "Profile"}).Content()
             "Profile"-> Page2(
-                BackHome= {SelectedScreen= "Home"},
+                BackHomePage= {SelectedScreen= "Home"},
                 GoToSettings= {SelectedScreen= "Settings"}).Content()
             "Settings"-> Page1().Content()
             "Calendar"-> Page1().Content()

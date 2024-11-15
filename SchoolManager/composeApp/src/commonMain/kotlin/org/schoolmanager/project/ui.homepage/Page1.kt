@@ -1,4 +1,4 @@
-package org.schoolmanager.project
+package org.schoolmanager.project.ui.homepage
 
 
 import androidx.compose.foundation.layout.*

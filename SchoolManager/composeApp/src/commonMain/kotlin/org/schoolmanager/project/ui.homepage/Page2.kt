@@ -1,4 +1,4 @@
-package org.schoolmanager.project
+package org.schoolmanager.project.ui.homepage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -12,7 +12,7 @@ import schoolmanager.composeapp.generated.resources.iconcontact
 
 
 
-class Page2(private val BackHome: ()-> Unit, private val GoToSettings: ()-> Unit) {
+class Page2(private val BackHomePage: ()-> Unit, private val GoToSettings: ()-> Unit) {
     @Composable
     fun Content(){
         Column(modifier= Modifier.fillMaxSize().padding(16.dp)){
@@ -21,7 +21,7 @@ class Page2(private val BackHome: ()-> Unit, private val GoToSettings: ()-> Unit
                 contentDescription= "Back",
                 modifier= Modifier
                     .size(40.dp)
-                    .clickable{BackHome()}
+                    .clickable{BackHomePage()}
                     .padding(bottom= 16.dp)
             )
             Image(
