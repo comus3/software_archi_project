@@ -11,5 +11,17 @@ class ProfileViewModel : ViewModel(){
         Course("Computer Science 305"),
         Course("History 210"),
         Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
+        Course("Biology 102"),
     )
 }
