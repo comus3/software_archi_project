@@ -58,6 +58,8 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -68,6 +70,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
