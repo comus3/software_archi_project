@@ -1,5 +1,6 @@
 package org.schoolmanager.project.data.model
 
+//import com.google.android.libraries.places.api.model.LocalDate
 import kotlinx.datetime.LocalDate
 
 // Classe modèle pour les cours
