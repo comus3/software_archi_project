@@ -21,9 +21,7 @@ import androidx.compose.ui.unit.sp
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
-fun ContactsScreen(GoToContactDetailScreen: ()-> Unit) {
-    val viewModel = ContactsViewModel()
-
+fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +54,10 @@ fun ContactsScreen(GoToContactDetailScreen: ()-> Unit) {
 
         LazyColumn {
             items(viewModel.filteredContacts) { contact ->
-                ContactCard(contact = contact, GoToContactDetailScreen)
+                ContactCard(contact = contact, onClick = {
+                    viewModel.onContactSelected(contact) // Enregistre le contact sélectionné
+                    GoToContactDetailScreen() // Navigue vers les détails
+                })
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
@@ -64,14 +65,14 @@ fun ContactsScreen(GoToContactDetailScreen: ()-> Unit) {
 }
 
 @Composable
-fun ContactCard(contact: Contact, GoToContactDetailScreen: ()-> Unit) {
+fun ContactCard(contact: Contact, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .clickable {GoToContactDetailScreen()}
+            .clickable { onClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -82,7 +83,7 @@ fun ContactCard(contact: Contact, GoToContactDetailScreen: ()-> Unit) {
                 Text(text = contact.type, color = Color.Gray)
             }
 
-            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon", )
+            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon")
         }
     }
 }

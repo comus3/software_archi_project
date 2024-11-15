@@ -1,5 +1,6 @@
 package org.schoolmanager.project
 
+import ContactDetailScreen
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.material.MaterialTheme
@@ -8,7 +9,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.ui.calendar.CalendarScreen
-import org.schoolmanager.project.ui.contacts.ContactDetailScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
 import org.schoolmanager.project.ui.homepage.HomePage
 import org.schoolmanager.project.ui.homepage.Page1
@@ -65,19 +65,27 @@ fun App(){
             }
         )
 
-        //SCREENS MANAGEMENT
-        {when (SelectedScreen){
-            "Home"-> HomePage(
-                GoToProfile= {SelectedScreen= "Profile"}).Content()
-            "Profile"-> ProfileScreen(
-                BackHomePage= {SelectedScreen= "Home"},
-                GoToSettings= {SelectedScreen= "Settings"})
-            "Settings"-> Page1().Content()
-            "Calendar"-> CalendarScreen()
-            "Courses"-> Page1().Content()
-            "Contact"-> ContactsScreen(
-                GoToContactDetailScreen= {SelectedScreen= "DetailContact"})
-//            "DetailContact"-> ContactDetailScreen(contact= it)
-        }}
+        // Screens Management
+        { when (SelectedScreen) {
+            "Home" -> HomePage(
+                GoToProfile = { SelectedScreen = "Profile" }
+            ).Content()
+            "Profile" -> ProfileScreen(
+                BackHomePage = { SelectedScreen = "Home" },
+                GoToSettings = { SelectedScreen = "Settings" }
+            )
+            "Settings" -> Page1().Content()
+            "Calendar" -> CalendarScreen()
+            "Courses" -> Page1().Content()
+            "Contact" -> ContactsScreen(
+                viewModel = viewModel,
+                GoToContactDetailScreen = { SelectedScreen = "DetailContact" }
+            )
+            "DetailContact" -> ContactDetailScreen(
+                contact = viewModel.selectedContact.value,
+                onBack = { SelectedScreen = "Contact" }
+            )
+        } }
+
     }
 }
