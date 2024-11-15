@@ -30,15 +30,17 @@ import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.viewmodel.ProfileViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.discord
-import schoolmanager.composeapp.generated.resources.iconcontact
 import schoolmanager.composeapp.generated.resources.mail
 import schoolmanager.composeapp.generated.resources.profilePicture
+import schoolmanager.composeapp.generated.resources.back
+import schoolmanager.composeapp.generated.resources.settings
+
 
 
 
 
 @Composable
-fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit) {
+fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades: () -> Unit) {
     val viewModel = ProfileViewModel()
 
     // Use LazyColumn for all scrollable content
@@ -51,15 +53,15 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit) {
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = 20.dp),
+                    .padding(top = 10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(Res.drawable.iconcontact),
+                    painter = painterResource(Res.drawable.back),
                     contentDescription = "Settings",
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(75.dp)
                         .clickable { BackHomePage() }
                         .padding(bottom = 16.dp)
                 )
@@ -67,10 +69,10 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit) {
                 Text("John Doe", fontSize = 20.sp, fontWeight = FontWeight.Bold)
 
                 Image(
-                    painter = painterResource(Res.drawable.iconcontact),
+                    painter = painterResource(Res.drawable.settings),
                     contentDescription = "Settings",
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(75.dp)
                         .clickable { GoToSettings() }
                         .padding(bottom = 16.dp)
                 )
@@ -141,7 +143,7 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit) {
             ) {
                 items(15) { index ->
                     Button(
-                        onClick = { /* Handle button click for index */ },
+                        onClick = {GoToGrades()},
                         modifier = Modifier
                             .width(100.dp)
                             .padding(12.dp),
