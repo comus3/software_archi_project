@@ -3,12 +3,12 @@ package org.schoolmanager.project
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import schoolmanager.composeapp.generated.resources.compose_multiplatform
-
 import androidx.compose.material.MaterialTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
@@ -21,20 +21,19 @@ import schoolmanager.composeapp.generated.resources.iconcontact
 @Preview
 fun App(){
     MaterialTheme{
-        //HOMEPAGE
-        HomePage().Content()
+        //SELECTED PAGE
+        var SelectedScreen by remember {mutableStateOf("Home")}
 
         //NAVIGATION BAR
-        var SelectedScreen by remember {mutableStateOf("Home")}
         Scaffold(
             bottomBar= {
-                BottomNavigation{
+                BottomNavigation(backgroundColor= Color(red=62,green=96,blue=160), contentColor= Color.White){
                     //HOME
                     BottomNavigationItem(
                         icon= {Icon(painter= painterResource(Res.drawable.iconhome), contentDescription= "Home")},
                         label= {Text("Home")},
                         selected= SelectedScreen=="Home",
-                        onClick= {SelectedScreen= "Home"}
+                        onClick= {SelectedScreen= "Home"},
                     )
                     //CALENDAR
                     BottomNavigationItem(
@@ -60,8 +59,15 @@ fun App(){
                 }
             }
         )
+
+        //SCREENS MANAGEMENT
         {when (SelectedScreen){
-            "Home"-> HomePage().Content()
+            "Home"-> HomePage(
+                GoToProfile= {SelectedScreen= "Profile"}).Content()
+            "Profile"-> Page2(
+                BackHome= {SelectedScreen= "Home"},
+                GoToSettings= {SelectedScreen= "Settings"}).Content()
+            "Settings"-> Page1().Content()
             "Calendar"-> Page1().Content()
             "Courses"-> Page1().Content()
             "Contact"-> Page1().Content()
