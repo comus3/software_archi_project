@@ -1,4 +1,4 @@
-package org.schoolmanager.project.ui.addcourse
+package org.schoolmanager.project.ui.courseB
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

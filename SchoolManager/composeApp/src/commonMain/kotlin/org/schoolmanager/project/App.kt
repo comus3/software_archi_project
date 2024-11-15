@@ -10,9 +10,9 @@ import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
-import org.schoolmanager.project.ui.courses.CoursesScreen
-import org.schoolmanager.project.ui.addcourse.AddCourseScreen
-import org.schoolmanager.project.ui.detailscourse.CourseDetailsScreen
+import org.schoolmanager.project.ui.courseA.CoursesScreen
+import org.schoolmanager.project.ui.courseB.AddCourseScreen
+import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
 import org.schoolmanager.project.ui.grades.GradesScreen
 import org.schoolmanager.project.ui.homepage.HomePage
 import org.schoolmanager.project.ui.profile.ProfileScreen
