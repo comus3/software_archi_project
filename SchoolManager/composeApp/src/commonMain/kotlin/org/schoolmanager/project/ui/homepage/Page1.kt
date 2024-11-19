@@ -1,6 +1,5 @@
 package org.schoolmanager.project.ui.homepage
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

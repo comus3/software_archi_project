@@ -109,6 +109,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.places)
     debugImplementation(compose.uiTooling)
 }
 

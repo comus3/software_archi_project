@@ -21,9 +21,7 @@ import androidx.compose.ui.unit.sp
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 
 @Composable
-fun ContactsScreen() {
-    val viewModel = ContactsViewModel()
-
+fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +54,10 @@ fun ContactsScreen() {
 
         LazyColumn {
             items(viewModel.filteredContacts) { contact ->
-                ContactCard(contact = contact, onClick = { viewModel.onContactSelected(contact) })
+                ContactCard(contact = contact, onClick = {
+                    viewModel.onContactSelected(contact) // Enregistre le contact sélectionné
+                    GoToContactDetailScreen() // Navigue vers les détails
+                })
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

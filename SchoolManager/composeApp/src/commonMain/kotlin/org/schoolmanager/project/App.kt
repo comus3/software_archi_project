@@ -1,5 +1,6 @@
-package org.schoolmanager.project.ui.homepage
+package org.schoolmanager.project
 
+import ContactDetailScreen
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.material.MaterialTheme
@@ -7,6 +8,16 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.ui.calendar.CalendarScreen
+import org.schoolmanager.project.ui.contacts.ContactsScreen
+import org.schoolmanager.project.ui.courseA.CoursesScreen
+import org.schoolmanager.project.ui.courseB.AddCourseScreen
+import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
+import org.schoolmanager.project.ui.grades.GradesScreen
+import org.schoolmanager.project.ui.homepage.HomePage
+import org.schoolmanager.project.ui.profile.ProfileScreen
+import org.schoolmanager.project.ui.settings.SettingsScreen
+import org.schoolmanager.project.viewmodel.ContactsViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
 import schoolmanager.composeapp.generated.resources.iconcalendar
@@ -20,6 +31,7 @@ fun App(){
     MaterialTheme{
         //SELECTED PAGE
         var SelectedScreen by remember {mutableStateOf("Home")}
+        val viewModel= ContactsViewModel()
 
         //NAVIGATION BAR
         Scaffold(
@@ -60,14 +72,29 @@ fun App(){
         //SCREENS MANAGEMENT
         {when (SelectedScreen){
             "Home"-> HomePage(
-                GoToProfile= {SelectedScreen= "Profile"}).Content()
-            "Profile"-> Page2(
+                GoToProfile = {SelectedScreen= "Profile"}).Content()
+            "Profile"-> ProfileScreen(
                 BackHomePage= {SelectedScreen= "Home"},
-                GoToSettings= {SelectedScreen= "Settings"}).Content()
-            "Settings"-> Page1().Content()
-            "Calendar"-> Page1().Content()
-            "Courses"-> Page1().Content()
-            "Contact"-> Page1().Content()
+                GoToSettings= {SelectedScreen= "Settings"},
+                GoToGrades= {SelectedScreen= "Grades"})
+            "Settings"-> SettingsScreen(
+                BackProfile= {SelectedScreen= "Profile"})
+            "Grades"-> GradesScreen(
+                BackProfile= {SelectedScreen= "Profile"})
+            "Calendar"-> CalendarScreen()
+            "Courses"-> CoursesScreen(
+                GoToAddCourse= {SelectedScreen= "AddCourse"},
+                GoToCourseDetail= {SelectedScreen= "DetailsCourse"})
+            "DetailsCourse"-> CourseDetailsScreen(
+                BackCourses= {SelectedScreen= "Courses"})
+            "AddCourse"-> AddCourseScreen(
+                BackCourses= {SelectedScreen= "Courses"})
+            "Contact"-> ContactsScreen(
+                viewModel= viewModel,
+                GoToContactDetailScreen= {SelectedScreen= "DetailContact"})
+            "DetailContact"-> ContactDetailScreen(
+                contact= viewModel.selectedContact.value,
+                onBack= {SelectedScreen= "Contact"})
         }}
     }
 }
