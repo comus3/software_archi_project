@@ -1,11 +1,12 @@
 package org.schoolmanager.project.ui.contacts
 import org.schoolmanager.project.data.model.Contact
-
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,20 +15,45 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.viewmodel.ContactsViewModel
+import schoolmanager.composeapp.generated.resources.Res
+import schoolmanager.composeapp.generated.resources.images56
+import schoolmanager.composeapp.generated.resources.profilephoto
 
 @Composable
-fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> Unit) {
+fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> Unit, GoToProfile: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF7F7F7))
             .padding(16.dp)
     ) {
+        // Box pour la photo de profil
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp, bottom = 6.dp, end = 10.dp)
+        ) {
+            Image(
+                painter = painterResource(Res.drawable.profilephoto),
+                contentDescription = "Profile Photo",
+                modifier = Modifier
+                    .align(Alignment.TopEnd) // Positionne dans le coin supérieur droit
+                    .clip(CircleShape)
+                    .size(65.dp)
+                    .clickable { GoToProfile() }, // Appel de la fonction pour aller au profil
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        // Titre de la page
         Text(
             text = "Contacts",
             fontSize = 28.sp,
@@ -37,6 +63,7 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Barre de recherche
         TextField(
             value = viewModel.searchQuery.value,
             onValueChange = viewModel::onSearchQueryChanged,
@@ -52,13 +79,14 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Liste des contacts
         LazyColumn {
             items(viewModel.filteredContacts) { contact ->
                 ContactCard(contact = contact, onClick = {
-                    viewModel.onContactSelected(contact) // Enregistre le contact sélectionné
-                    GoToContactDetailScreen() // Navigue vers les détails
+                    viewModel.onContactSelected(contact)
+                    GoToContactDetailScreen()
                 })
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp)) // Espace entre les cartes
             }
         }
     }
@@ -82,7 +110,15 @@ fun ContactCard(contact: Contact, onClick: () -> Unit) {
                 Text(text = contact.name, fontWeight = FontWeight.Bold)
                 Text(text = contact.type, color = Color.Gray)
             }
+            Spacer(modifier = Modifier.width(8.dp))
 
+            Image(
+                painter = painterResource(Res.drawable.images56),
+                contentDescription = "Profile Photo",
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(65.dp)
+            )
             Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon")
         }
     }
