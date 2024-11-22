@@ -41,7 +41,8 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 import kotlin.time.Duration.Companion.days
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.animation.core.tween
-//import androidx.compose.animation.animatedFloat
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.animation.core.*
 
 @Composable
 fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfile:()-> Unit) {
@@ -226,32 +227,7 @@ fun WeeklyCalendar(
         }
     }
 }
-/*
-@Composable
-fun CourseList(courses: List<Course>) {
-    LazyColumn {
-        items(courses) { course ->
-            CourseItem(course)
-        }
-    }
-}
 
-@Composable
-fun CourseItem(course: Course) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(6.dp),
-        elevation = 8.dp
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = course.name, fontWeight = FontWeight.Bold)
-            Text(text = "${course.startTime} - ${course.endTime}")
-            Text(text = "Room: ${course.hall}")
-        }
-    }
-}
-*/
 @Composable
 fun CourseList(courses: List<Course>) {
     LazyColumn {
@@ -270,11 +246,16 @@ fun CourseItem(course: Course) {
         animatedOffset = 0f
     }
 
+    val offsetAnimation by animateFloatAsState(
+        targetValue = animatedOffset,
+        animationSpec = tween(durationMillis = 1000) // Durée de l'animation
+    )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(6.dp),
-            //.offset { IntOffset(animatedOffset.toInt(), 0) }, // Animation d'entrée
+            .padding(6.dp)
+            .offset { IntOffset(offsetAnimation.toInt(), 0) }, // Animation du mouvement
         elevation = 8.dp
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -283,14 +264,6 @@ fun CourseItem(course: Course) {
             Text(text = "Room: ${course.hall}")
         }
     }
-
-    // Animation du mouvement
-    /*LaunchedEffect(animatedOffset) {
-        animateFloatAsState(
-            targetValue = animatedOffset,
-            animationSpec = tween(durationMillis = 1000)
-        )
-    }*/
 }
 
 @Composable
