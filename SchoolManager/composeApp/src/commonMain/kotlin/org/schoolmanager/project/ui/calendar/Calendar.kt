@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfile:()-> Unit) {
@@ -256,12 +257,42 @@ fun CourseItem(course: Course) {
             .fillMaxWidth()
             .padding(6.dp)
             .offset { IntOffset(offsetAnimation.toInt(), 0) }, // Animation du mouvement
-        elevation = 8.dp
+        elevation = 8.dp,
+        shape= RoundedCornerShape(16.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = course.name, fontWeight = FontWeight.Bold)
-            Text(text = "${course.startTime} - ${course.endTime}")
-            Text(text = "Room: ${course.hall}")
+        Row(
+            modifier= Modifier.fillMaxWidth().padding(10.dp),
+            horizontalArrangement= Arrangement.SpaceBetween,
+            verticalAlignment= Alignment.CenterVertically
+        )
+        {
+            Column{
+                Text(
+                    text= course.name,
+                    fontSize= 24.sp,
+                    fontWeight= FontWeight.Bold,
+                    color= Color.Black
+                )
+                Spacer(modifier= Modifier.height(4.dp))
+                Text(
+                    text= "${course.startTime} - ${course.endTime}",
+                    fontSize= 16.sp,
+                    color= Color.Black
+                )
+            }
+            Column(horizontalAlignment= Alignment.End){
+                Text(
+                    text= "Room",
+                    fontSize= 20.sp,
+                    fontWeight= FontWeight.Bold,
+                    color= Color.Black
+                )
+                Spacer(modifier= Modifier.height(4.dp))
+                Text(
+                    text= course.hall,
+                    fontSize= 16.sp,
+                )
+            }
         }
     }
 }
