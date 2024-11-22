@@ -111,7 +111,9 @@ fun App(){
             "DetailsCourse"-> CourseDetailsScreen(
                 BackCourses= {SelectedScreen= "Courses"})
             "AddCourse"-> AddCourseScreen(
-                BackCourses= {SelectedScreen= "Courses"})
+                BackCourses= {SelectedScreen= "Courses"},
+                GoToCourseDetail= {SelectedScreen= "DetailsCourse"},
+                GoToAddCourse= {SelectedScreen= "AddCourseScreen"})
             "Contact" -> ContactsScreen(
                 viewModel = viewModel,
                 GoToContactDetailScreen = { SelectedScreen = "DetailContact" },
