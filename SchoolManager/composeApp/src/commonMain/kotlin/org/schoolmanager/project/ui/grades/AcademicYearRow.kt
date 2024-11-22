@@ -18,7 +18,7 @@ fun AcademicYearRow(academicYear: String) {
         academicYear,
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFF3E60A0))
+            .background(Color(red=62,green=96,blue=160))
             .padding(8.dp),
         color = Color.White,
         fontSize = 16.sp,
