@@ -110,6 +110,7 @@ android {
 dependencies {
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(libs.places)
+    implementation(libs.androidx.navigation.runtime.ktx)
     debugImplementation(compose.uiTooling)
 }
 

@@ -141,7 +141,7 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(18.dp)
             ) {
-                items(15) { index ->
+                items(3) { index ->
                     Button(
                         onClick = {GoToGrades()},
                         modifier = Modifier

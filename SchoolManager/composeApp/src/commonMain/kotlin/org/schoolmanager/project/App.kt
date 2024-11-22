@@ -16,7 +16,10 @@ import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
 import org.schoolmanager.project.ui.grades.GradesScreen
 import org.schoolmanager.project.ui.homepage.HomePage
 import org.schoolmanager.project.ui.profile.ProfileScreen
+import org.schoolmanager.project.ui.settings.AboutScreen
+import org.schoolmanager.project.ui.settings.LanguageScreen
 import org.schoolmanager.project.ui.settings.SettingsScreen
+import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
@@ -78,7 +81,10 @@ fun App(){
                 GoToSettings= {SelectedScreen= "Settings"},
                 GoToGrades= {SelectedScreen= "Grades"})
             "Settings"-> SettingsScreen(
-                BackProfile= {SelectedScreen= "Profile"})
+                BackProfile= {SelectedScreen= "Profile"},
+                GoToLanguage = {SelectedScreen ="Language"},
+                GoToAbout = {SelectedScreen ="About"},
+                GoToTerms = {SelectedScreen ="Terms"})
             "Grades"-> GradesScreen(
                 BackProfile= {SelectedScreen= "Profile"})
             "Calendar"-> CalendarScreen()
@@ -95,6 +101,17 @@ fun App(){
             "DetailContact"-> ContactDetailScreen(
                 contact= viewModel.selectedContact.value,
                 onBack= {SelectedScreen= "Contact"})
+            "Language"-> LanguageScreen(
+                BackSettings = {SelectedScreen="Settings"}
+            )
+            "About"-> AboutScreen(
+                BackSettings = {SelectedScreen="Settings"}
+            )
+            "Terms"-> TermsScreen(
+                BackSettings = {SelectedScreen="Settings"}
+            )
+
         }}
     }
 }
+
