@@ -46,57 +46,259 @@
         }
     ],
 
-    "calendar" : 
-    {
-        "01_0830_1140": "Cours dinfo au 2F10",
-        "01_1140_1230": "Pause dejeuner",
-        "01_1230_1530": "Cours de math au 2F10",
-        "01_1530_1630": "Cours de francais au 2F10",
-        "02_0830_1140": "Cours dinfo au 2F10",
-        "03_0830_1140": "Cours dinfo au 2F10",
-        "04_0830_1140": "Cours dinfo au 2F10",
-        "04_1140_1230": "Pause dejeuner",
-        "04_1230_1530": "Cours de math au 2F10",
-        "07_0830_1140": "Cours dinfo au 2F10",
-        "07_1140_1230": "Pause dejeuner",
-        "07_1230_1530": "Cours de math au 2F10",
-        "07_1530_1630": "Cours de francais au 2F10",
-        "08_0830_1140": "Cours dinfo au 2F10",
-        "08_1140_1230": "Pause dejeuner",
-        "08_1230_1530": "Cours de math au 2F10",
-        "09_0830_1140": "Cours dinfo au 2F10",
-        "10_0830_1140": "Cours dinfo au 2F10",
-        "11_0830_1140": "Cours dinfo au 2F10",
-        "11_1140_1230": "Pause dejeuner",
-        "11_1230_1530": "Cours de math au 2F10",
-        "11_1530_1630": "Cours de francais au 2F10",
-        "14_0830_1140": "Cours dinfo au 2F10",
-        "14_1140_1230": "Pause dejeuner",
-        "14_1230_1530": "Cours de math au 2F10",
-        "15_0830_1140": "Cours dinfo au 2F10",
-        "16_0830_1140": "Cours dinfo au 2F10",
-        "17_0830_1140": "Cours dinfo au 2F10",
-        "18_0830_1140": "Cours dinfo au 2F10",
-        "18_1140_1230": "Pause dejeuner",
-        "18_1230_1530": "Cours de math au 2F10",
-        "18_1530_1630": "Cours de francais au 2F10",
-        "21_0830_1140": "Cours dinfo au 2F10",
-        "21_1140_1230": "Pause dejeuner",
-        "21_1230_1530": "Cours de math au 2F10",
-        "22_0830_1140": "Cours dinfo au 2F10",
-        "23_0830_1140": "Cours dinfo au 2F10",
-        "24_0830_1140": "Cours dinfo au 2F10",
-        "25_0830_1140": "Cours dinfo au 2F10",
-        "25_1140_1230": "Pause dejeuner",
-        "25_1230_1530": "Cours de math au 2F10",
-        "25_1530_1630": "Cours de francais au 2F10",
-        "28_0830_1140": "Cours dinfo au 2F10",
-        "28_1140_1230": "Pause dejeuner",
-        "28_1230_1530": "Cours de math au 2F10",
-        "29_0830_1140": "Cours dinfo au 2F10",
-        "30_0830_1140": "Cours dinfo au 2F10",
-        "31_0830_1140": "Cours dinfo au 2F10"
-    },
+    "calendar" :
+    [
+        {
+            "month": "Janvier",
+            "days": {
+                "01": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de français",
+                        "time": "15:30 - 16:30",
+                        "room": "2F10"
+                    }
+                ],
+                "02": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "03": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "04": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    }
+                ],
+                "05": [],
+                "06": [],
+                "07": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de français",
+                        "time": "15:30 - 16:30",
+                        "room": "2F10"
+                    }
+                ],
+                "08": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    }
+                ],
+                "09": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "10": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "11": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de français",
+                        "time": "15:30 - 16:30",
+                        "room": "2F10"
+                    }
+                ],
+                "12": [],
+                "13": [],
+                "14": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    }
+                ],
+                "15": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "16": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "17": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "18": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de français",
+                        "time": "15:30 - 16:30",
+                        "room": "2F10"
+                    }
+                ],
+                "19": [],
+                "20": [],
+                "21": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    }
+                ],
+                "22": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "23": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "24": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "25": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de français",
+                        "time": "15:30 - 16:30",
+                        "room": "2F10"
+                    }
+                ],
+                "26": [],
+                "27": [],
+                "28": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    },
+                    {
+                        "name": "Cours de math",
+                        "time": "12:30 - 15:30",
+                        "room": "2F10"
+                    }
+                ],
+                "29": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "30": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ],
+                "31": [
+                    {
+                        "name": "Cours dinfo",
+                        "time": "08:30 - 11:40",
+                        "room": "2F10"
+                    }
+                ]
+            }
+        }
+
+    ],
 
     "students": [
         {

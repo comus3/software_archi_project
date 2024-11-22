@@ -8,16 +8,19 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.data.model.DataHomePageNews
+import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
 import org.schoolmanager.project.ui.courseA.CoursesScreen
 import org.schoolmanager.project.ui.courseB.AddCourseScreen
 import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
 import org.schoolmanager.project.ui.grades.GradesScreen
-import org.schoolmanager.project.ui.homepage.HomePage
+import org.schoolmanager.project.ui.homepage.HomePageDetailsNews
 import org.schoolmanager.project.ui.profile.ProfileScreen
 import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.viewmodel.ContactsViewModel
+import org.schoolmanager.project.viewmodel.HomePageViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
 import schoolmanager.composeapp.generated.resources.iconcalendar
@@ -32,6 +35,8 @@ fun App(){
         //SELECTED PAGE
         var SelectedScreen by remember {mutableStateOf("Home")}
         val viewModel= ContactsViewModel()
+        var SelectedButton by remember { mutableStateOf("Today classes") }
+        var SelectedNews: DataHomePageNews? by remember {mutableStateOf(null)}
 
         //NAVIGATION BAR
         Scaffold(
@@ -71,8 +76,18 @@ fun App(){
 
         //SCREENS MANAGEMENT
         {when (SelectedScreen){
-            "Home"-> HomePage(
-                GoToProfile = {SelectedScreen= "Profile"}).Content()
+            "Home"-> HomePageScreen(
+                SelectedButton= SelectedButton,
+                GoToProfile= {SelectedScreen = "Profile"},
+                viewModel= HomePageViewModel(),
+                GoToDetailsNews= {news->
+                    SelectedNews= news
+                    SelectedScreen= "DetailsNews"
+                })
+            "DetailsNews"-> SelectedNews?.let {HomePageDetailsNews(it,
+                BackHomePage = {button ->
+                SelectedButton = button
+                SelectedScreen = "Home"})}
             "Profile"-> ProfileScreen(
                 BackHomePage= {SelectedScreen= "Home"},
                 GoToSettings= {SelectedScreen= "Settings"},
