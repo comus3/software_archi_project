@@ -23,7 +23,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-
+import androidx.compose.animation.*
 import org.jetbrains.compose.resources.painterResource
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto

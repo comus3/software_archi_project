@@ -81,7 +81,8 @@ fun App(){
                 BackProfile= {SelectedScreen= "Profile"})
             "Grades"-> GradesScreen(
                 BackProfile= {SelectedScreen= "Profile"})
-            "Calendar"-> CalendarScreen()
+            "Calendar"-> CalendarScreen(
+                goToProfile = {SelectedScreen= "Profile"})
             "Courses"-> CoursesScreen(
                 GoToAddCourse= {SelectedScreen= "AddCourse"},
                 GoToCourseDetail= {SelectedScreen= "DetailsCourse"})
