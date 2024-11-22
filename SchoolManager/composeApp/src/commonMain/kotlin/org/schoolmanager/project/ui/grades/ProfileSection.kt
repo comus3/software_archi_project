@@ -19,28 +19,31 @@ import schoolmanager.composeapp.generated.resources.zlatan
 
 @Composable
 fun ProfileSection() {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalAlignment = Alignment.CenterHorizontally // Centre horizontalement le contenu
     ) {
         Box(
             modifier = Modifier
-                .size(50.dp)
+                .size(70.dp) // Taille augmentée pour une meilleure visibilité
                 .clip(CircleShape)
         ) {
             Image(
                 painter = painterResource(Res.drawable.zlatan),
                 contentDescription = null,
-                contentScale = ContentScale.Crop, // Étire et recadre l'image pour remplir le cercl
+                contentScale = ContentScale.Crop, // Étire et recadre l'image pour remplir le cercle
                 modifier = Modifier
-                    .size(50.dp) // Assure que l'image prend toute la Box
+                    .size(80.dp) // Assure que l'image prend toute la Box
                     .clip(CircleShape) // Découpe l'image en cercle
             )
         }
-        Spacer(modifier = Modifier.width(8.dp))
-        Text("Zlatan Ibrahimovic", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+        Spacer(modifier = Modifier.height(16.dp)) // Espacement entre la photo et le texte
+        Text(
+            text = "Zlatan Ibrahimovic",
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
+        )
     }
 }
