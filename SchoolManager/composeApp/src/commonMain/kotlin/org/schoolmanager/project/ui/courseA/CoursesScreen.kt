@@ -5,72 +5,170 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.addcourse
+import schoolmanager.composeapp.generated.resources.profilephoto
+import schoolmanager.composeapp.generated.resources.shopping_cart
+import schoolmanager.composeapp.generated.resources.alternatif_monophase
+import schoolmanager.composeapp.generated.resources.electronic_circuit
+import schoolmanager.composeapp.generated.resources.motor
+import schoolmanager.composeapp.generated.resources.administration_reseau
 
 @Composable
-fun CoursesScreen(GoToAddCourse: ()-> Unit, GoToCourseDetail: ()-> Unit) {
+fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxSize(), // Fill the available size
-        horizontalAlignment = Alignment.CenterHorizontally)
+            .fillMaxSize()
+            .padding(16.dp), // Fill the available size
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
     {
         Row(
             Modifier
                 .fillMaxWidth()
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically)
+            verticalAlignment = Alignment.CenterVertically
+        )
         {
+            Text(
+                text = "COURSE A",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Image(
+                painter = painterResource(Res.drawable.profilephoto),
+                contentDescription = "Profile Photo",
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterVertically)
+                    .clip(CircleShape)
+                    .size(65.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                label = { Text("Course") },
+                placeholder = { Text("Search here...") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search Icon"
+                    )
+                },
+                modifier = Modifier
+                    .weight(1f)
+            )
             Image(
                 painter = painterResource(Res.drawable.addcourse),
                 contentDescription = "Settings",
                 modifier = Modifier
-                    .size(75.dp)
+                    .size(50.dp)
                     .clickable { GoToAddCourse() }
-                    .padding(bottom = 16.dp)
+                    .align(Alignment.CenterVertically)
             )
-            Text("COURSEA", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        }
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically)
-        {
             Button(
-                onClick= {GoToCourseDetail()},
+                onClick = { /* TODO */ },
+                shape = RoundedCornerShape(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(red = 62, green = 96, blue = 160),
+                    contentColor = Color.White
+                ),
                 modifier = Modifier
-                    .width(100.dp)
-                    .padding(12.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                shape = MaterialTheme.shapes.medium
+                    .height(40.dp)
+                    .wrapContentWidth(),
             ) {
-                Text(
-                    text= "Pont Math",
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
-
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically, // Aligne l'icône et le texte
+                    horizontalArrangement = Arrangement.spacedBy(8.dp) // Espace entre l'icône et le texte
+                ) {
+                    Icon(
+                        painter = painterResource(Res.drawable.shopping_cart), // Remplace par ton icône
+                        contentDescription = "Syllabus Icon",
+                        modifier = Modifier.size(20.dp) // Taille de l'icône
+                    )
+                    Text("Syllabus") // Texte du bouton
+                }
             }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Course cards
+        CourseCard(title = "Elec Q1",Res.drawable.electronic_circuit, GoToCourseDetail) // Remplacez par votre ressource d'image
+        Spacer(modifier = Modifier.height(16.dp))
+        CourseCard(title = "Elec Q2",Res.drawable.alternatif_monophase, GoToCourseDetail) // Remplacez par votre ressource d'image
+        Spacer(modifier = Modifier.height(16.dp))
+        CourseCard(title = "Motors",Res.drawable.motor, GoToCourseDetail) // Remplacez par votre ressource d'image
+        Spacer(modifier = Modifier.height(16.dp))
+        CourseCard(title = "Network",Res.drawable.administration_reseau, GoToCourseDetail) // Remplacez par votre ressource d'image
+
+    }
+}
+
+@Composable
+fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp)
+            .clickable { GoToCourseDetail() },
+        shape = RoundedCornerShape(12.dp),
+        elevation = 4.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Course image
+            Image(
+                painter = painterResource(resource),
+                contentDescription = "$title Icon",
+                modifier = Modifier.size(40.dp)
+            )
+            // Course title
+            Text(
+                text = title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
         }
     }
 }
