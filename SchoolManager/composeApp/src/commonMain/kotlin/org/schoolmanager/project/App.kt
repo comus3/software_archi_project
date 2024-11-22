@@ -106,7 +106,8 @@ fun App(){
                 goToProfile = {SelectedScreen= "Profile"})
             "Courses"-> CoursesScreen(
                 GoToAddCourse= {SelectedScreen= "AddCourse"},
-                GoToCourseDetail= {SelectedScreen= "DetailsCourse"})
+                GoToCourseDetail= {SelectedScreen= "DetailsCourse"},
+                GoToProfile= {SelectedScreen= "Profile"})
             "DetailsCourse"-> CourseDetailsScreen(
                 BackCourses= {SelectedScreen= "Courses"})
             "AddCourse"-> AddCourseScreen(
