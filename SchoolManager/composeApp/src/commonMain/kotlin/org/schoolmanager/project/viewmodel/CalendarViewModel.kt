@@ -6,22 +6,31 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.plus
 import org.schoolmanager.project.data.model.Course
+import schoolmanager.composeapp.generated.resources.Res
+import schoolmanager.composeapp.generated.resources.administration_reseau
+import schoolmanager.composeapp.generated.resources.electronic_circuit
+import schoolmanager.composeapp.generated.resources.alternatif_monophase
+import schoolmanager.composeapp.generated.resources.motor
+
 
 class CalendarViewModel : ViewModel() {
-    private val courses = listOf(
-        Course("Elec", "12H", "15H", "EA13", LocalDate(2024, 11, 21)),
-        Course("Math", "10H", "12H", "EA12", LocalDate(2024, 11, 21)),
-        Course("Physics", "15H", "17H", "EA11", LocalDate(2024, 11, 21)),
-        Course("Elec", "12H", "15H", "EA13", LocalDate(2024, 11, 22)),
-        Course("Math", "10H", "12H", "EA12", LocalDate(2024, 11, 22)),
-        Course("Physics", "15H", "17H", "EA11", LocalDate(2024, 11, 22)),
-        Course("Elec", "12H", "15H", "EA13", LocalDate(2024, 11, 25)),
-        Course("Math", "10H", "12H", "EA12", LocalDate(2024, 11, 25)),
-        Course("Physics", "15H", "17H", "EA11", LocalDate(2024, 11, 25)),
-        Course("Physics", "15H", "17H", "EA11", LocalDate(2024, 11, 22)),
-        Course("Elec", "12H", "15H", "EA13", LocalDate(2024, 11, 25)),
-        Course("Math", "10H", "12H", "EA12", LocalDate(2024, 11, 25)),
-        Course("Physics", "15H", "17H", "EA11", LocalDate(2024, 11, 25)),
+     val courses = listOf(
+        Course("Elec", Res.drawable.alternatif_monophase,"12H", "15H", "EA13", LocalDate(2024, 11, 21)),
+        Course("Motors", Res.drawable.motor,"16H", "18H", "EA14", LocalDate(2024, 11, 21)),
+        Course("Math", Res.drawable.electronic_circuit,"10H", "12H", "EA12", LocalDate(2024, 11, 21)),
+        Course("Network", Res.drawable.administration_reseau,"15H", "17H", "EA11", LocalDate(2024, 11, 21)),
+        Course("Elec", Res.drawable.alternatif_monophase,"10H", "12H", "EA13", LocalDate(2024, 11, 22)),
+        Course("Math", Res.drawable.electronic_circuit, "15H", "17H", "EA12", LocalDate(2024, 11, 22)),
+        Course("Network",Res.drawable.administration_reseau, "18H", "19H", "EA11", LocalDate(2024, 11, 22)),
+         Course("Math", Res.drawable.electronic_circuit, "10H", "12H", "EA12", LocalDate(2024, 11, 24)),
+        Course("Elec", Res.drawable.alternatif_monophase,  "12H", "15H", "EA13", LocalDate(2024, 11, 25)),
+        Course("Motors", Res.drawable.motor,"16H", "18H", "EA14", LocalDate(2024, 11, 25)),
+        Course("Network", Res.drawable.administration_reseau,"11H", "13H", "EA11", LocalDate(2024, 11, 26)),
+        Course("Network", Res.drawable.administration_reseau,"14H", "16H", "EA11", LocalDate(2024, 11, 26)),
+        Course("Elec", Res.drawable.alternatif_monophase, "16H30", "18H", "EA13", LocalDate(2024, 11, 26)),
+        Course("Motors", Res.drawable.motor,"10H", "12H", "EA14", LocalDate(2024, 11, 27)),
+        Course("Math", Res.drawable.electronic_circuit,"15H", "16H", "EA12", LocalDate(2024, 11, 27)),
+        Course("Network", Res.drawable.administration_reseau, "17H", "19H", "EA11", LocalDate(2024, 11, 27)),
     )
 
     fun getCoursesForDate(date: LocalDate): List<Course> {

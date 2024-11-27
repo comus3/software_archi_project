@@ -1,7 +1,7 @@
 package org.schoolmanager.project.data.model
 
 //PARAMETERS OF DATA NEWS
-class DataHomePageNews(
+class NewsHomePage(
     val time: String,
     val title: String,
     val description: String)

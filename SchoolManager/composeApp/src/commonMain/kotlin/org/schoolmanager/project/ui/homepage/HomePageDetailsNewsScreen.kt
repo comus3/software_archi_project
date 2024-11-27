@@ -12,12 +12,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
-import org.schoolmanager.project.data.model.DataHomePageNews
+import org.schoolmanager.project.data.model.NewsHomePage
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.back
 
 @Composable
-fun HomePageDetailsNews(news: DataHomePageNews, BackHomePage:(String)-> Unit){
+fun HomePageDetailsNews(news: NewsHomePage, BackHomePage:(String)-> Unit){
     Column(
         modifier= Modifier.fillMaxSize().padding(16.dp))
     {

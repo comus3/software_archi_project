@@ -8,7 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
-import org.schoolmanager.project.data.model.DataHomePageNews
+import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
@@ -22,8 +22,9 @@ import org.schoolmanager.project.ui.settings.AboutScreen
 import org.schoolmanager.project.ui.settings.LanguageScreen
 import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
+import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.ContactsViewModel
-import org.schoolmanager.project.viewmodel.HomePageViewModel
+import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
 import schoolmanager.composeapp.generated.resources.iconcalendar
@@ -39,7 +40,7 @@ fun App(){
         var SelectedScreen by remember {mutableStateOf("Home")}
         val viewModel= ContactsViewModel()
         var SelectedButton by remember { mutableStateOf("Today classes") }
-        var SelectedNews: DataHomePageNews? by remember {mutableStateOf(null)}
+        var SelectedNews: NewsHomePage? by remember {mutableStateOf(null)}
 
         //NAVIGATION BAR
         Scaffold(
@@ -82,7 +83,8 @@ fun App(){
             "Home"-> HomePageScreen(
                 SelectedButton= SelectedButton,
                 GoToProfile= {SelectedScreen = "Profile"},
-                viewModel= HomePageViewModel(),
+                newsHomePageViewModel= NewsHomePageViewModel(),
+                calendarViewModel= CalendarViewModel(),
                 GoToDetailsNews= {news->
                     SelectedNews= news
                     SelectedScreen= "DetailsNews"
