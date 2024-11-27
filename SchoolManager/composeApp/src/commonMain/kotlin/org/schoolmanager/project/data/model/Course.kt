@@ -1,14 +1,10 @@
 package org.schoolmanager.project.data.model
 
-import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.DrawableResource
 
-// Classe modèle pour les cours
+//DATA COURSE OF SCHOOL
 data class Course(
+    val id: Int= 0,
     val name: String,
     val image: DrawableResource?= null,
-    val startTime: String = "",
-    val endTime: String = "",
-    val hall: String = "",
-    val date: LocalDate = LocalDate(1970, 1, 1)
 )

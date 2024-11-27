@@ -44,9 +44,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import org.schoolmanager.project.data.model.CourseCalendar
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 
 @Composable
-fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfile:()-> Unit) {
+fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), goToProfile:()-> Unit) {
 
     // Obtenir la date actuelle
     val currentDate = Clock.System.now()
@@ -60,7 +62,7 @@ fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfi
     val timeZone = TimeZone.currentSystemDefault()
     // Date sélectionnée par défaut
     var selectedDate by remember { mutableStateOf(Clock.System.now().toLocalDateTime(timeZone).date) }
-    val daysInMonth = viewModel.getDaysInMonth(selectedDate)
+    val daysInMonth = calendarViewModel.getDaysInMonth(selectedDate)
     // Calculer le premier jour du mois
     val firstDayOfWeek = LocalDate(selectedDate.year, selectedDate.month, 1).dayOfWeek
     val selectedDateInstant = selectedDate.atStartOfDayIn(timeZone)
@@ -73,6 +75,7 @@ fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfi
     val weekDates = (0 until 7).map { dayOffset ->
         startOfWeek.plus(dayOffset, DateTimeUnit.DAY)
     }
+    val selectedDateCourses = calendarViewModel.getCoursesForDate(selectedDate)
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -132,8 +135,8 @@ fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfi
                     }
                 )
                 // Affichage des cours du jour sélectionné
-                val courses = viewModel.getCoursesForDate(selectedDate)
-                CourseList(courses)
+                val courses = calendarViewModel.getCoursesForDate(selectedDate)
+                CourseList(selectedDateCourses, coursesViewModel)
             } else {
                 // Affichage de la semaine courante avec les dates et les cours de chaque jour
                 WeeklyCalendar(weekDates, selectedDate) { date ->
@@ -141,8 +144,8 @@ fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfi
                 }
 
                 // Affichage des cours du jour sélectionné dans la vue hebdomadaire
-                val courses = viewModel.getCoursesForDate(selectedDate)
-                CourseList(courses)
+                val courses = calendarViewModel.getCoursesForDate(selectedDate)
+                CourseList(selectedDateCourses, coursesViewModel)
             }
         }
     }
@@ -230,16 +233,17 @@ fun WeeklyCalendar(
 }
 
 @Composable
-fun CourseList(courses: List<Course>) {
+fun CourseList(courses: List<CourseCalendar>, coursesViewModel: CoursesViewModel) {
     LazyColumn {
-        items(courses) { course ->
-            CourseItem(course)
+        items(courses) { courseCalendar ->
+            val course = coursesViewModel.getCourseById(courseCalendar.idcourse)
+            CourseItem(courseCalendar, course)
         }
     }
 }
 
 @Composable
-fun CourseItem(course: Course) {
+fun CourseItem(courseCalendar: CourseCalendar, course: Course?) {
     var animatedOffset by remember { mutableStateOf(1000f) }
 
     LaunchedEffect(true) {
@@ -267,17 +271,30 @@ fun CourseItem(course: Course) {
         )
         {
             Column{
-                Text(
-                    text= course.name,
-                    fontSize= 24.sp,
-                    fontWeight= FontWeight.Bold,
-                    color= Color.Black
-                )
+                Row(verticalAlignment= Alignment.CenterVertically) {
+                    course?.image?.let { painterResource(it) }?.let {
+                        Image(
+                            painter = it,
+                            contentDescription = "Course Image",
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(40.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                    Spacer(modifier= Modifier.width(8.dp))
+                    Text(
+                        text = course?.name ?: "Unknown Course",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
-                    text= "${course.startTime} - ${course.endTime}",
-                    fontSize= 16.sp,
-                    color= Color.Black
+                    text = "${courseCalendar.startTime} - ${courseCalendar.endTime}",
+                    fontSize = 16.sp,
+                    color = Color.Black
                 )
             }
             Column(horizontalAlignment= Alignment.End){
@@ -289,7 +306,7 @@ fun CourseItem(course: Course) {
                 )
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
-                    text= course.hall,
+                    text= courseCalendar.hall,
                     fontSize= 16.sp,
                 )
             }

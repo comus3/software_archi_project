@@ -1,0 +1,23 @@
+package org.schoolmanager.project.viewmodel
+
+import androidx.lifecycle.ViewModel
+import org.schoolmanager.project.data.model.Course
+import schoolmanager.composeapp.generated.resources.Res
+import schoolmanager.composeapp.generated.resources.administration_reseau
+import schoolmanager.composeapp.generated.resources.alternatif_monophase
+import schoolmanager.composeapp.generated.resources.electronic_circuit
+import schoolmanager.composeapp.generated.resources.motor
+
+class CoursesViewModel: ViewModel(){
+    private val courses = listOf(
+        Course(1, "Electrical", Res.drawable.alternatif_monophase),
+        Course(2, "Motors", Res.drawable.motor),
+        Course(3, "Math", Res.drawable.electronic_circuit),
+        Course(4, "Network", Res.drawable.administration_reseau),
+    )
+
+    //FCT TO GET THE COURSE BY ID
+    fun getCourseById(id: Int): Course?{
+        return courses.find{it.id==id}
+    }
+}

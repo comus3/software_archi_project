@@ -34,6 +34,7 @@ import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.viewmodel.CalendarViewModel
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
@@ -43,7 +44,7 @@ import schoolmanager.composeapp.generated.resources.forward
 
 //HOMEPAGE
 @Composable
-fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsHomePageViewModel: NewsHomePageViewModel= NewsHomePageViewModel(), calendarViewModel: CalendarViewModel = CalendarViewModel(), GoToDetailsNews: (NewsHomePage)-> Unit){
+fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsHomePageViewModel: NewsHomePageViewModel= NewsHomePageViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsNews: (NewsHomePage)-> Unit){
     Column(Modifier.fillMaxWidth(), horizontalAlignment= Alignment.CenterHorizontally){
         //PROFILE PHOTO
         Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp)){
@@ -85,7 +86,7 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
         //VARIABLE CONTENT OF BUTTONS
         Spacer(modifier= Modifier.height(16.dp))
         when (CurrentSelectedButton){
-            "Today classes"-> TodayClassesContent(calendarViewModel)
+            "Today classes"-> TodayClassesContent(calendarViewModel, coursesViewModel)
             "Last News"-> LastNewsContent(newsHomePageViewModel, GoToDetailsNews)
         }
     }
@@ -110,16 +111,17 @@ fun Welcome(name: String) {
 
 //FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
-fun TodayClassesContent(viewModel: CalendarViewModel){
+fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: CoursesViewModel){
     //DATE TODAY
     val TodayDate= Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
     //TODAY COURSE
-    val TodayCourses= viewModel.getCoursesForDate(TodayDate)
+    val TodayCourses= calendarViewModel.getCoursesForDate(TodayDate)
 
     LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally){
         //IF MINIMUM 1 COURSE
         if (TodayCourses.isNotEmpty()){
-            items(TodayCourses){course->
+            items(TodayCourses){courseCalendar->
+                val course= coursesViewModel.getCourseById(courseCalendar.idcourse)
                 Card(
                     modifier= Modifier.fillMaxWidth().height(130.dp).padding(vertical= 12.dp),
                     elevation= 8.dp,
@@ -135,19 +137,19 @@ fun TodayClassesContent(viewModel: CalendarViewModel){
                         //NAME COURSE
                         Column{
                             Row(verticalAlignment= Alignment.CenterVertically){
-                                course.image?.let{painterResource(it)}?.let{
+                                course?.image?.let {painterResource(it)}?.let{
                                     Image(
-                                        painter= it,
-                                        contentDescription= "ProfilePhoto",
-                                        modifier= Modifier
+                                        painter = it,
+                                        contentDescription = "Course Image",
+                                        modifier = Modifier
                                             .clip(CircleShape)
                                             .size(40.dp),
-                                        contentScale= ContentScale.Crop
+                                        contentScale = ContentScale.Crop
                                     )
                                 }
                                 Spacer(modifier= Modifier.width(8.dp))
                                 Text(
-                                    text= course.name,
+                                    text= course?.name ?: "Unknown Course",
                                     fontSize= 28.sp,
                                     fontWeight= FontWeight.Bold,
                                     color= Color.Black
@@ -156,7 +158,7 @@ fun TodayClassesContent(viewModel: CalendarViewModel){
                             Spacer(modifier= Modifier.height(4.dp))
                             //TIME OF THE COURSE
                             Text(
-                                text= course.startTime +" - " +course.endTime,
+                                text= courseCalendar.startTime +" - " +courseCalendar.endTime,
                                 fontSize= 20.sp,
                                 color= Color.Black
                             )
@@ -171,7 +173,7 @@ fun TodayClassesContent(viewModel: CalendarViewModel){
                             )
                             Spacer(modifier= Modifier.height(4.dp))
                             Text(
-                                text= course.hall,
+                                text= courseCalendar.hall,
                                 fontSize= 20.sp,
                                 color= Color.Black
                             )
@@ -196,7 +198,7 @@ fun TodayClassesContent(viewModel: CalendarViewModel){
     }
 }
 
-
+//FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
 fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHomePage)-> Unit){
     //DATAS FROM VIEWMODEL

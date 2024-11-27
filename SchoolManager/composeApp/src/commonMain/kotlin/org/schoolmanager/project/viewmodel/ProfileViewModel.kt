@@ -6,8 +6,8 @@ import org.schoolmanager.project.data.model.Course
 
 class ProfileViewModel : ViewModel(){
     val courses = mutableStateListOf(
-        Course("Mathematics 101"),
-        Course("Physics 201"),
-        Course("Computer Science 305"),
+        Course(name= "Mathematics 101"),
+        Course(name= "Physics 201"),
+        Course(name= "Computer Science 305"),
     )
 }
