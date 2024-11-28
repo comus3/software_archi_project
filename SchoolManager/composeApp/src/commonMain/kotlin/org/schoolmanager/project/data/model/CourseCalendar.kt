@@ -1,6 +1,6 @@
 package org.schoolmanager.project.data.model
+
 import kotlinx.datetime.LocalDate
-import org.jetbrains.compose.resources.DrawableResource
 
 //DATA COURSE CALENDAR
 class CourseCalendar(

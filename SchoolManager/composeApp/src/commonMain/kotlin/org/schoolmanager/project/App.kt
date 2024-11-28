@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.data.model.Course
 import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
@@ -39,7 +40,8 @@ fun App(){
         //SELECTED PAGE
         var SelectedScreen by remember {mutableStateOf("Home")}
         val viewModel= ContactsViewModel()
-        var SelectedButton by remember { mutableStateOf("Today classes") }
+        var SelectedButton by remember {mutableStateOf("Today classes")}
+        var SelectedCourse: Course? by remember {mutableStateOf(null)}
         var SelectedNews: NewsHomePage? by remember {mutableStateOf(null)}
 
         //NAVIGATION BAR
@@ -85,10 +87,12 @@ fun App(){
                 GoToProfile= {SelectedScreen = "Profile"},
                 newsHomePageViewModel= NewsHomePageViewModel(),
                 calendarViewModel= CalendarViewModel(),
+                GoToDetailsCourse= {course->
+                    SelectedCourse= course
+                    SelectedScreen= "DetailsCourse"},
                 GoToDetailsNews= {news->
                     SelectedNews= news
-                    SelectedScreen= "DetailsNews"
-                })
+                    SelectedScreen= "DetailsNews"})
             "DetailsNews"-> SelectedNews?.let {HomePageDetailsNews(it,
                 BackHomePage = {button ->
                 SelectedButton = button
@@ -110,8 +114,9 @@ fun App(){
                 GoToAddCourse= {SelectedScreen= "AddCourse"},
                 GoToCourseDetail= {SelectedScreen= "DetailsCourse"},
                 GoToProfile= {SelectedScreen= "Profile"})
-            "DetailsCourse"-> CourseDetailsScreen(
-                BackCourses= {SelectedScreen= "Courses"})
+            "DetailsCourse"-> SelectedCourse?.let{course->CourseDetailsScreen(
+                    course= course,
+                    BackCourses= {SelectedScreen= "Courses"})}
             "AddCourse"-> AddCourseScreen(
                 BackCourses= {SelectedScreen= "Courses"},
                 GoToCourseDetail= {SelectedScreen= "DetailsCourse"},

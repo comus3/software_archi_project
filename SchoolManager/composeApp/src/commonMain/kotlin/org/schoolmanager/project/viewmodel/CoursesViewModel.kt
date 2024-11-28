@@ -10,10 +10,10 @@ import schoolmanager.composeapp.generated.resources.motor
 
 class CoursesViewModel: ViewModel(){
     private val courses = listOf(
-        Course(1, "Electrical", Res.drawable.alternatif_monophase),
-        Course(2, "Motors", Res.drawable.motor),
-        Course(3, "Math", Res.drawable.electronic_circuit),
-        Course(4, "Network", Res.drawable.administration_reseau),
+        Course(1, "Electrical", Res.drawable.alternatif_monophase, "LURKIN Quentin", "lrk@ecam.be"),
+        Course(2, "Motors", Res.drawable.motor, "LOUIS Jean-Guillaume", "j3l@ecam.be"),
+        Course(3, "Math", Res.drawable.electronic_circuit, "HILLEWAERE Ruben", "hlr@ecam.be"),
+        Course(4, "Network", Res.drawable.administration_reseau, "DELHAY Quentin", "dlh@ecam.be"),
     )
 
     //FCT TO GET THE COURSE BY ID
