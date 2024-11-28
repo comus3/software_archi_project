@@ -206,14 +206,14 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
 @Composable
 fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHomePage)-> Unit){
     //DATAS FROM VIEWMODEL
-    val News= viewModel.news
+    val News= viewModel.news.sortedByDescending{it.id}
 
     LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally)
     {
-        items(News){new->
+        items(News){newsItem->
             Card(
                 modifier= Modifier.fillMaxWidth().height(120.dp).padding(vertical= 12.dp)
-                    .clickable {GoToDetailsNews(new)},
+                    .clickable {GoToDetailsNews(newsItem)},
                 elevation= 8.dp,
                 shape= RoundedCornerShape(16.dp),
             )
@@ -227,7 +227,7 @@ fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHome
                     //TIME OF THE NEWS
                     Column{
                         Text(
-                            text= new.time,
+                            text= newsItem.time,
                             fontSize= 22.sp,
                             fontWeight= FontWeight.Bold,
                             color= Color.Gray,
@@ -235,18 +235,12 @@ fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHome
                         Spacer(modifier= Modifier.height(4.dp))
                         //TITLE OF THE NEWS
                         Text(
-                            text= new.title,
+                            text= newsItem.title,
                             fontSize= 25.sp,
                             fontWeight= FontWeight.Bold,
                             color= Color.Black
                         )
                     }
-                    //ARROW FORWARD
-                    Image(
-                        painter= painterResource(Res.drawable.forward),
-                        contentDescription= "GoToDetailsNews",
-                        modifier= Modifier.size(40.dp),
-                    )
                 }
             }
         }
