@@ -48,7 +48,7 @@ import org.schoolmanager.project.data.model.CourseCalendar
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 
 @Composable
-fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), goToProfile:()-> Unit) {
+fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), goToProfile:()-> Unit, GoToDetailsCourse: (Course) -> Unit) {
 
     // Obtenir la date actuelle
     val currentDate = Clock.System.now()
@@ -134,18 +134,21 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
                         selectedDate = LocalDate(selectedDate.year, selectedDate.month, day)
                     }
                 )
+                // Divider entre le calendrier et la liste des cours
+                Divider()
+                Spacer(modifier = Modifier.height(13.dp))
                 // Affichage des cours du jour sélectionné
-                val courses = calendarViewModel.getCoursesForDate(selectedDate)
-                CourseList(selectedDateCourses, coursesViewModel)
+                CourseList(selectedDateCourses, coursesViewModel, GoToDetailsCourse)
             } else {
                 // Affichage de la semaine courante avec les dates et les cours de chaque jour
                 WeeklyCalendar(weekDates, selectedDate) { date ->
                     selectedDate = date
                 }
-
+                // Divider entre le calendrier et la liste des cours
+                Divider()
+                Spacer(modifier = Modifier.height(13.dp))
                 // Affichage des cours du jour sélectionné dans la vue hebdomadaire
-                val courses = calendarViewModel.getCoursesForDate(selectedDate)
-                CourseList(selectedDateCourses, coursesViewModel)
+                CourseList(selectedDateCourses, coursesViewModel, GoToDetailsCourse)
             }
         }
     }
@@ -233,17 +236,20 @@ fun WeeklyCalendar(
 }
 
 @Composable
-fun CourseList(courses: List<CourseCalendar>, coursesViewModel: CoursesViewModel) {
+fun CourseList(courses: List<CourseCalendar>, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course) -> Unit) {
     LazyColumn {
         items(courses) { courseCalendar ->
             val course = coursesViewModel.getCourseById(courseCalendar.idcourse)
-            CourseItem(courseCalendar, course)
+            course?.let {
+                CourseItem(courseCalendar, it, GoToDetailsCourse)
+            }
         }
+        item{Spacer(modifier= Modifier.height(40.dp))}
     }
 }
 
 @Composable
-fun CourseItem(courseCalendar: CourseCalendar, course: Course?) {
+fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse: (Course) -> Unit) {
     var animatedOffset by remember { mutableStateOf(1000f) }
 
     LaunchedEffect(true) {
@@ -253,14 +259,15 @@ fun CourseItem(courseCalendar: CourseCalendar, course: Course?) {
 
     val offsetAnimation by animateFloatAsState(
         targetValue = animatedOffset,
-        animationSpec = tween(durationMillis = 1000) // Durée de l'animation
+        animationSpec = tween(durationMillis = 500) // Durée de l'animation
     )
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(6.dp)
-            .offset { IntOffset(offsetAnimation.toInt(), 0) }, // Animation du mouvement
+            .offset { IntOffset(offsetAnimation.toInt(), 0) } // Animation du mouvement
+            .clickable {GoToDetailsCourse(course)},
         elevation = 8.dp,
         shape= RoundedCornerShape(16.dp)
     ) {

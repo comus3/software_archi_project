@@ -45,7 +45,7 @@ fun CourseDetailsScreen(course: Course, BackCourses: () -> Unit) {
                 contentDescription = "Back",
                 modifier = Modifier
                     .size(55.dp)
-                    .clickable { BackCourses() },
+                    .clickable { BackCourses() }, // Retour à l'écran précédent
                 contentScale = ContentScale.Crop
             )
             Text(
@@ -55,6 +55,12 @@ fun CourseDetailsScreen(course: Course, BackCourses: () -> Unit) {
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Name: ${course.name}",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(8.dp)
+        )
         Text(
             text = "Professor: ${course.professor}",
             fontSize = 20.sp,
