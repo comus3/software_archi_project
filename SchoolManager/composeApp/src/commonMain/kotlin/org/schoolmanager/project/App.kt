@@ -104,17 +104,16 @@ fun App(){
                 BackHomePage= {
                     if (ScreenHistory.isNotEmpty()){
                         ScreenHistory.removeAt(ScreenHistory.lastIndex)
-                        SelectedScreen= ScreenHistory.lastOrNull()?:"Home"
-                }},
-                GoToSettings= {SelectedScreen= "Settings"; ScreenHistory.add("Profile")},
-                GoToGrades= {SelectedScreen= "Grades"; ScreenHistory.add("Profile")})
+                        SelectedScreen= ScreenHistory.lastOrNull()?:"Home"}},
+                GoToSettings= {SelectedScreen= "Settings"},
+                GoToGrades= {SelectedScreen= "Grades"})
             "Settings"-> SettingsScreen(
-                BackProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Settings")},
-                GoToLanguage= {SelectedScreen ="Language"; ScreenHistory.add("Settings")},
-                GoToAbout= {SelectedScreen="About"; ScreenHistory.add("Settings")},
-                GoToTerms= {SelectedScreen="Terms"; ScreenHistory.add("Settings")})
+                BackProfile= {SelectedScreen= "Profile"},
+                GoToLanguage= {SelectedScreen ="Language"},
+                GoToAbout= {SelectedScreen="About"},
+                GoToTerms= {SelectedScreen="Terms"})
             "Grades"-> GradesScreen(
-                BackProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Grades")})
+                BackProfile= {SelectedScreen= "Profile"})
             "Calendar"-> CalendarScreen(
                 goToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Calendar")},
                 GoToDetailsCourse= {course->
@@ -130,29 +129,23 @@ fun App(){
                     if (ScreenHistory.isNotEmpty()){
                         ScreenHistory.removeAt(ScreenHistory.lastIndex)
                         SelectedScreen= ScreenHistory.lastOrNull()?:"Home"
-                    }
-                })
-            }
+                    }}
+                )}
             "AddCourse"-> AddCourseScreen(
                 BackCourses= {SelectedScreen= "Courses"; ScreenHistory.add("AddCourse")})
             "Contact"-> ContactsScreen(
                 viewModel= viewModel,
                 GoToContactDetailScreen= {SelectedScreen= "DetailContact"; ScreenHistory.add("Contact")},
-                GoToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Contact")}
-            )
+                GoToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Contact")})
             "DetailContact"-> ContactDetailScreen(
                 contact= viewModel.selectedContact.value,
                 onBack= {SelectedScreen= "Contact"})
             "Language"-> LanguageScreen(
-                BackSettings= {SelectedScreen="Settings"; ScreenHistory.add("Language")}
-            )
+                BackSettings= {SelectedScreen="Settings"})
             "About"-> AboutScreen(
-                BackSettings= {SelectedScreen="Settings"; ScreenHistory.add("About")}
-            )
+                BackSettings= {SelectedScreen="Settings"})
             "Terms"-> TermsScreen(
-                BackSettings= {SelectedScreen="Settings"; ScreenHistory.add("Terms")}
-            )
-
+                BackSettings= {SelectedScreen="Settings"})
         }}
     }
 }
