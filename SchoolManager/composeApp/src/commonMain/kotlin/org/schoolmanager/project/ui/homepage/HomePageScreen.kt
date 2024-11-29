@@ -21,23 +21,30 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 import org.jetbrains.compose.resources.painterResource
-import org.schoolmanager.project.data.model.DataHomePageNews
-import org.schoolmanager.project.viewmodel.HomePageViewModel
+import org.schoolmanager.project.data.model.Course
+import org.schoolmanager.project.data.model.NewsHomePage
+import org.schoolmanager.project.viewmodel.CalendarViewModel
+import org.schoolmanager.project.viewmodel.CoursesViewModel
+import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
-import schoolmanager.composeapp.generated.resources.forward
 
 
 
 //HOMEPAGE
 @Composable
-fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, viewModel: HomePageViewModel= HomePageViewModel(), GoToDetailsNews: (DataHomePageNews)-> Unit){
+fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsHomePageViewModel: NewsHomePageViewModel= NewsHomePageViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
     Column(Modifier.fillMaxWidth(), horizontalAlignment= Alignment.CenterHorizontally){
         //PROFILE PHOTO
         Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp)){
@@ -79,8 +86,8 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
         //VARIABLE CONTENT OF BUTTONS
         Spacer(modifier= Modifier.height(16.dp))
         when (CurrentSelectedButton){
-            "Today classes"-> TodayClassesContent(viewModel)
-            "Last News"-> LastNewsContent(viewModel, GoToDetailsNews)
+            "Today classes"-> TodayClassesContent(calendarViewModel, coursesViewModel, GoToDetailsCourse)
+            "Last News"-> LastNewsContent(newsHomePageViewModel, GoToDetailsNews)
         }
     }
 
@@ -104,76 +111,108 @@ fun Welcome(name: String) {
 
 //FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
-fun TodayClassesContent(viewModel: HomePageViewModel){
-    //DATAS FROM VIEWMODEL
-    val Courses= viewModel.courses
+fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course)-> Unit){
+    //DATE TODAY
+    val TodayDate= Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+    //TODAY COURSE
+    val TodayCourses= calendarViewModel.getCoursesForDate(TodayDate)
 
-    Column(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally)
-    {
-        //DESIGN FOR EACH COURSE
-        Courses.forEach{course->
-            Card(
-                modifier= Modifier.fillMaxWidth().height(130.dp).padding(vertical= 12.dp),
-                elevation= 8.dp,
-                shape= RoundedCornerShape(16.dp)
-            )
-            {
-                Row(
-                    modifier= Modifier.fillMaxWidth().padding(10.dp),
-                    horizontalArrangement= Arrangement.SpaceBetween,
-                    verticalAlignment= Alignment.CenterVertically
-                )
-                {
-                    //NAME COURSE
-                    Column{
-                        Text(
-                            text= course.name,
-                            fontSize= 28.sp,
-                            fontWeight= FontWeight.Bold,
-                            color= Color.Black
+    LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally){
+        //IF MINIMUM 1 COURSE
+        if (TodayCourses.isNotEmpty()){
+            items(TodayCourses){courseCalendar->
+                val course= coursesViewModel.getCourseById(courseCalendar.idcourse)
+                course?.let{
+                    Card(
+                        modifier= Modifier.fillMaxWidth().height(130.dp).padding(vertical= 12.dp)
+                            .clickable{GoToDetailsCourse(course)},
+                        elevation= 8.dp,
+                        shape= RoundedCornerShape(16.dp)
+                    )
+                    {
+                        Row(
+                            modifier= Modifier.fillMaxWidth().padding(10.dp),
+                            horizontalArrangement= Arrangement.SpaceBetween,
+                            verticalAlignment= Alignment.CenterVertically
                         )
-                        Spacer(modifier= Modifier.height(4.dp))
-                        //TIME OF THE COURSE
-                        Text(
-                            text= course.time,
-                            fontSize= 20.sp,
-                            color= Color.Black
-                        )
-                    }
-                    //ROOM
-                    Column(horizontalAlignment= Alignment.End){
-                        Text(
-                            text= "Room",
-                            fontSize= 24.sp,
-                            fontWeight= FontWeight.Bold,
-                            color= Color.Black
-                        )
-                        Spacer(modifier= Modifier.height(4.dp))
-                        Text(
-                            text= course.room,
-                            fontSize= 20.sp,
-                            color= Color.Black
-                        )
+                        {
+                            //NAME COURSE
+                            Column{
+                                Row(verticalAlignment= Alignment.CenterVertically){
+                                    course?.image?.let{painterResource(it)}?.let{
+                                        Image(
+                                            painter= it,
+                                            contentDescription= "Course Image",
+                                            modifier= Modifier
+                                                .clip(CircleShape)
+                                                .size(40.dp),
+                                            contentScale= ContentScale.Crop
+                                        )
+                                    }
+                                    Spacer(modifier= Modifier.width(8.dp))
+                                    Text(
+                                        text= course?.name ?: "Unknown Course",
+                                        fontSize= 28.sp,
+                                        fontWeight= FontWeight.Bold,
+                                        color= Color.Black
+                                    )
+                                }
+                                Spacer(modifier= Modifier.height(4.dp))
+                                //TIME OF THE COURSE
+                                Text(
+                                    text= courseCalendar.startTime +" - " +courseCalendar.endTime,
+                                    fontSize= 20.sp,
+                                    color= Color.Black
+                                )
+                            }
+                            //ROOM
+                            Column(horizontalAlignment= Alignment.End){
+                                Text(
+                                    text= "Room",
+                                    fontSize= 24.sp,
+                                    fontWeight= FontWeight.Bold,
+                                    color= Color.Black
+                                )
+                                Spacer(modifier= Modifier.height(4.dp))
+                                Text(
+                                    text= courseCalendar.hall,
+                                    fontSize= 20.sp,
+                                    color= Color.Black
+                                )
+                            }
+                        }
                     }
                 }
+            }
+            //SPACE NAVIGATION
+            item{Spacer(modifier= Modifier.height(70.dp))}
+        }
+        //IF NOT COURSE
+        else{
+            item{
+                Text(
+                    text= "No classes scheduled for today.",
+                    fontSize= 20.sp,
+                    color= Color.Gray,
+                    modifier= Modifier.padding(16.dp)
+                )
             }
         }
     }
 }
 
-
+//FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
-fun LastNewsContent(viewModel: HomePageViewModel, GoToDetailsNews: (DataHomePageNews)-> Unit){
+fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHomePage)-> Unit){
     //DATAS FROM VIEWMODEL
-    val News= viewModel.news
+    val News= viewModel.news.sortedByDescending{it.id}
 
-    Column(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally)
+    LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally)
     {
-        //DESIGN FOR EACH NEWS
-        News.forEach{new->
+        items(News){newsItem->
             Card(
                 modifier= Modifier.fillMaxWidth().height(120.dp).padding(vertical= 12.dp)
-                    .clickable {GoToDetailsNews(new)},
+                    .clickable {GoToDetailsNews(newsItem)},
                 elevation= 8.dp,
                 shape= RoundedCornerShape(16.dp),
             )
@@ -187,7 +226,7 @@ fun LastNewsContent(viewModel: HomePageViewModel, GoToDetailsNews: (DataHomePage
                     //TIME OF THE NEWS
                     Column{
                         Text(
-                            text= new.time,
+                            text= newsItem.time,
                             fontSize= 22.sp,
                             fontWeight= FontWeight.Bold,
                             color= Color.Gray,
@@ -195,20 +234,16 @@ fun LastNewsContent(viewModel: HomePageViewModel, GoToDetailsNews: (DataHomePage
                         Spacer(modifier= Modifier.height(4.dp))
                         //TITLE OF THE NEWS
                         Text(
-                            text= new.title,
+                            text= newsItem.title,
                             fontSize= 25.sp,
                             fontWeight= FontWeight.Bold,
                             color= Color.Black
                         )
                     }
-                    //ARROW FORWARD
-                    Image(
-                        painter= painterResource(Res.drawable.forward),
-                        contentDescription= "GoToDetailsNews",
-                        modifier= Modifier.size(40.dp),
-                    )
                 }
             }
         }
+        //SPACE NAVIGATION
+        item{Spacer(modifier= Modifier.height(70.dp))}
     }
 }

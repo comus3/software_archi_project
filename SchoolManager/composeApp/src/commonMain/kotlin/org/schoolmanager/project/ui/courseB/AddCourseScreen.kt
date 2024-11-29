@@ -44,7 +44,7 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 import schoolmanager.composeapp.generated.resources.shopping_cart
 
 @Composable
-fun AddCourseScreen(BackCourses: ()-> Unit, GoToCourseDetail: () -> Unit, GoToAddCourse: () -> Unit) {
+fun AddCourseScreen(BackCourses: ()-> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -104,13 +104,13 @@ fun AddCourseScreen(BackCourses: ()-> Unit, GoToCourseDetail: () -> Unit, GoToAd
         Spacer(modifier = Modifier.height(24.dp))
 
         // Course cards
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q1",Res.drawable.electronic_circuit, GoToCourseDetail, GoToAddCourse) // Remplacez par votre ressource d'image
+        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q1",Res.drawable.electronic_circuit) // Remplacez par votre ressource d'image
         Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q2",Res.drawable.alternatif_monophase, GoToCourseDetail, GoToAddCourse) // Remplacez par votre ressource d'image
+        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q2",Res.drawable.alternatif_monophase) // Remplacez par votre ressource d'image
         Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Motors",Res.drawable.motor, GoToCourseDetail, GoToAddCourse) // Remplacez par votre ressource d'image
+        org.schoolmanager.project.ui.courseB.CourseCard(title = "Motors",Res.drawable.motor) // Remplacez par votre ressource d'image
         Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Network",Res.drawable.administration_reseau, GoToCourseDetail, GoToAddCourse) // Remplacez par votre ressource d'image
+        org.schoolmanager.project.ui.courseB.CourseCard(title = "Network",Res.drawable.administration_reseau) // Remplacez par votre ressource d'image
         }
     }
 
@@ -119,14 +119,12 @@ fun AddCourseScreen(BackCourses: ()-> Unit, GoToCourseDetail: () -> Unit, GoToAd
 fun CourseCard(
     title: String,
     resource: DrawableResource,
-    GoToCourseDetail: () -> Unit,
-    GoToAddCourse: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .clickable { GoToCourseDetail() },
+            .clickable {},
         shape = RoundedCornerShape(12.dp),
         elevation = 4.dp
     ) {
@@ -162,7 +160,7 @@ fun CourseCard(
                 contentDescription = "Add Course",
                 modifier = Modifier
                     .size(40.dp) // Adjust size
-                    .clickable { GoToAddCourse() } // Add click functionality
+                    .clickable {} // Add click functionality
             )
         }
     }
