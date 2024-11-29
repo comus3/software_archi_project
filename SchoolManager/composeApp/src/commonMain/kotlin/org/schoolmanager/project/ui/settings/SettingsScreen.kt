@@ -37,7 +37,13 @@ import schoolmanager.composeapp.generated.resources.phoneIcon
 import schoolmanager.composeapp.generated.resources.termsAndConditions
 
 @Composable
-fun SettingsScreen(BackProfile: () -> Unit, GoToLanguage: () -> Unit, GoToTerms: () -> Unit, GoToAbout: () -> Unit) {
+fun SettingsScreen(
+    BackProfile: () -> Unit = {},
+    GoToAbout: () -> Unit = {},
+    GoToLanguage: () -> Unit = {},
+    GoToTerms: () -> Unit = {},
+    onDarkModeToggle: (Boolean) -> Unit
+){
     Column( // Use Column to stack the elements vertically
         modifier = Modifier
             .fillMaxWidth()
@@ -161,8 +167,11 @@ fun SettingsScreen(BackProfile: () -> Unit, GoToLanguage: () -> Unit, GoToTerms:
                 // Add the Switch component
                 Switch(
                     checked = isDarkModeEnabled,
-                    onCheckedChange = { isChecked -> isDarkModeEnabled = isChecked },
-                    modifier = Modifier.align(Alignment.CenterVertically) // Align Switch vertically in the Row
+                    onCheckedChange = { isChecked ->
+                        isDarkModeEnabled = isChecked
+                        onDarkModeToggle(isChecked) // Appelle la fonction pour changer le mode
+                    },
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
 
             }
