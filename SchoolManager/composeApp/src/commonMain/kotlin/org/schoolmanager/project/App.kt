@@ -23,9 +23,11 @@ import org.schoolmanager.project.ui.settings.AboutScreen
 import org.schoolmanager.project.ui.settings.LanguageScreen
 import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
+import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.ContactsViewModel
 import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
+import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
 import schoolmanager.composeapp.generated.resources.iconcalendar
@@ -123,7 +125,8 @@ fun App(){
             "Courses"-> CoursesScreen(
                 GoToAddCourse= {SelectedScreen= "AddCourse"; ScreenHistory.add("Courses")},
                 GoToCourseDetail= {SelectedScreen= "DetailsCourse"; ScreenHistory.add("Courses")},
-                GoToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Courses")})
+                GoToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Courses")},
+                GoToSyllabus= {SelectedScreen= "HomeSyllabus"})
             "DetailsCourse"-> SelectedCourse?.let {course->
                 CourseDetailsScreen(course= course, BackCourses={
                     if (ScreenHistory.isNotEmpty()){
@@ -131,6 +134,7 @@ fun App(){
                         SelectedScreen= ScreenHistory.lastOrNull()?:"Home"
                     }}
                 )}
+            "HomeSyllabus"->HomeSyllabusScreen(syllabusviewModel= SyllabusViewModel(),)
             "AddCourse"-> AddCourseScreen(
                 BackCourses= {SelectedScreen= "Courses"; ScreenHistory.add("AddCourse")})
             "Contact"-> ContactsScreen(

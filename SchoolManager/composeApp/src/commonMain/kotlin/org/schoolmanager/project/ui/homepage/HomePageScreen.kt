@@ -39,7 +39,6 @@ import org.schoolmanager.project.viewmodel.CoursesViewModel
 import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
-import schoolmanager.composeapp.generated.resources.forward
 
 
 

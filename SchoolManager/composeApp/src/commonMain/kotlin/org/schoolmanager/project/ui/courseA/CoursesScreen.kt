@@ -43,7 +43,7 @@ import schoolmanager.composeapp.generated.resources.motor
 import schoolmanager.composeapp.generated.resources.administration_reseau
 
 @Composable
-fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToProfile: ()-> Unit) {
+fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToProfile: ()-> Unit, GoToSyllabus:()-> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +103,7 @@ fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToP
                     .align(Alignment.CenterVertically)
             )
             Button(
-                onClick = { /* TODO */ },
+                onClick = {GoToSyllabus()},
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(red = 62, green = 96, blue = 160),

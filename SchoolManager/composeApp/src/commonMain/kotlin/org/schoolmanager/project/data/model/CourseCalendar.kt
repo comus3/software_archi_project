@@ -3,7 +3,7 @@ package org.schoolmanager.project.data.model
 import kotlinx.datetime.LocalDate
 
 //DATA COURSE CALENDAR
-class CourseCalendar(
+data class CourseCalendar(
     val idcourse: Int,
     val startTime: String = "",
     val endTime: String = "",
