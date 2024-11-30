@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import org.schoolmanager.project.data.model.CourseCalendar
 import org.schoolmanager.project.viewmodel.CoursesViewModel
@@ -84,6 +85,7 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
             modifier = Modifier
                 .padding(bottom = 56.dp)  // Laisse de la place pour la barre de navigation en bas
                 .fillMaxSize()
+                .background(MaterialTheme.colors.background)
         ) {
             // En-tête avec le mois/année et le bouton de bascule
             Row(
@@ -108,7 +110,8 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
                 Text(
                     text = "${month.lowercase()} $year",
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colors.onBackground
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
@@ -167,7 +170,7 @@ fun MonthlyCalendar(
         .padding(8.dp)
         .fillMaxWidth()
 
-    Column {
+    Column( modifier = Modifier.background(MaterialTheme.colors.background))  {
         Spacer(modifier = Modifier.height(8.dp))
 
         // Grille des jours
@@ -193,7 +196,7 @@ fun MonthlyCalendar(
                         text = day.toString(),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (day == selectedDate.dayOfMonth) Color.Blue else Color.Black
+                        color = if (day == selectedDate.dayOfMonth) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
                     )
                 }
             }
@@ -227,7 +230,7 @@ fun WeeklyCalendar(
                     text = date.dayOfMonth.toString(),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (date == selectedDate) Color.Blue else Color.Black,
+                    color = if (date == selectedDate) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground,
                     textAlign = TextAlign.Center // Centrage du texte
                 )
             }
@@ -294,14 +297,14 @@ fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse
                         text = course?.name ?: "Unknown Course",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+
                     )
                 }
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
                     text = "${courseCalendar.startTime} - ${courseCalendar.endTime}",
                     fontSize = 16.sp,
-                    color = Color.Black
+
                 )
             }
             Column(horizontalAlignment= Alignment.End){
@@ -309,7 +312,7 @@ fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse
                     text= "Room",
                     fontSize= 20.sp,
                     fontWeight= FontWeight.Bold,
-                    color= Color.Black
+
                 )
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
@@ -340,7 +343,7 @@ fun WeekDaysHeader(selectedDate: LocalDate) {
                 fontWeight = FontWeight.ExtraBold,
                 modifier = Modifier.weight(1f, fill = true), // Chaque jour prend la même largeur
                 textAlign = TextAlign.Center, // Alignement centré pour un meilleur alignement
-                color = if (index == selectedDayOfWeekIndex) Color.Blue else Color.Black // Mettre en bleu si c'est le jour sélectionné
+                color = if (index == selectedDayOfWeekIndex) MaterialTheme.colors.primary  else MaterialTheme.colors.onBackground // Mettre en bleu si c'est le jour sélectionné
             )
         }
     }

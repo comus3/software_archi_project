@@ -56,7 +56,7 @@ fun App() {
             bottomBar = {
                 BottomNavigation(
                     backgroundColor = Color(red = 62, green = 96, blue = 160),
-                    contentColor = Color.White
+                    contentColor = if (isDarkModeEnabled) Color.White else Color.Black
                 ) {
                     // HOME
                     BottomNavigationItem(

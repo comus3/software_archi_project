@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -44,6 +49,8 @@ fun SettingsScreen(
     GoToTerms: () -> Unit = {},
     onDarkModeToggle: (Boolean) -> Unit
 ){
+    val iconColor = MaterialTheme.colors.onSurface
+    val arrowColor = MaterialTheme.colors.onSurface
     Column( // Use Column to stack the elements vertically
         modifier = Modifier
             .fillMaxWidth()
@@ -127,11 +134,14 @@ fun SettingsScreen(
 
                 // Arrow Icon aligned to the end
                 Image(
-                    painter = painterResource(Res.drawable.arrowRight),
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = "Arrow Icon",
                     modifier = Modifier
                         .size(30.dp)
-                        .clickable{GoToLanguage()}
+                        .clickable{GoToLanguage()},
+                    colorFilter = ColorFilter.tint(arrowColor)
+
+
                 )
             }
         }
@@ -155,7 +165,8 @@ fun SettingsScreen(
                     Image(
                         painter = painterResource(Res.drawable.darkMode),
                         contentDescription = "Dark Mode Icon",
-                        modifier = Modifier.size(40.dp) // Set the image size
+                        modifier = Modifier.size(40.dp),
+                        colorFilter = ColorFilter.tint(iconColor)// Set the image sizecolorFilter = ColorFilter.tint(iconColor)
                     )
                     Spacer(modifier = Modifier.width(8.dp)) // Optional: Adds space between the image and text
                     Text(
@@ -208,7 +219,8 @@ fun SettingsScreen(
                     Image(
                         painter = painterResource(Res.drawable.phoneIcon),
                         contentDescription = "Phone Icon",
-                        modifier = Modifier.size(40.dp) // Set the image size
+                        modifier = Modifier.size(40.dp),
+                        colorFilter = ColorFilter.tint(iconColor)// Set the image size
                     )
                     Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
                     Text(
@@ -220,11 +232,14 @@ fun SettingsScreen(
 
                 // Arrow Icon aligned to the end
                 Image(
-                    painter = painterResource(Res.drawable.arrowRight),
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = "Arrow Icon",
                     modifier = Modifier
-                        .size(30.dp)
-                        .clickable{GoToAbout()}
+                        .size(30.dp).clickable{GoToAbout()},
+                    colorFilter = ColorFilter.tint(arrowColor)
+
+
+
                 )
             }
         }
@@ -245,7 +260,8 @@ fun SettingsScreen(
                     Image(
                         painter = painterResource(Res.drawable.termsAndConditions),
                         contentDescription = "Terms Icon",
-                        modifier = Modifier.size(40.dp) // Set the image size
+                        modifier = Modifier.size(40.dp),
+                        colorFilter = ColorFilter.tint(iconColor)// Set the image size
                     )
                     Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
                     Text(
@@ -257,11 +273,12 @@ fun SettingsScreen(
 
                 // Arrow Icon aligned to the end
                 Image(
-                    painter = painterResource(Res.drawable.arrowRight),
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = "Arrow Icon",
                     modifier = Modifier
                         .size(30.dp)
-                        .clickable{GoToTerms()}
+                        .clickable{GoToTerms()},
+                    colorFilter = ColorFilter.tint(arrowColor)
                 )
             }
         }

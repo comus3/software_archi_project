@@ -32,7 +32,7 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF7F7F7))
+            .background(MaterialTheme.colors.background)
             .padding(16.dp)
     ) {
         // Box pour la photo de profil
@@ -67,14 +67,11 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
         TextField(
             value = viewModel.searchQuery.value,
             onValueChange = viewModel::onSearchQueryChanged,
-            placeholder = { Text("Search here...") },
+            placeholder = { Text("Search here...", fontWeight = FontWeight.Bold) },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon") },
             modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.White,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
+
+
         )
 
         Spacer(modifier = Modifier.height(16.dp))
