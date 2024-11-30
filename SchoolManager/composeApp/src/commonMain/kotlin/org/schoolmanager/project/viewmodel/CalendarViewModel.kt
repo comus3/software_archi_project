@@ -29,8 +29,8 @@ class CalendarViewModel : ViewModel() {
         CourseCalendar(1, "17H", "18H", "EA13", LocalDate(2024, 11, 26)),
         CourseCalendar(1, "10H", "12H", "EA14", LocalDate(2024, 11, 28)),
         CourseCalendar(3, "15H", "16H", "EA12", LocalDate(2024, 11, 28)),
-        CourseCalendar(4, "17H", "19H", "EA11", LocalDate(2024, 11, 28)),
-        CourseCalendar(2, "19H", "21H", "EA13", LocalDate(2024, 11, 28)),
+        CourseCalendar(4, "17H", "19H", "EA11", LocalDate(2024, 11, 29)),
+        CourseCalendar(2, "19H", "21H", "EA13", LocalDate(2024, 11, 29)),
     )
 
     fun getCoursesForDate(date: LocalDate): List<CourseCalendar> {

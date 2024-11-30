@@ -19,12 +19,14 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import kotlinx.datetime.Clock
@@ -45,9 +47,9 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 //HOMEPAGE
 @Composable
 fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsHomePageViewModel: NewsHomePageViewModel= NewsHomePageViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
-    Column(Modifier.fillMaxWidth(), horizontalAlignment= Alignment.CenterHorizontally){
+    Column(Modifier.fillMaxWidth().background(MaterialTheme.colors.background), horizontalAlignment= Alignment.CenterHorizontally){
         //PROFILE PHOTO
-        Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp)){
+        Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp).background(MaterialTheme.colors.background)){
             Image(
                 painter= painterResource(Res.drawable.profilephoto),
                 contentDescription= "ProfilePhoto",
@@ -74,13 +76,13 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
                 onClick= {CurrentSelectedButton= "Today classes"},
                 colors= ButtonDefaults.buttonColors(backgroundColor= if (CurrentSelectedButton=="Today classes") Color(red= 62, green= 96, blue= 160) else Color.Gray),
                 modifier= Modifier.padding(8.dp, top=30.dp).width(150.dp).height(55.dp))
-            {Text("Today classes", color= Color.White, fontSize= 22.sp, textAlign= TextAlign.Center)}
+            {Text("Today classes", color= MaterialTheme.colors.onBackground, fontSize= 22.sp, textAlign= TextAlign.Center)}
 
             Button(
                 onClick= {CurrentSelectedButton= "Last News"},
                 colors= ButtonDefaults.buttonColors(backgroundColor= if (CurrentSelectedButton=="Last News") Color(red= 62, green= 96, blue= 160) else Color.Gray),
                 modifier= Modifier.padding(8.dp, top=30.dp).width(150.dp).height(55.dp))
-            {Text("Last News", color= Color.White, fontSize= 22.sp, textAlign= TextAlign.Center)}
+            {Text("Last News", color= MaterialTheme.colors.onBackground, fontSize= 22.sp, textAlign= TextAlign.Center)}
         }
 
         //VARIABLE CONTENT OF BUTTONS
@@ -98,13 +100,17 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
 //FCT WELCOME "NAME" TEXT
 @Composable
 fun Welcome(name: String) {
-    BasicText(
+    Text(
         text= "Hello, $name!",
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colors.onBackground,
         style= TextStyle(
-            color= Color.Black,
+
             fontSize= 30.sp,
             fontWeight= FontWeight.Bold,
             textDecoration= TextDecoration.Underline
+
         )
     )
 }
@@ -154,7 +160,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
                                         text= course?.name ?: "Unknown Course",
                                         fontSize= 28.sp,
                                         fontWeight= FontWeight.Bold,
-                                        color= Color.Black
+
                                     )
                                 }
                                 Spacer(modifier= Modifier.height(4.dp))
@@ -162,7 +168,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
                                 Text(
                                     text= courseCalendar.startTime +" - " +courseCalendar.endTime,
                                     fontSize= 20.sp,
-                                    color= Color.Black
+
                                 )
                             }
                             //ROOM
@@ -171,13 +177,13 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
                                     text= "Room",
                                     fontSize= 24.sp,
                                     fontWeight= FontWeight.Bold,
-                                    color= Color.Black
+
                                 )
                                 Spacer(modifier= Modifier.height(4.dp))
                                 Text(
                                     text= courseCalendar.hall,
                                     fontSize= 20.sp,
-                                    color= Color.Black
+
                                 )
                             }
                         }
@@ -193,7 +199,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
                 Text(
                     text= "No classes scheduled for today.",
                     fontSize= 20.sp,
-                    color= Color.Gray,
+
                     modifier= Modifier.padding(16.dp)
                 )
             }
@@ -229,7 +235,7 @@ fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHome
                             text= newsItem.time,
                             fontSize= 22.sp,
                             fontWeight= FontWeight.Bold,
-                            color= Color.Gray,
+
                         )
                         Spacer(modifier= Modifier.height(4.dp))
                         //TITLE OF THE NEWS
@@ -237,7 +243,7 @@ fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHome
                             text= newsItem.title,
                             fontSize= 25.sp,
                             fontWeight= FontWeight.Bold,
-                            color= Color.Black
+
                         )
                     }
                 }

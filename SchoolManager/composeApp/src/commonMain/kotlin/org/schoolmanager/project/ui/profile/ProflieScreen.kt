@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,7 +43,7 @@ import schoolmanager.composeapp.generated.resources.settings
 @Composable
 fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades: () -> Unit) {
     val viewModel = ProfileViewModel()
-
+    val iconColor = MaterialTheme.colors.onSurface
     // Use LazyColumn for all scrollable content
     LazyColumn(
         modifier = Modifier
@@ -63,7 +64,8 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
                     modifier = Modifier
                         .size(75.dp)
                         .clickable { BackHomePage() }
-                        .padding(bottom = 16.dp)
+                        .padding(bottom = 16.dp),
+                    colorFilter = ColorFilter.tint(iconColor)
                 )
 
                 Text("John Doe", fontSize = 20.sp, fontWeight = FontWeight.Bold)
@@ -74,7 +76,8 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
                     modifier = Modifier
                         .size(75.dp)
                         .clickable { GoToSettings() }
-                        .padding(bottom = 16.dp)
+                        .padding(bottom = 16.dp),
+                    colorFilter = ColorFilter.tint(iconColor)
                 )
             }
         }
