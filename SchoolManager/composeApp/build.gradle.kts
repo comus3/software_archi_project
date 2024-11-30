@@ -82,6 +82,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
 
 
+
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

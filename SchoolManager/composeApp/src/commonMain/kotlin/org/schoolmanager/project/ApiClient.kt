@@ -1,4 +1,5 @@
 package org.schoolmanager.project
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -9,27 +10,36 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import org.schoolmanager.project.data.model.Contact
 
-private val contact_results = MutableStateFlow("Appuyez sur le bouton pour charger les contacts.")
-val contactResult: StateFlow<String> = contact_results
-val appScope = CoroutineScope(Dispatchers.Default)
-// Fonction pour récupérer les cours
-fun fetchCourses() {
-    appScope.launch {
-        try {
-            val client = HttpClient(CIO)
-            val response = client.get("http://pat.infolab.ecam.be:61818/students")
 
-            // Vérification de la réponse
+object ApiService {
+
+    // Fonction pour récupérer les contacts depuis l'API
+    suspend fun fetchContacts(): List<Contact> {
+        // Créer un client HTTP
+        val client = HttpClient(CIO)
+
+        return try {
+            // Effectuer la requête HTTP GET
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
+
+            // Vérifier si la réponse est OK
             if (response.status == HttpStatusCode.OK) {
-                contact_results.value = response.bodyAsText()
+                val jsonResponse = response.bodyAsText()
+                // Utiliser kotlinx.serialization pour convertir la réponse JSON en liste de contacts
+                Json.decodeFromString<List<Contact>>(jsonResponse)
             } else {
-                contact_results.value = "Erreur : ${response.status}"
+                emptyList() // Retourne une liste vide en cas d'erreur
             }
-
-            client.close()
         } catch (e: Exception) {
-            contact_results.value = "Erreur lors de la requête : ${e.message}"
+            // En cas d'erreur, retourne une liste vide et logge l'erreur
+            emptyList()
+        } finally {
+            // Fermer le client HTTP après la requête
+            client.close()
         }
     }
 }
