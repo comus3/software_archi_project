@@ -28,11 +28,24 @@ import org.schoolmanager.project.ContactsViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.images56
 import schoolmanager.composeapp.generated.resources.profilephoto
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+
 @Composable
-fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> Unit, GoToProfile: () -> Unit) {
+fun ContactsScreen(
+    viewModel: ContactsViewModel,
+    GoToContactDetailScreen: () -> Unit,
+    GoToProfile: () -> Unit
+) {
+    // Collecte les données des StateFlow
+    val contacts by viewModel.contacts.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val filteredContacts by viewModel.filteredContacts.collectAsState()
+
     LaunchedEffect(Unit) {
         viewModel.fetchContacts()
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -69,7 +82,7 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
 
         // Barre de recherche
         TextField(
-            value = viewModel.searchQuery.value,
+            value = searchQuery, // Utilise la valeur collectée
             onValueChange = viewModel::onSearchQueryChanged,
             placeholder = { Text("Search here...") },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon") },
@@ -85,7 +98,7 @@ fun ContactsScreen(viewModel: ContactsViewModel, GoToContactDetailScreen: () -> 
 
         // Liste des contacts
         LazyColumn {
-            items(viewModel.filteredContacts) { contact ->
+            items(filteredContacts) { contact -> // Utilise les contacts filtrés collectés
                 ContactCard(contact = contact, onClick = {
                     viewModel.onContactSelected(contact)
                     GoToContactDetailScreen()
