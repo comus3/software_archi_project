@@ -424,87 +424,384 @@
         }
     ],
 
-    "courses": [
+  "courses": [
+    {
+      "id": 1,
+      "name": "Math",
+      "professor": "M. Dupont",
+      "email": "coucou@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_math",
+      "students": [
+        "20231",
+        "20232",
+        "20233",
+        "20234",
+        "20235",
+        "20236",
+        "20237"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Informatique",
+      "professor": "Mme Lefevre",
+      "email": "informatique@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_info",
+      "students": [
+        "20231",
+        "20232",
+        "20233",
+        "20235",
+        "20236",
+        "20237",
+        "20238"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Francais",
+      "professor": "M. Martin",
+      "email": "francais@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_francais",
+      "students": [
+        "20232",
+        "20233",
+        "20234",
+        "20235",
+        "20236",
+        "20237",
+        "20238"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Physique",
+      "professor": "Mme Bernard",
+      "email": "physique@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_physique",
+      "students": [
+        "20231",
+        "20234",
+        "20235",
+        "20236",
+        "20237",
+        "20239",
+        "2023010"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Chimie",
+      "professor": "Dr Moreau",
+      "email": "chimie@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_chimie",
+      "students": [
+        "20233",
+        "20235",
+        "20236",
+        "20237",
+        "20238",
+        "20239",
+        "2023011"
+      ]
+    }
+  ],
+    
+   
+    "calendar": [
         {
-            "professor": "M. Dupont",
-            "subject": "Math",
-            "id": 1,
-            "email": "coucou@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_math",
-            "students": [
-                "20231",
-                "20232",
-                "20233",
-                "20234",
-                "20235",
-                "20236",
-                "20237"
-            ]
+            "idcourse": 1,
+            "startTime": "12H",
+            "endTime": "15H",
+            "hall": "EA13",
+            "date": "2024-11-21"
         },
         {
-            "professor": "Mme Lefevre",
-            "subject": "Informatique",
-            "id": 2,
-            "email": "informatique@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_info",
-            "students": [
-                "20231",
-                "20232",
-                "20233",
-                "20235",
-                "20236",
-                "20237",
-                "20238"
-            ]
+            "idcourse": 2,
+            "startTime": "16H",
+            "endTime": "18H",
+            "hall": "EA14",
+            "date": "2024-11-21"
         },
         {
-            "professor": "M. Martin",
-            "subject": "Francais",
-            "id": 3,
-            "email": "francais@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_francais",
-            "students": [
-                "20232",
-                "20233",
-                "20234",
-                "20235",
-                "20236",
-                "20237",
-                "20238"
-            ]
+            "idcourse": 3,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA12",
+            "date": "2024-11-21"
         },
         {
-            "professor": "Mme Bernard",
-            "subject": "Physique",
-            "id": 4,
-            "email": "physique@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_physique",
-            "students": [
-                "20231",
-                "20234",
-                "20235",
-                "20236",
-                "20237",
-                "20239",
-                "2023010"
-            ]
+            "idcourse": 4,
+            "startTime": "15H",
+            "endTime": "17H",
+            "hall": "EA11",
+            "date": "2024-11-21"
         },
         {
-            "professor": "Dr Moreau",
-            "subject": "Chimie",
-            "id": 5,
-            "email": "chimie@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_chimie",
-            "students": [
-                "20233",
-                "20235",
-                "20236",
-                "20237",
-                "20238",
-                "20239",
-                "2023011"
-            ]
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA13",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "17H",
+            "hall": "EA12",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "18H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA12",
+            "date": "2024-11-24"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "12H",
+            "endTime": "15H",
+            "hall": "EA13",
+            "date": "2024-11-25"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "16H",
+            "endTime": "18H",
+            "hall": "EA14",
+            "date": "2024-11-25"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "11H",
+            "endTime": "13H",
+            "hall": "EA11",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "14H",
+            "endTime": "16H",
+            "hall": "EA11",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "17H",
+            "endTime": "18H",
+            "hall": "EA13",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "19H",
+            "endTime": "21H",
+            "hall": "EA13",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-01"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-02"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-03"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-04"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-05"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "19H",
+            "endTime": "21H",
+            "hall": "EA13",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-07"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-08"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-09"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-10"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-11"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-12"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-13"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-14"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-15"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-16"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-17"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-18"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-19"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-20"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-12-20"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-12-20"
         }
     ]
-
-}   
+}
