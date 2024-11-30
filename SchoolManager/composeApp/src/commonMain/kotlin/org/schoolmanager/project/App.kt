@@ -26,7 +26,6 @@ import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
-import org.schoolmanager.project.viewmodel.ContactsViewModel
 import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
