@@ -25,7 +25,7 @@ import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
-import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
+import org.schoolmanager.project.viewmodel.NewsViewModel
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
@@ -87,7 +87,7 @@ fun App(){
             "Home"-> HomePageScreen(
                 SelectedButton= SelectedButton,
                 GoToProfile= {SelectedScreen= "Profile"; ScreenHistory.add("Home")},
-                newsHomePageViewModel= NewsHomePageViewModel(),
+                newsViewModel= NewsViewModel(),
                 calendarViewModel= CalendarViewModel(),
                 GoToDetailsCourse= {course->
                     SelectedCourse= course

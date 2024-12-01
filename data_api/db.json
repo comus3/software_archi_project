@@ -1,304 +1,87 @@
 {
 
-    "events" :
+    "news" :
     [
         {
-            "id" : 1,
-            "description" : "Super soupe du samedi",
-            "local" : "2F10",
-            "date" : "2021-01-02"
+            "id": 1,
+            "time": "10/10/2024",
+            "title": "School Annual Talent Show",
+            "description": "Dear Students and Staff,\nWe are excited to announce that our Annual Talent Show will take place on 22/10/2024. We encourage all students to showcase their talents, whether it's singing, dancing, acting, or any other creative expression. There will be prizes for the best performances!\n\nBest regards,\nEvent Team",
         },
         {
-            "id" : 2,
-            "description" : "Super soupe du dimanche",
-            "local" : "2F10",
-            "date" : "2021-01-03"
+            "id": 2,
+            "time": "13/10/2024",
+            "title": "Teachers' Professional Development Day",
+            "description": "Dear Students,\nPlease be informed that there will be no classes on 15/10/2024 as our teachers will be attending a professional development workshop. This is a great opportunity for our teaching staff to enhance their skills and knowledge to improve the learning experience.\n\nBest regards,\nAdministration Team"
         },
         {
-            "id" : 3,
-            "description" : "Super soupe du lundi",
-            "local" : "2F10",
-            "date" : "2021-01-04"
+            "id": 3,
+            "time": "15/10/2024",
+            "title": "New School Club Introductions",
+            "description": "Dear Students,\nWe are excited to introduce new school clubs for the year 2024, including Photography Club, Debate Club, and Coding Club. If you're interested in joining any of these clubs, please visit the student services desk to sign up.\n\nBest regards,\nStudent Affairs"
         },
         {
-            "id" : 4,
-            "description" : "Super soupe du mardi",
-            "local" : "2F10",
-            "date" : "2021-01-05"
+            "id": 4,
+            "time": "20/10/2024",
+            "title": "Parent-Teacher Conferences",
+            "description": "Dear Parents and Guardians,\nWe would like to invite you to the upcoming Parent-Teacher Conferences scheduled for 22/10/2024. This is a great opportunity for you to meet with your child's teachers and discuss their progress. Please sign up at the reception.\n\nBest regards,\nSchool Administration"
         },
         {
-            "id" : 5,
-            "description" : "Super soupe du mercredi",
-            "local" : "2F10",
-            "date" : "2021-01-06"
+            "id": 5,
+            "time": "28/10/2024",
+            "title": "Winter Break Announcement",
+            "description": "Dear Students and Staff,\nPlease be informed that the school will be closed for Winter Break from 02/11/2024 to 08/11/2024. We hope everyone has a restful and joyful break!\n\nBest regards,\nSchool Calendar Team"
         },
         {
-            "id" : 6,
-            "description" : "Super soupe du jeudi",
-            "local" : "2F10",
-            "date" : "2021-01-07"
+            "id": 6,
+            "time": "01/11/2024",
+            "title": "Closing of the Library",
+            "description": "Dear Students,\nPlease be advised that the library will be closed for two weeks from 02/11/2024 to 08/11/2024. We apologize for any inconvenience and encourage you to plan your visits accordingly. Thank you for your understanding!\n\nBest regards,\nLAHAYE Philipe"
         },
         {
-            "id" : 7,
-            "description" : "Super soupe du vendredi",
-            "local" : "2F10",
-            "date" : "2021-01-08"
+            "id": 7,
+            "time": "09/11/2024",
+            "title": "Revue 2024",
+            "description": "Dear Students,\nWe are thrilled to announce an upcoming school event that promises to be both exciting and enriching for everyone! Mark your calendars and stay tuned for more details coming your way soon. We can’t wait to see you there!\n\nBest regards,\nSAHIB Oussama"
+        },
+        {
+            "id": 8,
+            "time": "12/11/2024",
+            "title": "Exam schedule",
+            "description": "Dear Students,\nWe are thrilled to announce an upcoming school event that promises to be both exciting and enriching for everyone! Mark your calendars and stay tuned for more details coming your way soon. We can’t wait to see you there!\n\nBest regards,\nDENIS Anaïs"
+        },
+        {
+            "id": 9,
+            "time": "14/11/2024",
+            "title": "School Community Charity Drive",
+            "description": "Dear Students,\nThis year, we are launching a school-wide charity drive to support local organizations. Donations of clothes, food, and toys will be accepted from 16/11/2024. Let’s come together to give back to the community!\n\nBest regards,\nCommunity Service Club"
+        },
+        {
+            "id": 10,
+            "time": "17/11/2024",
+            "title": "International Day Celebration",
+            "description": "Dear Students,\nJoin us as we celebrate our diverse cultures on International Day, 20/11/2024. Students will have the opportunity to share their cultural traditions, food, and performances. It’s a day to learn and appreciate our global community!\n\nBest regards,\nEvent Committee"
+        },
+        {
+            "id": 11,
+            "time": "18/11/2024",
+            "title": "Sports Day Announcement",
+            "description": "Dear Students,\nWe are excited to announce that the annual Sports Day will take place on 25/11/2024. Get ready to participate in various sports events and cheer on your classmates! There will be prizes for winners in each category.\n\nBest regards,\nSports Committee"
+        },
+        {
+            "id": 12,
+            "time": "20/11/2024",
+            "title": "School Talent Show Auditions",
+            "description": "Dear Students,\nAuditions for the School Talent Show are scheduled for 27/11/2024. If you wish to perform in the talent show, please sign up at the student services desk before 25/11/2024. We look forward to seeing your talent!\n\nBest regards,\nEvent Team"
+        },
+        {
+            "id": 13,
+            "time": "22/11/2024",
+            "title": "Book Fair Announcement",
+            "description": "Dear Students and Parents,\nWe are pleased to announce the upcoming Book Fair that will be held from 30/11/2024 to 03/12/2024 in the school library. This is a great opportunity to purchase books for the holiday season and support our school library.\n\nBest regards,\nLibrary Committee"
         }
     ],
 
-    "calendar" :
-    [
-        {
-            "month": "Janvier",
-            "days": {
-                "01": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de français",
-                        "time": "15:30 - 16:30",
-                        "room": "2F10"
-                    }
-                ],
-                "02": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "03": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "04": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    }
-                ],
-                "05": [],
-                "06": [],
-                "07": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de français",
-                        "time": "15:30 - 16:30",
-                        "room": "2F10"
-                    }
-                ],
-                "08": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    }
-                ],
-                "09": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "10": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "11": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de français",
-                        "time": "15:30 - 16:30",
-                        "room": "2F10"
-                    }
-                ],
-                "12": [],
-                "13": [],
-                "14": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    }
-                ],
-                "15": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "16": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "17": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "18": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de français",
-                        "time": "15:30 - 16:30",
-                        "room": "2F10"
-                    }
-                ],
-                "19": [],
-                "20": [],
-                "21": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    }
-                ],
-                "22": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "23": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "24": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "25": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de français",
-                        "time": "15:30 - 16:30",
-                        "room": "2F10"
-                    }
-                ],
-                "26": [],
-                "27": [],
-                "28": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    },
-                    {
-                        "name": "Cours de math",
-                        "time": "12:30 - 15:30",
-                        "room": "2F10"
-                    }
-                ],
-                "29": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "30": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ],
-                "31": [
-                    {
-                        "name": "Cours dinfo",
-                        "time": "08:30 - 11:40",
-                        "room": "2F10"
-                    }
-                ]
-            }
-        }
-
-    ],
 
     "students": [
         {
@@ -644,11 +427,11 @@
 
     "courses": [
         {
-            "professor": "M. Dupont",
-            "subject": "Math",
             "id": 1,
+            "name": "Math",
+            "professor": "M. Dupont",
             "email": "coucou@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_math",
+            "pdf_file": "https://example.com/pdf/cours_math",
             "students": [
                 "20231",
                 "20232",
@@ -660,11 +443,11 @@
             ]
         },
         {
-            "professor": "Mme Lefevre",
-            "subject": "Informatique",
             "id": 2,
+            "name": "Informatique",
+            "professor": "Mme Lefevre",
             "email": "informatique@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_info",
+            "pdf_file": "https://example.com/pdf/cours_info",
             "students": [
                 "20231",
                 "20232",
@@ -676,11 +459,11 @@
             ]
         },
         {
-            "professor": "M. Martin",
-            "subject": "Francais",
             "id": 3,
+            "name": "Francais",
+            "professor": "M. Martin",
             "email": "francais@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_francais",
+            "pdf_file": "https://example.com/pdf/cours_francais",
             "students": [
                 "20232",
                 "20233",
@@ -692,11 +475,11 @@
             ]
         },
         {
-            "professor": "Mme Bernard",
-            "subject": "Physique",
             "id": 4,
+            "name": "Physique",
+            "professor": "Mme Bernard",
             "email": "physique@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_physique",
+            "pdf_file": "https://example.com/pdf/cours_physique",
             "students": [
                 "20231",
                 "20234",
@@ -708,11 +491,11 @@
             ]
         },
         {
-            "professor": "Dr Moreau",
-            "subject": "Chimie",
             "id": 5,
+            "name": "Chimie",
+            "professor": "Dr Moreau",
             "email": "chimie@ecam.be",
-            "pdf_cours": "https://example.com/pdf/cours_chimie",
+            "pdf_file": "https://example.com/pdf/cours_chimie",
             "students": [
                 "20233",
                 "20235",
@@ -723,6 +506,302 @@
                 "2023011"
             ]
         }
-    ]
+    ],
 
-}   
+    "calendar": [
+        {
+            "idcourse": 1,
+            "startTime": "12H",
+            "endTime": "15H",
+            "hall": "EA13",
+            "date": "2024-11-21"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "16H",
+            "endTime": "18H",
+            "hall": "EA14",
+            "date": "2024-11-21"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA12",
+            "date": "2024-11-21"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "15H",
+            "endTime": "17H",
+            "hall": "EA11",
+            "date": "2024-11-21"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA13",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "17H",
+            "hall": "EA12",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "18H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-11-22"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA12",
+            "date": "2024-11-24"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "12H",
+            "endTime": "15H",
+            "hall": "EA13",
+            "date": "2024-11-25"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "16H",
+            "endTime": "18H",
+            "hall": "EA14",
+            "date": "2024-11-25"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "11H",
+            "endTime": "13H",
+            "hall": "EA11",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "14H",
+            "endTime": "16H",
+            "hall": "EA11",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "17H",
+            "endTime": "18H",
+            "hall": "EA13",
+            "date": "2024-11-26"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "19H",
+            "endTime": "21H",
+            "hall": "EA13",
+            "date": "2024-11-30"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-01"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-02"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-03"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-04"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-05"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 2,
+            "startTime": "19H",
+            "endTime": "21H",
+            "hall": "EA13",
+            "date": "2024-12-06"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-07"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-08"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-09"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-10"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-11"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-12"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-13"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-14"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-15"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-16"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-17"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-18"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-19"
+        },
+        {
+            "idcourse": 1,
+            "startTime": "10H",
+            "endTime": "12H",
+            "hall": "EA14",
+            "date": "2024-12-20"
+        },
+        {
+            "idcourse": 3,
+            "startTime": "15H",
+            "endTime": "16H",
+            "hall": "EA12",
+            "date": "2024-12-20"
+        },
+        {
+            "idcourse": 4,
+            "startTime": "17H",
+            "endTime": "19H",
+            "hall": "EA11",
+            "date": "2024-12-20"
+        }
+    ]
+}
