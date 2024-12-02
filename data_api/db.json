@@ -2,11 +2,11 @@
 
     "news" :
     [
-        {
+       {
             "id": 1,
             "time": "10/10/2024",
             "title": "School Annual Talent Show",
-            "description": "Dear Students and Staff,\nWe are excited to announce that our Annual Talent Show will take place on 22/10/2024. We encourage all students to showcase their talents, whether it's singing, dancing, acting, or any other creative expression. There will be prizes for the best performances!\n\nBest regards,\nEvent Team",
+            "description": "Dear Students and Staff,\nWe are excited to announce that our Annual Talent Show will take place on 22/10/2024. We encourage all students to showcase their talents, whether it's singing, dancing, acting, or any other creative expression. There will be prizes for the best performances!\n\nBest regards,\nEvent Team"
         },
         {
             "id": 2,
@@ -81,7 +81,6 @@
             "description": "Dear Students and Parents,\nWe are pleased to announce the upcoming Book Fair that will be held from 30/11/2024 to 03/12/2024 in the school library. This is a great opportunity to purchase books for the holiday season and support our school library.\n\nBest regards,\nLibrary Committee"
         }
     ],
-
 
     "students": [
         {
@@ -425,89 +424,90 @@
         }
     ],
 
-    "courses": [
-        {
-            "id": 1,
-            "name": "Math",
-            "professor": "M. Dupont",
-            "email": "coucou@ecam.be",
-            "pdf_file": "https://example.com/pdf/cours_math",
-            "students": [
-                "20231",
-                "20232",
-                "20233",
-                "20234",
-                "20235",
-                "20236",
-                "20237"
-            ]
-        },
-        {
-            "id": 2,
-            "name": "Informatique",
-            "professor": "Mme Lefevre",
-            "email": "informatique@ecam.be",
-            "pdf_file": "https://example.com/pdf/cours_info",
-            "students": [
-                "20231",
-                "20232",
-                "20233",
-                "20235",
-                "20236",
-                "20237",
-                "20238"
-            ]
-        },
-        {
-            "id": 3,
-            "name": "Francais",
-            "professor": "M. Martin",
-            "email": "francais@ecam.be",
-            "pdf_file": "https://example.com/pdf/cours_francais",
-            "students": [
-                "20232",
-                "20233",
-                "20234",
-                "20235",
-                "20236",
-                "20237",
-                "20238"
-            ]
-        },
-        {
-            "id": 4,
-            "name": "Physique",
-            "professor": "Mme Bernard",
-            "email": "physique@ecam.be",
-            "pdf_file": "https://example.com/pdf/cours_physique",
-            "students": [
-                "20231",
-                "20234",
-                "20235",
-                "20236",
-                "20237",
-                "20239",
-                "2023010"
-            ]
-        },
-        {
-            "id": 5,
-            "name": "Chimie",
-            "professor": "Dr Moreau",
-            "email": "chimie@ecam.be",
-            "pdf_file": "https://example.com/pdf/cours_chimie",
-            "students": [
-                "20233",
-                "20235",
-                "20236",
-                "20237",
-                "20238",
-                "20239",
-                "2023011"
-            ]
-        }
-    ],
-
+  "courses": [
+    {
+      "id": 1,
+      "name": "Math",
+      "professor": "M. Dupont",
+      "email": "coucou@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_math",
+      "students": [
+        "20231",
+        "20232",
+        "20233",
+        "20234",
+        "20235",
+        "20236",
+        "20237"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Informatique",
+      "professor": "Mme Lefevre",
+      "email": "informatique@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_info",
+      "students": [
+        "20231",
+        "20232",
+        "20233",
+        "20235",
+        "20236",
+        "20237",
+        "20238"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Francais",
+      "professor": "M. Martin",
+      "email": "francais@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_francais",
+      "students": [
+        "20232",
+        "20233",
+        "20234",
+        "20235",
+        "20236",
+        "20237",
+        "20238"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Physique",
+      "professor": "Mme Bernard",
+      "email": "physique@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_physique",
+      "students": [
+        "20231",
+        "20234",
+        "20235",
+        "20236",
+        "20237",
+        "20239",
+        "2023010"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Chimie",
+      "professor": "Dr Moreau",
+      "email": "chimie@ecam.be",
+      "pdf_file": "https://example.com/pdf/cours_chimie",
+      "students": [
+        "20233",
+        "20235",
+        "20236",
+        "20237",
+        "20238",
+        "20239",
+        "2023011"
+      ]
+    }
+  ],
+    
+   
     "calendar": [
         {
             "idcourse": 1,

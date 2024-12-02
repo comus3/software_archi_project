@@ -1,8 +1,10 @@
 package org.schoolmanager.project.ui.homepage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +21,7 @@ import schoolmanager.composeapp.generated.resources.back
 @Composable
 fun HomePageDetailsNews(news: NewsHomePage, BackHomePage:(String)-> Unit){
     Column(
-        modifier= Modifier.fillMaxSize().padding(16.dp))
+        modifier= Modifier.fillMaxSize().padding(16.dp).background(MaterialTheme.colors.background),)
     {
         //BACK BUTTON TO HOMEPAGE
         Row(
@@ -38,7 +40,7 @@ fun HomePageDetailsNews(news: NewsHomePage, BackHomePage:(String)-> Unit){
             text= news.time,
             fontSize= 22.sp,
             fontWeight= FontWeight.Bold,
-            color= Color.Gray,
+
             modifier= Modifier.padding(start= 10.dp,bottom = 8.dp)
         )
 
@@ -47,7 +49,7 @@ fun HomePageDetailsNews(news: NewsHomePage, BackHomePage:(String)-> Unit){
             text= news.title,
             fontSize= 30.sp,
             fontWeight= FontWeight.Bold,
-            color= Color.Black,
+
             modifier= Modifier
                 .padding(start= 10.dp, bottom= 8.dp)
         )
@@ -55,7 +57,7 @@ fun HomePageDetailsNews(news: NewsHomePage, BackHomePage:(String)-> Unit){
         Text(
             text= news.description,
             fontSize= 20.sp,
-            color= Color.Black,
+
             modifier= Modifier.padding(start= 10.dp, bottom= 8.dp)
         )
     }
