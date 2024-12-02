@@ -28,6 +28,7 @@ import androidx.compose.material.Card
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -45,10 +46,12 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 //HOMEPAGE
 @Composable
 fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
-    //LOAD NEWS DATA FROM API
-    LaunchedEffect(Unit) {
+    //LOAD NEWS+CALENDAR DATA FROM VIEWMODELS
+    LaunchedEffect(Unit){
         newsViewModel.fetchNews()
+        calendarViewModel.fetchCalendar()
     }
+
     Column(Modifier.fillMaxWidth(), horizontalAlignment= Alignment.CenterHorizontally){
         //PROFILE PHOTO
         Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp)){
@@ -116,10 +119,12 @@ fun Welcome(name: String) {
 //FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
 fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course)-> Unit){
+    //DATAS FROM VIEWMODEL
+    val AllCourses by calendarViewModel.courses.collectAsState()
     //DATE TODAY
     val TodayDate= Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
     //TODAY COURSE
-    val TodayCourses= calendarViewModel.getCoursesForDate(TodayDate)
+    val TodayCourses= AllCourses.filter {LocalDate.parse(it.date)==TodayDate}
 
     LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally){
         //IF MINIMUM 1 COURSE
@@ -195,7 +200,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
         else{
             item{
                 Text(
-                    text= "No classes scheduled for today.",
+                    text= "No courses for today.",
                     fontSize= 20.sp,
                     color= Color.Gray,
                     modifier= Modifier.padding(16.dp)

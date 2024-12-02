@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import org.schoolmanager.project.ApiService
 
 class NewsViewModel: ViewModel(){
-    private val coroutineScope = CoroutineScope(SupervisorJob() +Dispatchers.Default)
+    private val coroutineScope= CoroutineScope(SupervisorJob() +Dispatchers.Default)
     val news= MutableStateFlow<List<NewsHomePage>>(emptyList())
 
     //FCT TO HAVE NEWS FROM THE API

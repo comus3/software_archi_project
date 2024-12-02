@@ -44,7 +44,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import org.schoolmanager.project.data.model.CourseCalendar
+import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 
 @Composable
@@ -236,7 +236,7 @@ fun WeeklyCalendar(
 }
 
 @Composable
-fun CourseList(courses: List<CourseCalendar>, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course) -> Unit) {
+fun CourseList(courses: List<Calendar>, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course) -> Unit) {
     LazyColumn {
         items(courses) { courseCalendar ->
             val course = coursesViewModel.getCourseById(courseCalendar.idcourse)
@@ -249,7 +249,7 @@ fun CourseList(courses: List<CourseCalendar>, coursesViewModel: CoursesViewModel
 }
 
 @Composable
-fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse: (Course) -> Unit) {
+fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -> Unit) {
     var animatedOffset by remember { mutableStateOf(1000f) }
 
     LaunchedEffect(true) {
@@ -299,7 +299,7 @@ fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse
                 }
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
-                    text = "${courseCalendar.startTime} - ${courseCalendar.endTime}",
+                    text = "${calendar.startTime} - ${calendar.endTime}",
                     fontSize = 16.sp,
                     color = Color.Black
                 )
@@ -313,7 +313,7 @@ fun CourseItem(courseCalendar: CourseCalendar, course: Course, GoToDetailsCourse
                 )
                 Spacer(modifier= Modifier.height(4.dp))
                 Text(
-                    text= courseCalendar.hall,
+                    text= calendar.hall,
                     fontSize= 16.sp,
                 )
             }

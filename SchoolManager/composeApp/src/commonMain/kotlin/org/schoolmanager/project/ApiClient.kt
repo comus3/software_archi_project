@@ -8,8 +8,10 @@ import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.serialization.Serializable
+import kotlinx.datetime.LocalDate
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
 import org.schoolmanager.project.data.model.NewsHomePage
 
@@ -23,6 +25,9 @@ class SharedViewModel {
     private val _news= MutableStateFlow<List<NewsHomePage>>(emptyList())
     val news: StateFlow<List<NewsHomePage>> get()= _news
 
+    private val _calendar= MutableStateFlow<List<Calendar>>(emptyList())
+    val calendar: StateFlow<List<Calendar>> get()= _calendar
+
 
     fun fetchContacts() {
         coroutineScope.launch {
@@ -33,8 +38,15 @@ class SharedViewModel {
 
     fun fetchNews() {
         coroutineScope.launch {
-            val fetchedNews = ApiService.fetchNews()
+            val fetchedNews= ApiService.fetchNews()
             _news.value = fetchedNews
+        }
+    }
+
+    fun fetchCalendar() {
+        coroutineScope.launch {
+            val fetchedCalendar = ApiService.fetchCalendar()
+            _calendar.value = fetchedCalendar
         }
     }
 
@@ -68,6 +80,21 @@ object ApiService {
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun fetchCalendar(): List<Calendar> {
+        return try {
+            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/calendar")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                val fetchedData = Json.decodeFromString<List<Calendar>>(jsonResponse)
+                fetchedData.map { it.copy(date = LocalDate.parse(it.date).toString()) }
             } else {
                 emptyList()
             }
