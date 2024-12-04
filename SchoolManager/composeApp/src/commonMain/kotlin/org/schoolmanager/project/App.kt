@@ -57,7 +57,8 @@ fun App() {
         if (!isLoggedIn) {
             // Login Page
             LoginScreen(
-                onLoginSuccess = { isLoggedIn = true } // Set isLoggedIn to true after successful login
+                onLoginSuccess = { isLoggedIn = true }, // Set isLoggedIn to true after successful login
+                viewModel = viewModel
             )
         } else {
             // Main App with Bottom Navigation
