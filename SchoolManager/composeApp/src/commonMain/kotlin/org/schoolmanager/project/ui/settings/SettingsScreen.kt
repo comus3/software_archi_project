@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.arrowRight
@@ -40,6 +41,77 @@ import schoolmanager.composeapp.generated.resources.darkMode
 import schoolmanager.composeapp.generated.resources.language
 import schoolmanager.composeapp.generated.resources.phoneIcon
 import schoolmanager.composeapp.generated.resources.termsAndConditions
+
+@Composable
+fun SettingsButton(
+    text: String,
+    imageResource: DrawableResource, // Use Int if it's a resource ID
+    imageContentDescription: String?,
+    onClick: () -> Unit
+) {
+    val iconColor = MaterialTheme.colors.onSurface
+    val arrowColor = MaterialTheme.colors.onSurface
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(imageResource), // Use the parameter directly
+                    contentDescription = imageContentDescription,
+                    modifier = Modifier.size(40.dp),
+                    colorFilter = ColorFilter.tint(iconColor)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = text,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            // Arrow Icon aligned to the end
+            Image(
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = "Arrow Icon",
+                modifier = Modifier
+                    .size(30.dp)
+                    .clickable(onClick = onClick),
+                colorFilter = ColorFilter.tint(arrowColor)
+
+
+            )
+
+        }
+    }
+}
+
+@Composable
+fun BannerButton(
+    text: String,
+    backgroundColor: Color
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+            .padding(16.dp)
+    ) {
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
+}
 
 @Composable
 fun SettingsScreen(
@@ -91,60 +163,20 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(16.dp)) // Space between Rows
 
         // General Button
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Adjust width of the box
-                .background(Color(0xFF455A64))
-                .padding(16.dp) // Padding inside the box
-        ) {
-            Text(
-                "General",
-                color = Color.White,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+
+        BannerButton(
+            text = "General",
+            backgroundColor = Color(0xFF455A64)
+        )
+
+
         // Language Button
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Adjust width of the box
-                .padding(16.dp) // Padding inside the box
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(), // Make the Row span the entire width
-                verticalAlignment = Alignment.CenterVertically, // Center-align items vertically
-                horizontalArrangement = Arrangement.SpaceBetween // Space out elements to left and right
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically // Inner row for icon and text alignment
-                ) {
-                    Image(
-                        painter = painterResource(Res.drawable.language),
-                        contentDescription = "Language Icon",
-                        modifier = Modifier.size(40.dp) // Set the image size
-                    )
-                    Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
-                    Text(
-                        "Language",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-                // Arrow Icon aligned to the end
-                Image(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Arrow Icon",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clickable{GoToLanguage()},
-                    colorFilter = ColorFilter.tint(arrowColor)
-
-
-                )
-            }
-        }
+        SettingsButton(
+            text = "Language",
+            imageResource = Res.drawable.language,
+            imageContentDescription = "Language Icon",
+            onClick = { GoToLanguage() }
+        )
 
         // Dark Mode
         // State to manage the toggle state
@@ -188,100 +220,27 @@ fun SettingsScreen(
             }
         }
         // Infos section
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Adjust width of the box
-                .background(Color(0xFF455A64))
-                .padding(16.dp) // Padding inside the box
-        ) {
-            Text(
-                "Infos",
-                color = Color.White,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+        BannerButton(
+            text = "Infos",
+            backgroundColor = Color(0xFF455A64)
+        )
         // About button
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Adjust width of the box
-                .padding(16.dp) // Padding inside the box
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(), // Make the Row span the entire width
-                verticalAlignment = Alignment.CenterVertically, // Center-align items vertically
-                horizontalArrangement = Arrangement.SpaceBetween // Space out elements to left and right
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically // Inner row for icon and text alignment
-                ) {
-                    Image(
-                        painter = painterResource(Res.drawable.phoneIcon),
-                        contentDescription = "Phone Icon",
-                        modifier = Modifier.size(40.dp),
-                        colorFilter = ColorFilter.tint(iconColor)// Set the image size
-                    )
-                    Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
-                    Text(
-                        "About",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
 
-                // Arrow Icon aligned to the end
-                Image(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Arrow Icon",
-                    modifier = Modifier
-                        .size(30.dp).clickable{GoToAbout()},
-                    colorFilter = ColorFilter.tint(arrowColor)
+        SettingsButton(
+            text = "About",
+            imageResource = Res.drawable.phoneIcon,
+            imageContentDescription = "About Icon",
+            onClick = { GoToAbout() }
+        )
 
-
-
-                )
-            }
-        }
         // Terms and conditions button
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Adjust width of the box
-                .padding(16.dp) // Padding inside the box
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(), // Make the Row span the entire width
-                verticalAlignment = Alignment.CenterVertically, // Center-align items vertically
-                horizontalArrangement = Arrangement.SpaceBetween // Space out elements to left and right
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically // Inner row for icon and text alignment
-                ) {
-                    Image(
-                        painter = painterResource(Res.drawable.termsAndConditions),
-                        contentDescription = "Terms Icon",
-                        modifier = Modifier.size(40.dp),
-                        colorFilter = ColorFilter.tint(iconColor)// Set the image size
-                    )
-                    Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
-                    Text(
-                        "Terms and Conditions",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
 
-                // Arrow Icon aligned to the end
-                Image(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Arrow Icon",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clickable{GoToTerms()},
-                    colorFilter = ColorFilter.tint(arrowColor)
-                )
-            }
-        }
+        SettingsButton(
+            text = "Terms and Conditions",
+            imageResource = Res.drawable.termsAndConditions,
+            imageContentDescription = "Terms Icon",
+            onClick = { GoToTerms() }
+        )
 
     }
 }
