@@ -9,7 +9,7 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 
 class CoursesViewModel: ViewModel(){
-    private val courses = listOf(
+    val courses = listOf(
         Course(1, "Electrical", Res.drawable.alternatif_monophase, "LURKIN Quentin", "lrk@ecam.be"),
         Course(2, "Motors", Res.drawable.motor, "LOUIS Jean-Guillaume", "j3l@ecam.be"),
         Course(3, "Math", Res.drawable.electronic_circuit, "HILLEWAERE Ruben", "hlr@ecam.be"),

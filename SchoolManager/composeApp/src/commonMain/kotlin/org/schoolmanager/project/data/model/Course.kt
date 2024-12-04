@@ -6,7 +6,7 @@ import org.jetbrains.compose.resources.DrawableResource
 data class Course(
     val id: Int= 0,
     val name: String= "",
-    val image: DrawableResource?= null,
+    val image: DrawableResource,
     val professor: String= "",
     val mail: String= "",
     val pdf_file: String= "",

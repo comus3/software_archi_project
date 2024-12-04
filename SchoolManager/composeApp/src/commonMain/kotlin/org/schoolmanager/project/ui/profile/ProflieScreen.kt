@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,22 +29,56 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import org.schoolmanager.project.viewmodel.ProfileViewModel
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.discord
 import schoolmanager.composeapp.generated.resources.mail
 import schoolmanager.composeapp.generated.resources.profilePicture
 import schoolmanager.composeapp.generated.resources.back
+import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.settings
 
 
+
+@Composable
+fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .height(70.dp)
+            .clickable { GoToCourseDetail() },
+        shape = RoundedCornerShape(12.dp),
+        elevation = 4.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Course image
+            Image(
+                painter = painterResource(resource),
+                contentDescription = "$title Icon",
+                modifier = Modifier.size(40.dp)
+            )
+            // Course title
+            Text(
+                text = title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
+    }
+}
 
 
 
 @Composable
 fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades: () -> Unit) {
-    val viewModel = ProfileViewModel()
+    val viewModel = CoursesViewModel()
     val iconColor = MaterialTheme.colors.onSurface
     // Use LazyColumn for all scrollable content
     LazyColumn(
@@ -128,9 +164,14 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
             Text("Courses", Modifier.padding(top = 35.dp), fontSize = 20.sp, fontWeight = FontWeight.Bold)
         }
 
-        // Adding all courses
+
+        // Adding all courses using CourseCard instead of plain Text
         items(viewModel.courses) { course ->
-            Text(course.name, Modifier.padding(8.dp))
+            CourseCard(
+                title = course.name, // Course name
+                resource = course.image,
+                GoToCourseDetail = {GoToGrades()}
+            )
         }
 
         item {
