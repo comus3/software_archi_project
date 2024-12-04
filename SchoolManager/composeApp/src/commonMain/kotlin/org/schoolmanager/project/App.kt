@@ -24,6 +24,7 @@ import org.schoolmanager.project.ui.settings.AboutScreen
 import org.schoolmanager.project.ui.settings.LanguageScreen
 import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
+import org.schoolmanager.project.ui.syllabus.CartSyllabusScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.NewsViewModel
@@ -43,7 +44,7 @@ fun App() {
     // Thème global appliqué
     MyTheme(darkTheme = isDarkModeEnabled) {
         // SELECTED PAGE
-        var SelectedScreen by remember { mutableStateOf("Home") }
+        var SelectedScreen by remember { mutableStateOf("CartSyllabus") }
         val viewModel = ContactsViewModel()
         var SelectedButton by remember { mutableStateOf("Today classes") }
         var SelectedCourse: Course? by remember { mutableStateOf(null) }
@@ -153,7 +154,11 @@ fun App() {
                         }
                     })
                 }
-                "HomeSyllabus" -> HomeSyllabusScreen(syllabusviewModel = SyllabusViewModel())
+                "HomeSyllabus" -> HomeSyllabusScreen(
+                    BackCourse= {SelectedScreen = "Courses"},
+                    GoToCart= {SelectedScreen = "CartSyllabus"},
+                    syllabusviewModel = SyllabusViewModel())
+                "CartSyllabus" -> CartSyllabusScreen(BackHomeSyllabus= {SelectedScreen = "HomeSyllabus"} )
                 "AddCourse" -> AddCourseScreen(BackCourses = { SelectedScreen = "Courses"; ScreenHistory.add("AddCourse") })
                 "Contact" -> ContactsScreen(
                     viewModel = viewModel,
