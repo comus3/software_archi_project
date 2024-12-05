@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -133,7 +133,7 @@ fun ContactCard(contact: Contact, onClick: () -> Unit) {
                     .clip(CircleShape)
                     .size(65.dp)
             )
-            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Arrow Icon")
+            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Arrow Icon")
         }
     }
 }
