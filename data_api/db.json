@@ -225,25 +225,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
+                        "jun": "12",
+                        "sept": "14",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
+                        "jun": "14",
+                        "sept": "16",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 10,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
+                        "jun": "10",
+                        "sept": "12",
+                        "jan": ""
                     }
                 }
             ]
@@ -254,25 +254,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
+                        "jun": "15",
+                        "sept": "13",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
+                        "jun": "16",
+                        "sept": "17",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 11,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
+                        "jun": "11",
+                        "sept": "13",
+                        "jan": ""
                     }
                 }
             ]
@@ -283,25 +283,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
+                        "jun": "13",
+                        "sept": "15",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
+                        "jun": "14",
+                        "sept": "14",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
+                        "jun": "12",
+                        "sept": "13",
+                        "jan": ""
                     }
                 }
             ]
@@ -312,25 +312,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 11,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
+                        "jun": "11",
+                        "sept": "12",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
+                        "jun": "15",
+                        "sept": "14",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
+                        "jun": "14",
+                        "sept": "15",
+                        "jan": ""
                     }
                 }
             ]
@@ -341,25 +341,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
+                        "jun": "16",
+                        "sept": "17",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
+                        "jun": "13",
+                        "sept": "15",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 10,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
+                        "jun": "10",
+                        "sept": "12",
+                        "jan": ""
                     }
                 }
             ]
@@ -370,25 +370,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
+                        "jun": "14",
+                        "sept": "16",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
+                        "jun": "16",
+                        "sept": "17",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
+                        "jun": "13",
+                        "sept": "14",
+                        "jan": ""
                     }
                 }
             ]
@@ -399,25 +399,25 @@
                 {
                     "subject": "Math",
                     "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
+                        "jun": "12",
+                        "sept": "13",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Info",
                     "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
+                        "jun": "15",
+                        "sept": "16",
+                        "jan": ""
                     }
                 },
                 {
                     "subject": "Francais",
                     "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
+                        "jun": "14",
+                        "sept": "15",
+                        "jan": ""
                     }
                 }
             ]
