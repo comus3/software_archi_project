@@ -13,6 +13,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
+import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.NewsHomePage
 
 class SharedViewModel {
@@ -27,6 +28,9 @@ class SharedViewModel {
 
     private val _calendar= MutableStateFlow<List<Calendar>>(emptyList())
     val calendar: StateFlow<List<Calendar>> get()= _calendar
+
+    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
+    val grade: StateFlow<List<Grade>> get() = _grades
 
 
     fun fetchContacts() {
@@ -47,6 +51,13 @@ class SharedViewModel {
         coroutineScope.launch {
             val fetchedCalendar = ApiService.fetchCalendar()
             _calendar.value = fetchedCalendar
+        }
+    }
+
+    fun fetchGrades() {
+        coroutineScope.launch {
+            val fetchedGrades = ApiService.fetchGrades()
+            _grades.value = fetchedGrades
         }
     }
 
@@ -102,4 +113,19 @@ object ApiService {
             emptyList()
         }
     }
+
+    suspend fun fetchGrades(): List<Grade> {
+        return try {
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
 }
