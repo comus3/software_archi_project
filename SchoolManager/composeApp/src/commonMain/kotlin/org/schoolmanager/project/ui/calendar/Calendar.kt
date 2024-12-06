@@ -119,27 +119,38 @@ fun CalendarScreen(viewModel: CalendarViewModel = CalendarViewModel(), goToProfi
             Spacer(modifier = Modifier.height(5.dp))
 
             // Afficher les jours de la semaine
-            WeekDaysHeader(selectedDate = selectedDate,onMonthChanged = { newDate ->
+            WeekDaysHeader(selectedDate = selectedDate, isMonthView = isMonthView, onMonthChanged = { newDate ->
                 selectedDate = newDate
             },)
 
             // Affichage en fonction de la vue sélectionnée (mois ou semaine)
             if (isMonthView) {
-                MonthlyCalendar(
-                    daysInMonth = daysInMonth,
-                    firstDayOfWeek = firstDayOfWeek,
-                    selectedDate = selectedDate,
-                    onDayClick = { day ->
-                        selectedDate = LocalDate(selectedDate.year, selectedDate.month, day)
-                    }
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f) // Réduction pour laisser des colonnes vides à gauche et droite
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    MonthlyCalendar(
+                        daysInMonth = daysInMonth,
+                        firstDayOfWeek = firstDayOfWeek,
+                        selectedDate = selectedDate,
+                        onDayClick = { day ->
+                            selectedDate = LocalDate(selectedDate.year, selectedDate.month, day)
+                        }
+                    )
+                }
                 val courses = viewModel.getCoursesForDate(selectedDate)
                 CourseList(courses)
             } else {
-                WeeklyCalendar(weekDates, selectedDate) { date ->
-                    selectedDate = date
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f) // Réduction pour laisser des colonnes vides à gauche et droite
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    WeeklyCalendar(weekDates, selectedDate) { date ->
+                        selectedDate = date
+                    }
                 }
-
                 val courses = viewModel.getCoursesForDate(selectedDate)
                 CourseList(courses)
             }
@@ -297,7 +308,7 @@ fun CourseItem(course: Course) {
 }
 
 @Composable
-fun WeekDaysHeader(selectedDate: LocalDate,onMonthChanged: (LocalDate) -> Unit) {
+fun WeekDaysHeader(selectedDate: LocalDate, isMonthView: Boolean, onMonthChanged: (LocalDate) -> Unit) {
     // Liste des jours de la semaine dans l'ordre
     val weekDays = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
@@ -310,7 +321,11 @@ fun WeekDaysHeader(selectedDate: LocalDate,onMonthChanged: (LocalDate) -> Unit) 
     ) {
         IconButton(onClick = {
                     // Aller au mois précédent
-                    val newSelectedMont = selectedDate.minus(1, DateTimeUnit.MONTH)
+                    val newSelectedMont = if (isMonthView) {
+                        selectedDate.minus(1, DateTimeUnit.MONTH)
+                    } else {
+                        selectedDate.minus(7, DateTimeUnit.DAY)
+                    }
                     // Appeler la fonction onMonthChanged pour notifier le parent de la nouvelle date
                     onMonthChanged(newSelectedMont)
                 }) {
@@ -331,7 +346,11 @@ fun WeekDaysHeader(selectedDate: LocalDate,onMonthChanged: (LocalDate) -> Unit) 
         }
         IconButton(onClick = {
             // Aller au mois suivant
-            val newSelectedMont = selectedDate.plus(1, DateTimeUnit.MONTH)
+            val newSelectedMont = if (isMonthView) {
+                selectedDate.plus(1, DateTimeUnit.MONTH)
+                } else {
+                    selectedDate.plus(7, DateTimeUnit.DAY)
+                }
             // Appeler la fonction onMonthChanged pour notifier le parent de la nouvelle date
             onMonthChanged(newSelectedMont)
         }) {
