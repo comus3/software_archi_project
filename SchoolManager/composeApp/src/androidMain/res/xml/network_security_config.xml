@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permet le trafic en clair (HTTP) vers localhost et 127.0.0.1 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+
+    <!-- Autres configurations peuvent être ajoutées ici, par exemple pour des domaines HTTPS -->
+</network-security-config>

@@ -1,6 +1,7 @@
 package org.schoolmanager.project
 
 import ContactDetailScreen
+import MyTheme
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.material.MaterialTheme
@@ -25,8 +26,7 @@ import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
-import org.schoolmanager.project.viewmodel.ContactsViewModel
-import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
+import org.schoolmanager.project.viewmodel.NewsViewModel
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.iconhome
@@ -34,13 +34,17 @@ import schoolmanager.composeapp.generated.resources.iconcalendar
 import schoolmanager.composeapp.generated.resources.iconcourses
 import schoolmanager.composeapp.generated.resources.iconcontact
 
-
 @Composable
 @Preview
 fun App(){
     MaterialTheme {
         //SELECTED PAGE
         var isSplashScreenVisible by remember { mutableStateOf(true) }
+    // Gestion globale de l'état du thème
+    var isDarkModeEnabled by remember { mutableStateOf(false) }
+
+    // Thème global appliqué
+    MyTheme(darkTheme = isDarkModeEnabled) {
         var SelectedScreen by remember { mutableStateOf("Home") }
         val viewModel = ContactsViewModel()
         var SelectedButton by remember { mutableStateOf("Today classes") }

@@ -1,40 +1,38 @@
 package org.schoolmanager.project.viewmodel
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.plus
-import org.schoolmanager.project.data.model.CourseCalendar
+import org.schoolmanager.project.ApiService
+import org.schoolmanager.project.data.model.Calendar
+
 
 
 class CalendarViewModel : ViewModel() {
-    //1= Electric
-    //2= Motors
-    //3= Math
-    //4= Network
-    private val courses = listOf(
-        CourseCalendar(1, "12H", "15H", "EA13", LocalDate(2024, 11, 21)),
-        CourseCalendar(2, "16H", "18H", "EA14", LocalDate(2024, 11, 21)),
-        CourseCalendar(3, "10H", "12H", "EA12", LocalDate(2024, 11, 21)),
-        CourseCalendar(4, "15H", "17H", "EA11", LocalDate(2024, 11, 21)),
-        CourseCalendar(1, "10H", "12H", "EA13", LocalDate(2024, 11, 22)),
-        CourseCalendar(3, "15H", "17H", "EA12", LocalDate(2024, 11, 22)),
-        CourseCalendar(4, "18H", "19H", "EA11", LocalDate(2024, 11, 22)),
-        CourseCalendar(3, "10H", "12H", "EA12", LocalDate(2024, 11, 24)),
-        CourseCalendar(1, "12H", "15H", "EA13", LocalDate(2024, 11, 25)),
-        CourseCalendar(2, "16H", "18H", "EA14", LocalDate(2024, 11, 25)),
-        CourseCalendar(4, "11H", "13H", "EA11", LocalDate(2024, 11, 26)),
-        CourseCalendar(4, "14H", "16H", "EA11", LocalDate(2024, 11, 26)),
-        CourseCalendar(1, "17H", "18H", "EA13", LocalDate(2024, 11, 26)),
-        CourseCalendar(1, "10H", "12H", "EA14", LocalDate(2024, 11, 28)),
-        CourseCalendar(3, "15H", "16H", "EA12", LocalDate(2024, 11, 28)),
-        CourseCalendar(4, "17H", "19H", "EA11", LocalDate(2024, 11, 28)),
-        CourseCalendar(2, "19H", "21H", "EA13", LocalDate(2024, 11, 28)),
-    )
+    private val coroutineScope= CoroutineScope(SupervisorJob() +Dispatchers.Default)
+    val courses= MutableStateFlow<List<Calendar>>(emptyList())
 
-    fun getCoursesForDate(date: LocalDate): List<CourseCalendar> {
-        return courses.filter { it.date == date }
+    //FCT TO HAVE CALENDAR FROM THE API
+    fun fetchCalendar() {
+        coroutineScope.launch {
+            val fetchedCalendar = ApiService.fetchCalendar()
+            courses.value = fetchedCalendar
+        }
+    }
+
+
+
+
+
+    fun getCoursesForDate(date: LocalDate): List<Calendar> {
+        return courses.value.filter {LocalDate.parse(it.date)==date}
     }
 
     fun getDaysInMonth(selectedDate: LocalDate): List<Int> {
