@@ -52,43 +52,45 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
     val quantities = remember { mutableStateListOf(1, 2, 1, 1, 1, 1) }
     val prices = remember { mutableStateListOf(29.99, 19.99, 15.99, 3.00, 3.00, 3.00) }
 
-    LazyColumn(
-        modifier= Modifier.fillMaxSize().padding(5.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top
-    ) {
-        // Bouton pour revenir
-        item {
-            Row(
-                Modifier.fillMaxWidth().padding(top= 12.dp, bottom= 30.dp, start= 3.dp),
-                horizontalArrangement= Arrangement.SpaceBetween,
-                verticalAlignment= Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(Res.drawable.back),
-                    contentDescription = "Back to Course",
-                    modifier = Modifier
-                        .size(60.dp)
-                        .clickable { BackHomeSyllabus() }
-                )
-                Spacer(modifier = Modifier.weight(0.55f))
-                Text(
-                    text = "My Cart",
-                    style = TextStyle(
-                        fontSize = 36.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    ),
-//                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-            }
-        }
 
+    Column(
+        modifier= Modifier.fillMaxSize().padding(5.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top
+    ){
+    Row(
+        Modifier.fillMaxWidth().padding(top= 12.dp, start= 3.dp),
+        horizontalArrangement= Arrangement.SpaceBetween,
+        verticalAlignment= Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(Res.drawable.back),
+            contentDescription = "Back to Course",
+            modifier = Modifier
+                .size(60.dp)
+                .clickable { BackHomeSyllabus() }
+        )
+        Spacer(modifier = Modifier.weight(0.55f))
+        Text(
+            text = "My Cart",
+            style = TextStyle(
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            ),
+//                    modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Spacer(modifier = Modifier.weight(1f))
+    }
+
+
+    LazyColumn(
+        modifier= Modifier.fillMaxSize().padding(5.dp, top= 13.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top
+    ) {
         // Zone avec bordure contenant uniquement les articles
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp, bottom=0.dp, end= 16.dp) // Padding externe ajouté ici pour espacer la zone de bordure
+                    .padding(16.dp, bottom=0.dp, end= 16.dp, top= 10.dp) // Padding externe ajouté ici pour espacer la zone de bordure
                     .border(
                         BorderStroke(2.dp, Color.Black),
                         shape = RoundedCornerShape(12.dp)
@@ -157,7 +159,7 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
         }
         //SPACE NAVIGATION
         item{Spacer(modifier= Modifier.height(100.dp))}
-    }
+    }}
 }
 
 

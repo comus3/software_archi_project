@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.data.model.Course
 import org.schoolmanager.project.data.model.NewsHomePage
+import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
@@ -26,6 +27,7 @@ import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.ui.syllabus.CartSyllabusScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
+import org.schoolmanager.project.ui.syllabus.SyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.NewsViewModel
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
@@ -44,11 +46,12 @@ fun App() {
     // Thème global appliqué
     MyTheme(darkTheme = isDarkModeEnabled) {
         // SELECTED PAGE
-        var SelectedScreen by remember { mutableStateOf("CartSyllabus") }
+        var SelectedScreen by remember { mutableStateOf("HomeSyllabus") }
         val viewModel = ContactsViewModel()
         var SelectedButton by remember { mutableStateOf("Today classes") }
         var SelectedCourse: Course? by remember { mutableStateOf(null) }
         var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
+        var SelectedOrientation by remember { mutableStateOf<Orientation?>(null) }
         var ScreenHistory = remember { mutableStateListOf<String>() }
 
         // NAVIGATION BAR
@@ -144,7 +147,7 @@ fun App() {
                     GoToAddCourse = { SelectedScreen = "AddCourse"; ScreenHistory.add("Courses") },
                     GoToCourseDetail = { SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses") },
                     GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Courses") },
-                    GoToSyllabus = { SelectedScreen = "HomeSyllabus" }
+                    GoToSyllabus = { SelectedScreen = "HomeSyllabus"; ScreenHistory.add("Courses") }
                 )
                 "DetailsCourse" -> SelectedCourse?.let { course ->
                     CourseDetailsScreen(course = course, BackCourses = {
@@ -155,10 +158,29 @@ fun App() {
                     })
                 }
                 "HomeSyllabus" -> HomeSyllabusScreen(
-                    BackCourse= {SelectedScreen = "Courses"},
-                    GoToCart= {SelectedScreen = "CartSyllabus"},
+                    BackCourse = {SelectedScreen = "Courses"},
+                    GoToCart = {ScreenHistory.add("HomeSyllabus"); SelectedScreen = "CartSyllabus"},
+                    GoToSyllabus = {orientation ->
+                        SelectedOrientation = orientation
+                        SelectedScreen = "ListSyllabus"
+                    },
                     syllabusviewModel = SyllabusViewModel())
-                "CartSyllabus" -> CartSyllabusScreen(BackHomeSyllabus= {SelectedScreen = "HomeSyllabus"} )
+                "ListSyllabus" -> SelectedOrientation?.let { orientation ->
+                    SyllabusScreen(
+                        BackCourse = { SelectedScreen = "HomeSyllabus" },
+                        GoToCart = { SelectedScreen = "CartSyllabus" },
+                        orientation = orientation,
+                        syllabusviewModel = SyllabusViewModel()
+                    )
+                }
+                "CartSyllabus" -> CartSyllabusScreen(
+                    BackHomeSyllabus = {
+                        if (ScreenHistory.isNotEmpty()) {
+                            SelectedScreen = ScreenHistory.removeAt(ScreenHistory.lastIndex)
+                        } else {
+                            SelectedScreen = "HomeSyllabus"
+                        }
+                    })
                 "AddCourse" -> AddCourseScreen(BackCourses = { SelectedScreen = "Courses"; ScreenHistory.add("AddCourse") })
                 "Contact" -> ContactsScreen(
                     viewModel = viewModel,

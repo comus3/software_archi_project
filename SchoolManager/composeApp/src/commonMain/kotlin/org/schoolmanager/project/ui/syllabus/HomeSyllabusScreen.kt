@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,16 +27,17 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.back
 import schoolmanager.composeapp.generated.resources.shopping_cart
 
 @Composable
-fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, syllabusviewModel: SyllabusViewModel) {
+fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, GoToSyllabus: (Orientation)-> Unit, syllabusviewModel: SyllabusViewModel) {
     Column(modifier= Modifier.fillMaxSize().padding(0.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top){
         Row(
-            Modifier.fillMaxWidth().padding(top= 15.dp, bottom= 40.dp),
+            Modifier.fillMaxWidth().padding(top= 15.dp),
             horizontalArrangement= Arrangement.SpaceBetween,
             verticalAlignment= Alignment.CenterVertically)
         {
@@ -69,28 +71,36 @@ fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, syllabusviewM
         }
 
 
-        Text(
-            text= "Select your orientation",
-            style= TextStyle(
-                fontSize= 22.sp,
-                color= Color.Gray,
-                fontWeight= FontWeight.Normal),
-            modifier= Modifier.padding(bottom= 24.dp)
-        )
 
-        LazyColumn(verticalArrangement= Arrangement.spacedBy(16.dp), modifier= Modifier.fillMaxWidth()){
-            items(syllabusviewModel.orientations.size){index->
-                val orientation= syllabusviewModel.orientations[index]
 
-                //BUTTON FOR EACH ORIENTATION
+        LazyColumn(verticalArrangement= Arrangement.spacedBy(16.dp), horizontalAlignment= Alignment.CenterHorizontally, modifier= Modifier.fillMaxWidth()){
+            item{
+                Text(
+                    text= "Select your orientation",
+                    style= TextStyle(
+                        fontSize= 22.sp,
+                        color= Color.Gray,
+                        fontWeight= FontWeight.Normal),
+                    modifier= Modifier.padding(top= 20.dp, bottom= 14.dp)
+                )
+            }
+
+            items(syllabusviewModel.orientations.size) { index ->
+                val orientation = syllabusviewModel.orientations[index]
+
                 Button(
-                    onClick= {},
-                    modifier= Modifier.fillMaxWidth().padding(horizontal= 20.dp).height(65.dp),
-                    colors= ButtonDefaults.buttonColors(backgroundColor= Color(0xFF3E61A0)))
-                {Text(text= orientation.name,
-                    style= TextStyle(fontSize= 30.sp, fontWeight= FontWeight.Bold, color= Color.White))
+                    onClick = { GoToSyllabus(orientation) }, // Passe l'orientation sélectionnée
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp).height(65.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))
+                ) {
+                    Text(
+                        text = orientation.name,
+                        style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                    )
                 }
             }
+            //SPACE NAVIGATION
+            item{Spacer(modifier= Modifier.height(100.dp))}
         }
     }
 }

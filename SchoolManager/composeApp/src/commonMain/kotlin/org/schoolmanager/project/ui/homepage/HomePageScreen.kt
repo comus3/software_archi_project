@@ -200,7 +200,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
                 }
             }
             //SPACE NAVIGATION
-            item{Spacer(modifier= Modifier.height(70.dp))}
+            item{Spacer(modifier= Modifier.height(100.dp))}
         }
         //IF NOT COURSE
         else{
@@ -259,7 +259,7 @@ fun LastNewsContent(viewModel: NewsViewModel, GoToDetailsNews: (NewsHomePage)-> 
                 }
             }
         }
-        //SPACE NAVIGATION
-        item{Spacer(modifier= Modifier.height(70.dp))}
+        //SPACE NAVIGATIONµ
+        item{Spacer(modifier= Modifier.height(100.dp))}
     }
 }
