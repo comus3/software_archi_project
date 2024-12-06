@@ -74,7 +74,7 @@ fun App() {
                     )
                 }
             }
-        ) {
+        ) { 
             // Gestion des écrans
             when (SelectedScreen) {
                 "Home" -> HomePageScreen(
