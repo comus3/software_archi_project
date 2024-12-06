@@ -3,6 +3,7 @@ package org.schoolmanager.project.ui.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,44 +42,54 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.settings
 
 
+import androidx.compose.foundation.layout.Column
+
 
 @Composable
-fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -> Unit) {
+fun CourseCard(
+    title: String,
+    resource: DrawableResource,
+    GoToCourseDetail: () -> Unit
+) {
     Card(
         modifier = Modifier
-            .height(70.dp)
+            .width(120.dp) // Fixed width to fit in a grid
+            .height(150.dp) // Increased height for better appearance in a grid
             .clickable { GoToCourseDetail() },
         shape = RoundedCornerShape(12.dp),
         elevation = 4.dp
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
             // Course image
             Image(
                 painter = painterResource(resource),
                 contentDescription = "$title Icon",
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier
+                    .size(60.dp) // Adjust size for grid presentation
             )
             // Course title
             Text(
                 text = title,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
+                fontSize = 14.sp, // Smaller font for grid spacing
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 8.dp),
+                maxLines = 2 // Ensure long titles are constrained
             )
         }
     }
 }
 
 
-
 @Composable
 fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades: () -> Unit) {
     val viewModel = CoursesViewModel()
+    val courses = viewModel.courses
     val iconColor = MaterialTheme.colors.onSurface
     // Use LazyColumn for all scrollable content
     LazyColumn(
@@ -135,7 +146,6 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
                 fontWeight = FontWeight.Bold
             )
         }
-
         item {
             Row(
                 modifier = Modifier
@@ -160,18 +170,34 @@ fun ProfileScreen(BackHomePage: () -> Unit, GoToSettings: () -> Unit, GoToGrades
             }
         }
 
+
         item {
             Text("Courses", Modifier.padding(top = 35.dp), fontSize = 20.sp, fontWeight = FontWeight.Bold)
         }
-
-
-        // Adding all courses using CourseCard instead of plain Text
-        items(viewModel.courses) { course ->
-            CourseCard(
-                title = course.name, // Course name
-                resource = course.image,
-                GoToCourseDetail = {GoToGrades()}
-            )
+        item {
+            // Add the course grid here
+            Column(
+                modifier = Modifier.padding(top = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                val coursesChunked = courses.chunked(3) // Split courses into rows of 3
+                for (row in coursesChunked) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        for (course in row) {
+                            CourseCard(
+                                title = course.name,
+                                resource = course.image,
+                                GoToCourseDetail = { GoToGrades() } // Define your detail navigation
+                            )
+                        }
+                    }
+                }
+            }
         }
 
         item {
