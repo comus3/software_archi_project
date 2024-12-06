@@ -53,17 +53,14 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
     val prices = remember { mutableStateListOf(29.99, 19.99, 15.99, 3.00, 3.00, 3.00) }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        modifier= Modifier.fillMaxSize().padding(5.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top
     ) {
         // Bouton pour revenir
         item {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                Modifier.fillMaxWidth().padding(top= 12.dp, bottom= 30.dp, start= 3.dp),
+                horizontalArrangement= Arrangement.SpaceBetween,
+                verticalAlignment= Alignment.CenterVertically
             ) {
                 Image(
                     painter = painterResource(Res.drawable.back),
@@ -80,7 +77,7 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     ),
-                    modifier = Modifier.padding(bottom = 16.dp)
+//                    modifier = Modifier.padding(bottom = 16.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
             }
@@ -91,12 +88,13 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(16.dp, bottom=0.dp, end= 16.dp) // Padding externe ajouté ici pour espacer la zone de bordure
                     .border(
                         BorderStroke(2.dp, Color.Black),
                         shape = RoundedCornerShape(12.dp)
                     )
-                    .padding(16.dp)
-            ) {
+                    .padding(13.dp) // Padding interne (inchangé)
+            )  {
                 items.forEachIndexed { index, item ->
                     val (title, description) = item
                     val quantity = quantities[index]
@@ -126,80 +124,41 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
 
         // Calcul du prix total et affichage avec le bouton "Order"
         item {
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             val totalPrice = quantities.zip(prices).sumOf { (quantity, price) -> quantity * price }
             val formattedTotalPrice = (totalPrice * 100).toInt() / 100.0
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .fillMaxWidth(),
+//                    .padding(vertical = 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Texte pour le total à gauche
                 Text(
                     text = "TOTAL : $formattedTotalPrice€",
-                    style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
-                    modifier = Modifier.align(Alignment.CenterVertically)
+                    style = TextStyle(fontSize = 22.sp, fontWeight = FontWeight.Bold),
+                    modifier = Modifier.align(Alignment.CenterVertically).padding(start= 25.dp)
                 )
 
                 // Bouton "Order" à droite
                 Button(
                     onClick = {},
-                    modifier = Modifier.size(width = 150.dp, height = 50.dp),
+                    modifier = Modifier.size(width = 160.dp, height = 50.dp).padding(end= 20.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(red = 30, green = 100, blue = 50))
                 ) {
                     Text(
-                        text = "Order",
-                        style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        text = "ORDER",
+                        style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
                     )
                 }
             }
         }
         //SPACE NAVIGATION
-        item{Spacer(modifier= Modifier.height(70.dp))}
+        item{Spacer(modifier= Modifier.height(100.dp))}
     }
 }
-
-
-//Row(
-//modifier = Modifier.fillMaxWidth(),
-//verticalAlignment = Alignment.CenterVertically
-//) {
-//    Image(
-//        painter = painterResource(Res.drawable.back),
-//        contentDescription = "Back to Course",
-//        modifier = Modifier
-//            .size(60.dp)
-//            .clickable { BackHomeSyllabus() }
-//    )
-//    Spacer(modifier= Modifier.weight(0.55f))
-//    Text(
-//        text= "My Cart",
-//        style= TextStyle(
-//            fontSize= 36.sp,
-//            fontWeight= FontWeight.Bold,
-//            color= Color.Black
-//        ),
-//        modifier= Modifier.padding(bottom= 16.dp)
-//    )
-//    Spacer(modifier= Modifier.weight(1f))
-//}
-
-
-//            Spacer(modifier= Modifier.weight(0.55f))
-//                Text(
-//                    text= "Cart",
-//                    style= TextStyle(
-//                        fontSize= 36.sp,
-//                        fontWeight= FontWeight.Bold,
-//                        color= Color.Black
-//                    ),
-//                    modifier= Modifier.padding(bottom= 16.dp)
-//                )
-//            Spacer(modifier= Modifier.weight(1f))
-
 
 
 @Composable
