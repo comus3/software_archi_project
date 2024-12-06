@@ -13,8 +13,9 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
-import org.schoolmanager.project.data.model.Grade
+//import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.NewsHomePage
+import org.schoolmanager.project.data.model.StudentGradesResponse
 
 class SharedViewModel {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -29,8 +30,8 @@ class SharedViewModel {
     private val _calendar= MutableStateFlow<List<Calendar>>(emptyList())
     val calendar: StateFlow<List<Calendar>> get()= _calendar
 
-    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
-    val grade: StateFlow<List<Grade>> get() = _grades
+//    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
+//    val grade: StateFlow<List<Grade>> get() = _grades
 
 
     fun fetchContacts() {
@@ -54,12 +55,12 @@ class SharedViewModel {
         }
     }
 
-    fun fetchGrades() {
-        coroutineScope.launch {
-            val fetchedGrades = ApiService.fetchGrades()
-            _grades.value = fetchedGrades
-        }
-    }
+//    fun fetchGrades() {
+//        coroutineScope.launch {
+//            val fetchedGrades = ApiService.fetchGrades()
+//            _grades.value = fetchedGrades
+//        }
+//    }
 
 
     fun onClear() {
@@ -114,17 +115,13 @@ object ApiService {
         }
     }
 
-    suspend fun fetchGrades(): List<Grade> {
+    suspend fun fetchStudentGrades(): StudentGradesResponse {
         return try {
             val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades")
-            if (response.status == HttpStatusCode.OK) {
-                val jsonResponse = response.bodyAsText()
-                Json.decodeFromString(jsonResponse)
-            } else {
-                emptyList()
-            }
+            val jsonResponse = response.bodyAsText()
+            Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {
-            emptyList()
+            StudentGradesResponse(student_grades = emptyList())
         }
     }
 
