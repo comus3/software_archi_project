@@ -74,7 +74,7 @@ fun ContactDetailScreen(contact: Contact?, onBack: () -> Unit) {
             )
             Spacer(modifier = Modifier.height(32.dp))
 
-            Text(text = "Type: ${contact.type}", style = MaterialTheme.typography.h4)
+            Text(text = "ID: ${contact.id}", style = MaterialTheme.typography.h4)
 
             Spacer(modifier = Modifier.height(10.dp))
             Row(

@@ -1,14 +1,52 @@
-//import retrofit2.Retrofit
-//import retrofit2.converter.gson.GsonConverterFactory
-//
-//object ApiClient {
-//    private const val BASE_URL = "http://localhost:3323"
-//
-//    val apiService: ApiService by lazy {
-//        Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(ApiService::class.java)
-//    }
-//}
+
+package org.schoolmanager.project
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import org.schoolmanager.project.data.model.Contact
+
+class SharedViewModel {
+
+    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+    private val _contacts = MutableStateFlow<List<Contact>>(emptyList())
+    val contacts: StateFlow<List<Contact>> get() = _contacts
+
+    fun fetchContacts() {
+        coroutineScope.launch {
+            val fetchedContacts = ApiService.fetchContacts()
+            _contacts.value = fetchedContacts
+        }
+    }
+
+
+    fun onClear() {
+        coroutineScope.cancel()
+    }
+}
+
+object ApiService {
+
+    private val client = HttpClient(CIO)
+
+    suspend fun fetchContacts(): List<Contact> {
+        return try {
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+}
