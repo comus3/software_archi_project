@@ -30,6 +30,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -38,7 +39,7 @@ import org.schoolmanager.project.data.model.Course
 import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.CoursesViewModel
-import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
+import org.schoolmanager.project.viewmodel.NewsViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
 
@@ -46,7 +47,13 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 
 //HOMEPAGE
 @Composable
-fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsHomePageViewModel: NewsHomePageViewModel= NewsHomePageViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
+fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
+    //LOAD NEWS+CALENDAR DATA FROM VIEWMODELS
+    LaunchedEffect(Unit){
+        newsViewModel.fetchNews()
+        calendarViewModel.fetchCalendar()
+    }
+
     Column(Modifier.fillMaxWidth().background(MaterialTheme.colors.background), horizontalAlignment= Alignment.CenterHorizontally){
         //PROFILE PHOTO
         Box(modifier= Modifier.fillMaxWidth().padding(top=10.dp, bottom=6.dp, end=10.dp).background(MaterialTheme.colors.background)){
@@ -63,7 +70,7 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
         }
 
         //WELCOME+USERNAME
-        Welcome("Zlatan The best")
+        Welcome("Zlatann The best")
 
         //2 BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
         var CurrentSelectedButton by remember {mutableStateOf(SelectedButton)}
@@ -89,7 +96,7 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
         Spacer(modifier= Modifier.height(16.dp))
         when (CurrentSelectedButton){
             "Today classes"-> TodayClassesContent(calendarViewModel, coursesViewModel, GoToDetailsCourse)
-            "Last News"-> LastNewsContent(newsHomePageViewModel, GoToDetailsNews)
+            "Last News"-> LastNewsContent(newsViewModel, GoToDetailsNews)
         }
     }
 
@@ -118,10 +125,12 @@ fun Welcome(name: String) {
 //FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
 fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course)-> Unit){
+    //DATAS FROM VIEWMODEL
+    val AllCourses by calendarViewModel.courses.collectAsState()
     //DATE TODAY
     val TodayDate= Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
     //TODAY COURSE
-    val TodayCourses= calendarViewModel.getCoursesForDate(TodayDate)
+    val TodayCourses= AllCourses.filter {LocalDate.parse(it.date)==TodayDate}
 
     LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally){
         //IF MINIMUM 1 COURSE
@@ -197,7 +206,7 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
         else{
             item{
                 Text(
-                    text= "No classes scheduled for today.",
+                    text= "No courses for today.",
                     fontSize= 20.sp,
 
                     modifier= Modifier.padding(16.dp)
@@ -209,13 +218,14 @@ fun TodayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: 
 
 //FCT VARIABLE CONTENT OF BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
 @Composable
-fun LastNewsContent(viewModel: NewsHomePageViewModel, GoToDetailsNews: (NewsHomePage)-> Unit){
+fun LastNewsContent(viewModel: NewsViewModel, GoToDetailsNews: (NewsHomePage)-> Unit){
     //DATAS FROM VIEWMODEL
-    val News= viewModel.news.sortedByDescending{it.id}
+    val News= viewModel.news.collectAsState()
+    val NewsSorted= News.value.sortedByDescending{it.id}
 
     LazyColumn(modifier= Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment= Alignment.CenterHorizontally)
     {
-        items(News){newsItem->
+        items(NewsSorted){newsItem->
             Card(
                 modifier= Modifier.fillMaxWidth().height(120.dp).padding(vertical= 12.dp)
                     .clickable {GoToDetailsNews(newsItem)},

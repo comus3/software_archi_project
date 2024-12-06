@@ -80,7 +80,7 @@ fun App() {
                 "Home" -> HomePageScreen(
                     SelectedButton = SelectedButton,
                     GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Home") },
-                    newsHomePageViewModel = NewsHomePageViewModel(),
+                    newsViewModel = NewsViewModel(),
                     calendarViewModel = CalendarViewModel(),
                     GoToDetailsCourse = { course ->
                         SelectedCourse = course
