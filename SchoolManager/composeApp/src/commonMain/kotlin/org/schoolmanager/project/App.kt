@@ -49,183 +49,178 @@ fun App(){
         var ScreenHistory = remember { mutableStateListOf<String>() }
         MaterialTheme {
             // Si le SplashScreen est visible, on l'affiche
-            if (isSplashScreenVisible) {
-                SplashScreen(onTimeout = {
-                    isSplashScreenVisible = false // Cache le SplashScreen après son animation
-                })
-            } else {
                 //NAVIGATION BAR
-                Scaffold(
-                    bottomBar = {
-                        BottomNavigation(
-                            backgroundColor = Color(red = 62, green = 96, blue = 160),
-                            contentColor = Color.White
-                        ) {
-                            //HOME
-                            BottomNavigationItem(
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(Res.drawable.iconhome),
-                                        contentDescription = "Home"
-                                    )
-                                },
-                                label = { Text("Home") },
-                                selected = SelectedScreen == "Home",
-                                onClick = { SelectedScreen = "Home"; ScreenHistory.add("Home") },
-                            )
-                            //CALENDAR
-                            BottomNavigationItem(
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(Res.drawable.iconcalendar),
-                                        contentDescription = "Calendar"
-                                    )
-                                },
-                                label = { Text("Calendar") },
-                                selected = SelectedScreen == "Calendar",
-                                onClick = {
-                                    SelectedScreen = "Calendar"; ScreenHistory.add("Calendar")
-                                }
-                            )
-                            //COURSES
-                            BottomNavigationItem(
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(Res.drawable.iconcourses),
-                                        contentDescription = "Courses"
-                                    )
-                                },
-                                label = { Text("Courses") },
-                                selected = SelectedScreen == "Courses",
-                                onClick = {
-                                    SelectedScreen = "Courses"; ScreenHistory.add("Courses")
-                                }
-                            )
-                            //CONTACT
-                            BottomNavigationItem(
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(Res.drawable.iconcontact),
-                                        contentDescription = "Contact"
-                                    )
-                                },
-                                label = { Text("Contact") },
-                                selected = SelectedScreen == "Contact",
-                                onClick = {
-                                    SelectedScreen = "Contact"; ScreenHistory.add("Contact")
-                                }
-                            )
-                        }
-                    }
-                )
-
-                //SCREENS MANAGEMENT
-                {
-                    when (SelectedScreen) {
-                        "Home" -> HomePageScreen(
-                            SelectedButton = SelectedButton,
-                            GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Home") },
-                            newsHomePageViewModel = NewsHomePageViewModel(),
-                            calendarViewModel = CalendarViewModel(),
-                            GoToDetailsCourse = { course ->
-                                SelectedCourse = course
-                                SelectedScreen = "DetailsCourse"
-                                ScreenHistory.add("Home")
+            Scaffold(
+                bottomBar = {
+                    BottomNavigation(
+                        backgroundColor = Color(red = 62, green = 96, blue = 160),
+                        contentColor = Color.White
+                    ) {
+                        //HOME
+                        BottomNavigationItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.iconhome),
+                                    contentDescription = "Home"
+                                )
                             },
-                            GoToDetailsNews = { news ->
-                                SelectedNews = news
-                                SelectedScreen = "DetailsNews"
-                                ScreenHistory.add("Home")
-                            })
-
-                        "DetailsNews" -> SelectedNews?.let {
-                            HomePageDetailsNews(it,
-                                BackHomePage = { button ->
-                                    SelectedButton = button
-                                    SelectedScreen = "Home"
-                                })
-                        }
-
-                        "Profile" -> ProfileScreen(
-                            BackHomePage = {
-                                if (ScreenHistory.isNotEmpty()) {
-                                    ScreenHistory.removeAt(ScreenHistory.lastIndex)
-                                    SelectedScreen = ScreenHistory.lastOrNull() ?: "Home"
-                                }
+                            label = { Text("Home") },
+                            selected = SelectedScreen == "Home",
+                            onClick = { SelectedScreen = "Home"; ScreenHistory.add("Home") },
+                        )
+                        //CALENDAR
+                        BottomNavigationItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.iconcalendar),
+                                    contentDescription = "Calendar"
+                                )
                             },
-                            GoToSettings = { SelectedScreen = "Settings" },
-                            GoToGrades = { SelectedScreen = "Grades" })
-
-                        "Settings" -> SettingsScreen(
-                            BackProfile = { SelectedScreen = "Profile" },
-                            GoToLanguage = { SelectedScreen = "Language" },
-                            GoToAbout = { SelectedScreen = "About" },
-                            GoToTerms = { SelectedScreen = "Terms" })
-
-                        "Grades" -> GradesScreen(
-                            BackProfile = { SelectedScreen = "Profile" })
-
-                        "Calendar" -> CalendarScreen(
-                            goToProfile = {
-                                SelectedScreen = "Profile"; ScreenHistory.add("Calendar")
-                            },
-                            GoToDetailsCourse = { course ->
-                                SelectedCourse = course
-                                SelectedScreen = "DetailsCourse"
-                                ScreenHistory.add("Calendar")
-                            })
-
-                        "Courses" -> CoursesScreen(
-                            GoToAddCourse = {
-                                SelectedScreen = "AddCourse"; ScreenHistory.add("Courses")
-                            },
-                            GoToCourseDetail = {
-                                SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses")
-                            },
-                            GoToProfile = {
-                                SelectedScreen = "Profile"; ScreenHistory.add("Courses")
-                            },
-                            GoToSyllabus = { SelectedScreen = "HomeSyllabus" })
-
-                        "DetailsCourse" -> SelectedCourse?.let { course ->
-                            CourseDetailsScreen(course = course, BackCourses = {
-                                if (ScreenHistory.isNotEmpty()) {
-                                    ScreenHistory.removeAt(ScreenHistory.lastIndex)
-                                    SelectedScreen = ScreenHistory.lastOrNull() ?: "Home"
-                                }
+                            label = { Text("Calendar") },
+                            selected = SelectedScreen == "Calendar",
+                            onClick = {
+                                SelectedScreen = "Calendar"; ScreenHistory.add("Calendar")
                             }
-                            )
-                        }
-
-                        "HomeSyllabus" -> HomeSyllabusScreen(syllabusviewModel = SyllabusViewModel(),)
-                        "AddCourse" -> AddCourseScreen(
-                            BackCourses = {
-                                SelectedScreen = "Courses"; ScreenHistory.add("AddCourse")
-                            })
-
-                        "Contact" -> ContactsScreen(
-                            viewModel = viewModel,
-                            GoToContactDetailScreen = {
-                                SelectedScreen = "DetailContact"; ScreenHistory.add("Contact")
+                        )
+                        //COURSES
+                        BottomNavigationItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.iconcourses),
+                                    contentDescription = "Courses"
+                                )
                             },
-                            GoToProfile = {
-                                SelectedScreen = "Profile"; ScreenHistory.add("Contact")
-                            })
-
-                        "DetailContact" -> ContactDetailScreen(
-                            contact = viewModel.selectedContact.value,
-                            onBack = { SelectedScreen = "Contact" })
-
-                        "Language" -> LanguageScreen(
-                            BackSettings = { SelectedScreen = "Settings" })
-
-                        "About" -> AboutScreen(
-                            BackSettings = { SelectedScreen = "Settings" })
-
-                        "Terms" -> TermsScreen(
-                            BackSettings = { SelectedScreen = "Settings" })
+                            label = { Text("Courses") },
+                            selected = SelectedScreen == "Courses",
+                            onClick = {
+                                SelectedScreen = "Courses"; ScreenHistory.add("Courses")
+                            }
+                        )
+                        //CONTACT
+                        BottomNavigationItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.iconcontact),
+                                    contentDescription = "Contact"
+                                )
+                            },
+                            label = { Text("Contact") },
+                            selected = SelectedScreen == "Contact",
+                            onClick = {
+                                SelectedScreen = "Contact"; ScreenHistory.add("Contact")
+                            }
+                        )
                     }
                 }
+            )
+
+            //SCREENS MANAGEMENT
+            {
+                when (SelectedScreen) {
+                    "Home" -> HomePageScreen(
+                        SelectedButton = SelectedButton,
+                        GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Home") },
+                        newsHomePageViewModel = NewsHomePageViewModel(),
+                        calendarViewModel = CalendarViewModel(),
+                        GoToDetailsCourse = { course ->
+                            SelectedCourse = course
+                            SelectedScreen = "DetailsCourse"
+                            ScreenHistory.add("Home")
+                        },
+                        GoToDetailsNews = { news ->
+                            SelectedNews = news
+                            SelectedScreen = "DetailsNews"
+                            ScreenHistory.add("Home")
+                        })
+
+                    "DetailsNews" -> SelectedNews?.let {
+                        HomePageDetailsNews(it,
+                            BackHomePage = { button ->
+                                SelectedButton = button
+                                SelectedScreen = "Home"
+                            })
+                    }
+
+                    "Profile" -> ProfileScreen(
+                        BackHomePage = {
+                            if (ScreenHistory.isNotEmpty()) {
+                                ScreenHistory.removeAt(ScreenHistory.lastIndex)
+                                SelectedScreen = ScreenHistory.lastOrNull() ?: "Home"
+                            }
+                        },
+                        GoToSettings = { SelectedScreen = "Settings" },
+                        GoToGrades = { SelectedScreen = "Grades" })
+
+                    "Settings" -> SettingsScreen(
+                        BackProfile = { SelectedScreen = "Profile" },
+                        GoToLanguage = { SelectedScreen = "Language" },
+                        GoToAbout = { SelectedScreen = "About" },
+                        GoToTerms = { SelectedScreen = "Terms" })
+
+                    "Grades" -> GradesScreen(
+                        BackProfile = { SelectedScreen = "Profile" })
+
+                    "Calendar" -> CalendarScreen(
+                        goToProfile = {
+                            SelectedScreen = "Profile"; ScreenHistory.add("Calendar")
+                        },
+                        GoToDetailsCourse = { course ->
+                            SelectedCourse = course
+                            SelectedScreen = "DetailsCourse"
+                            ScreenHistory.add("Calendar")
+                        })
+
+                    "Courses" -> CoursesScreen(
+                        GoToAddCourse = {
+                            SelectedScreen = "AddCourse"; ScreenHistory.add("Courses")
+                        },
+                        GoToCourseDetail = {
+                            SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses")
+                        },
+                        GoToProfile = {
+                            SelectedScreen = "Profile"; ScreenHistory.add("Courses")
+                        },
+                        GoToSyllabus = { SelectedScreen = "HomeSyllabus" })
+
+                    "DetailsCourse" -> SelectedCourse?.let { course ->
+                        CourseDetailsScreen(course = course, BackCourses = {
+                            if (ScreenHistory.isNotEmpty()) {
+                                ScreenHistory.removeAt(ScreenHistory.lastIndex)
+                                SelectedScreen = ScreenHistory.lastOrNull() ?: "Home"
+                            }
+                        }
+                        )
+                    }
+
+                    "HomeSyllabus" -> HomeSyllabusScreen(syllabusviewModel = SyllabusViewModel(),)
+                    "AddCourse" -> AddCourseScreen(
+                        BackCourses = {
+                            SelectedScreen = "Courses"; ScreenHistory.add("AddCourse")
+                        })
+
+                    "Contact" -> ContactsScreen(
+                        viewModel = viewModel,
+                        GoToContactDetailScreen = {
+                            SelectedScreen = "DetailContact"; ScreenHistory.add("Contact")
+                        },
+                        GoToProfile = {
+                            SelectedScreen = "Profile"; ScreenHistory.add("Contact")
+                        })
+
+                    "DetailContact" -> ContactDetailScreen(
+                        contact = viewModel.selectedContact.value,
+                        onBack = { SelectedScreen = "Contact" })
+
+                    "Language" -> LanguageScreen(
+                        BackSettings = { SelectedScreen = "Settings" })
+
+                    "About" -> AboutScreen(
+                        BackSettings = { SelectedScreen = "Settings" })
+
+                    "Terms" -> TermsScreen(
+                        BackSettings = { SelectedScreen = "Settings" })
+                }
             }
-        }
-    } }
+
+    }
+} }
