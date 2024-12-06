@@ -63,8 +63,7 @@ fun GradesScreen(BackProfile: () -> Unit) {
 
         // Grades Table
         item {
-            val viewModel = GradesViewModel()
-            GradesTable(viewModel = viewModel, studentId = "20231")
+            GradesTable(GradesViewModel())
         }
 
         // Spacer at the bottom

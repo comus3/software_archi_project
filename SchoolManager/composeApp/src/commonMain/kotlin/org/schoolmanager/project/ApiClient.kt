@@ -15,7 +15,9 @@ import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
 //import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.NewsHomePage
-import org.schoolmanager.project.data.model.StudentGradesResponse
+import org.schoolmanager.project.data.model.StudentGrade
+
+//import org.schoolmanager.project.data.model.StudentGradesResponse
 
 class SharedViewModel {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -115,13 +117,13 @@ object ApiService {
         }
     }
 
-    suspend fun fetchStudentGrades(): StudentGradesResponse {
+    suspend fun fetchStudentGrades(): StudentGrade {
         return try {
-            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades")
+            val response: HttpResponse = client.get("http://172.17.38.18:5000/grades/20231")
             val jsonResponse = response.bodyAsText()
             Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {
-            StudentGradesResponse(student_grades = emptyList())
+            StudentGrade(grades = emptyList(), student_id = "")
         }
     }
 

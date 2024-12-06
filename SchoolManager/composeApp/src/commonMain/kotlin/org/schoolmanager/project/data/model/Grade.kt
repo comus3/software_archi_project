@@ -2,10 +2,10 @@
 package org.schoolmanager.project.data.model
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class StudentGradesResponse(
-    val student_grades: List<StudentGrade> // Liste des étudiants et leurs notes
-)
+//@Serializable
+//data class StudentGradesResponse(
+//    val student_grades: List<StudentGrade> // Liste des étudiants et leurs notes
+//)
 
 @Serializable
 data class StudentGrade(
