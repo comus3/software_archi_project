@@ -9,12 +9,12 @@ with open('db.json') as f:
 app = Flask(__name__)
 
 # Configuration du port
-PORT = 3323
+PORT = 5000
 
 # Route pour récupérer tous les événements
-@app.route('/events', methods=['GET'])
+@app.route('/news', methods=['GET'])
 def get_events():
-    return jsonify(db.get("events", []))
+    return jsonify(db.get("news", []))
 
 # Route pour récupérer le calendrier
 @app.route('/calendar', methods=['GET'])
@@ -45,7 +45,7 @@ def get_students():
 # Route pour récupérer les notes d'un étudiant par matricule
 @app.route('/grades/<matricule>', methods=['GET'])
 def get_grades(matricule):
-    grades = db.get("grades", [])
+    grades = db.get("student_grades", [])
     student_grades = next((g for g in grades if g["student_id"] == matricule), None)
     if student_grades:
         return jsonify(student_grades)
@@ -55,6 +55,6 @@ def get_grades(matricule):
 if __name__ == '__main__':
     # On tente d'utiliser le port 3323, mais si indisponible, Flask choisit un autre port
     try:
-        app.run(host='localhost', port=PORT)
+        app.run(host='0.0.0.0', port=PORT)
     except OSError:
         app.run(host='localhost', port=os.getenv("PORT", 0))
