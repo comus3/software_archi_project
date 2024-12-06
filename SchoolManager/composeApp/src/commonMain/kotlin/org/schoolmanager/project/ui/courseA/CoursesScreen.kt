@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -23,6 +25,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,8 +48,20 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 import schoolmanager.composeapp.generated.resources.administration_reseau
 
+
+
 @Composable
-fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToProfile: ()-> Unit, GoToSyllabus:()-> Unit) {
+fun CoursesScreen(
+    GoToAddCourse: () -> Unit,
+    GoToCourseDetail: () -> Unit,
+    GoToProfile: () -> Unit,
+    GoToSyllabus: () -> Unit
+) {
+    var searchQuery by remember { mutableStateOf("") }
+    val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
+        course.title.contains(searchQuery, ignoreCase = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -71,7 +89,7 @@ fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToP
                     .align(alignment = Alignment.CenterVertically)
                     .clip(CircleShape)
                     .size(65.dp)
-                    .clickable{GoToProfile()},
+                    .clickable { GoToProfile() },
                 contentScale = ContentScale.Crop
             )
         }
@@ -81,8 +99,8 @@ fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToP
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = searchQuery,
+                onValueChange = {searchQuery = it},
                 label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
@@ -103,7 +121,7 @@ fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToP
                     .align(Alignment.CenterVertically)
             )
             Button(
-                onClick = {GoToSyllabus()},
+                onClick = { GoToSyllabus() },
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(red = 62, green = 96, blue = 160),
@@ -129,15 +147,17 @@ fun CoursesScreen(GoToAddCourse: () -> Unit, GoToCourseDetail: () -> Unit, GoToP
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Course cards
-        CourseCard(title = "Elec Q1",Res.drawable.electronic_circuit, GoToCourseDetail) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        CourseCard(title = "Elec Q2",Res.drawable.alternatif_monophase, GoToCourseDetail) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        CourseCard(title = "Motors",Res.drawable.motor, GoToCourseDetail) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        CourseCard(title = "Network",Res.drawable.administration_reseau, GoToCourseDetail) // Remplacez par votre ressource d'image
-
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(filteredCourses) { course ->
+                CourseCard(
+                    title = course.title,
+                    resource = course.imageResId,
+                    GoToCourseDetail = course.onClick
+                )
+            }
+        }
     }
 }
 
@@ -172,4 +192,27 @@ fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -
             )
         }
     }
+}
+
+data class Course(
+    val title: String,
+    val imageResId: DrawableResource,
+    val onClick: () -> Unit
+)
+
+fun getCourseList(GoToCourseDetail: () -> Unit): List<Course> {
+    return listOf(
+        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+    )
 }
