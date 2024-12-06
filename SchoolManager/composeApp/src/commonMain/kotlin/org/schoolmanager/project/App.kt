@@ -4,7 +4,6 @@ import ContactDetailScreen
 import MyTheme
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
@@ -20,19 +19,10 @@ import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
 import org.schoolmanager.project.ui.grades.GradesScreen
 import org.schoolmanager.project.ui.homepage.HomePageDetailsNews
 import org.schoolmanager.project.ui.profile.ProfileScreen
-import org.schoolmanager.project.ui.settings.AboutScreen
-import org.schoolmanager.project.ui.settings.LanguageScreen
-import org.schoolmanager.project.ui.settings.SettingsScreen
-import org.schoolmanager.project.ui.settings.TermsScreen
+import org.schoolmanager.project.ui.settings.*
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
-import org.schoolmanager.project.viewmodel.CalendarViewModel
-import org.schoolmanager.project.viewmodel.NewsHomePageViewModel
-import org.schoolmanager.project.viewmodel.SyllabusViewModel
-import schoolmanager.composeapp.generated.resources.Res
-import schoolmanager.composeapp.generated.resources.iconhome
-import schoolmanager.composeapp.generated.resources.iconcalendar
-import schoolmanager.composeapp.generated.resources.iconcourses
-import schoolmanager.composeapp.generated.resources.iconcontact
+import org.schoolmanager.project.viewmodel.*
+import schoolmanager.composeapp.generated.resources.*
 
 @Composable
 @Preview
@@ -42,7 +32,7 @@ fun App() {
 
     // Thème global appliqué
     MyTheme(darkTheme = isDarkModeEnabled) {
-        // SELECTED PAGE
+        // Gestion des écrans sélectionnés
         var SelectedScreen by remember { mutableStateOf("Home") }
         val viewModel = ContactsViewModel()
         var SelectedButton by remember { mutableStateOf("Today classes") }
@@ -50,35 +40,32 @@ fun App() {
         var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
         var ScreenHistory = remember { mutableStateListOf<String>() }
 
-        // NAVIGATION BAR
+        // Barre de navigation inférieure
         Scaffold(
             bottomBar = {
                 BottomNavigation(
-                    backgroundColor = Color(red = 62, green = 96, blue = 160),
+                    backgroundColor = if (isDarkModeEnabled) Color.DarkGray else Color(red = 62, green = 96, blue = 160),
                     contentColor = if (isDarkModeEnabled) Color.White else Color.Black
                 ) {
-                    // HOME
+                    // Boutons de navigation
                     BottomNavigationItem(
                         icon = { Icon(painter = painterResource(Res.drawable.iconhome), contentDescription = "Home") },
                         label = { Text("Home") },
                         selected = SelectedScreen == "Home",
                         onClick = { SelectedScreen = "Home"; ScreenHistory.add("Home") },
                     )
-                    // CALENDAR
                     BottomNavigationItem(
                         icon = { Icon(painter = painterResource(Res.drawable.iconcalendar), contentDescription = "Calendar") },
                         label = { Text("Calendar") },
                         selected = SelectedScreen == "Calendar",
                         onClick = { SelectedScreen = "Calendar"; ScreenHistory.add("Calendar") }
                     )
-                    // COURSES
                     BottomNavigationItem(
                         icon = { Icon(painter = painterResource(Res.drawable.iconcourses), contentDescription = "Courses") },
                         label = { Text("Courses") },
                         selected = SelectedScreen == "Courses",
                         onClick = { SelectedScreen = "Courses"; ScreenHistory.add("Courses") }
                     )
-                    // CONTACT
                     BottomNavigationItem(
                         icon = { Icon(painter = painterResource(Res.drawable.iconcontact), contentDescription = "Contact") },
                         label = { Text("Contact") },
@@ -87,7 +74,8 @@ fun App() {
                     )
                 }
             }
-        ) { // Screens Management
+        ) {
+            // Gestion des écrans
             when (SelectedScreen) {
                 "Home" -> HomePageScreen(
                     SelectedButton = SelectedButton,
@@ -106,12 +94,10 @@ fun App() {
                     }
                 )
                 "DetailsNews" -> SelectedNews?.let {
-                    HomePageDetailsNews(it,
-                        BackHomePage = { button ->
-                            SelectedButton = button
-                            SelectedScreen = "Home"
-                        }
-                    )
+                    HomePageDetailsNews(it, BackHomePage = { button ->
+                        SelectedButton = button
+                        SelectedScreen = "Home"
+                    })
                 }
                 "Profile" -> ProfileScreen(
                     BackHomePage = {
@@ -128,7 +114,7 @@ fun App() {
                     GoToLanguage = { SelectedScreen = "Language" },
                     GoToAbout = { SelectedScreen = "About" },
                     GoToTerms = { SelectedScreen = "Terms" },
-                    onDarkModeToggle = { isDarkModeEnabled = it } // Ajoutez cette ligne
+                    onDarkModeToggle = { isDarkModeEnabled = it } // Gestion du mode sombre
                 )
                 "Grades" -> GradesScreen(BackProfile = { SelectedScreen = "Profile" })
                 "Calendar" -> CalendarScreen(
