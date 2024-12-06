@@ -218,33 +218,87 @@
 
     ],
     
-    "grades": [
+    "student_grades": [
         {
             "student_id": "20231",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "12",
-                        "sept": "14",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
+                    "course": "Math",
+                    "final_grades": {
+                        "jan": "12",
                         "jun": "14",
-                        "sept": "16",
-                        "jan": ""
-                    }
+                        "sept": "13"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Algebra",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "13",
+                                "sept": "14"
+                            }
+                        },
+                        {
+                            "subcourse": "Geometry",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "14",
+                                "sept": "13"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "10",
-                        "sept": "12",
-                        "jan": ""
-                    }
+                    "course": "Info",
+                    "final_grades": {
+                        "jan": "14",
+                        "jun": "16",
+                        "sept": "15"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Programming",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "15",
+                                "sept": "14"
+                            }
+                        },
+                        {
+                            "subcourse": "Databases",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "16",
+                                "sept": "15"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "Francais",
+                    "final_grades": {
+                        "jan": "10",
+                        "jun": "12",
+                        "sept": "11"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Literature",
+                            "grades": {
+                                "jan": "9",
+                                "jun": "11",
+                                "sept": "10"
+                            }
+                        },
+                        {
+                            "subcourse": "Grammar",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "13",
+                                "sept": "12"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -252,28 +306,82 @@
             "student_id": "20232",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "15",
-                        "sept": "13",
-                        "jan": ""
-                    }
+                    "course": "Math",
+                    "final_grades": {
+                        "jan": "15",
+                        "jun": "13",
+                        "sept": "14"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Algebra",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "14",
+                                "sept": "13"
+                            }
+                        },
+                        {
+                            "subcourse": "Geometry",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "12",
+                                "sept": "14"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "jun": "16",
-                        "sept": "17",
-                        "jan": ""
-                    }
+                    "course": "Info",
+                    "final_grades": {
+                        "jan": "16",
+                        "jun": "17",
+                        "sept": "16"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Programming",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "18",
+                                "sept": "17"
+                            }
+                        },
+                        {
+                            "subcourse": "Networking",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "16",
+                                "sept": "16"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "11",
-                        "sept": "13",
-                        "jan": ""
-                    }
+                    "course": "Francais",
+                    "final_grades": {
+                        "jan": "11",
+                        "jun": "13",
+                        "sept": "12"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Literature",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "14",
+                                "sept": "12"
+                            }
+                        },
+                        {
+                            "subcourse": "Grammar",
+                            "grades": {
+                                "jan": "10",
+                                "jun": "12",
+                                "sept": "11"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -281,28 +389,82 @@
             "student_id": "20233",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "13",
-                        "sept": "15",
-                        "jan": ""
-                    }
+                    "course": "Math",
+                    "final_grades": {
+                        "jan": "13",
+                        "jun": "15",
+                        "sept": "14"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Algebra",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "14",
+                                "sept": "15"
+                            }
+                        },
+                        {
+                            "subcourse": "Geometry",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "16",
+                                "sept": "14"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
+                    "course": "Info",
+                    "final_grades": {
+                        "jan": "14",
                         "jun": "14",
-                        "sept": "14",
-                        "jan": ""
-                    }
+                        "sept": "13"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Programming",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "15",
+                                "sept": "14"
+                            }
+                        },
+                        {
+                            "subcourse": "Databases",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "12",
+                                "sept": "13"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "12",
-                        "sept": "13",
-                        "jan": ""
-                    }
+                    "course": "Francais",
+                    "final_grades": {
+                        "jan": "12",
+                        "jun": "13",
+                        "sept": "12"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Literature",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "13",
+                                "sept": "12"
+                            }
+                        },
+                        {
+                            "subcourse": "Grammar",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "14",
+                                "sept": "13"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -310,115 +472,82 @@
             "student_id": "20234",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "11",
-                        "sept": "12",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "jun": "15",
-                        "sept": "14",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "14",
-                        "sept": "15",
-                        "jan": ""
-                    }
-                }
-            ]
-        },
-        {
-            "student_id": "20235",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "16",
-                        "sept": "17",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "jun": "13",
-                        "sept": "15",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "10",
-                        "sept": "12",
-                        "jan": ""
-                    }
-                }
-            ]
-        },
-        {
-            "student_id": "20236",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
-                        "jun": "14",
-                        "sept": "16",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "jun": "16",
-                        "sept": "17",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "jun": "13",
-                        "sept": "14",
-                        "jan": ""
-                    }
-                }
-            ]
-        },
-        {
-            "student_id": "20237",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
+                    "course": "Math",
+                    "final_grades": {
+                        "jan": "11",
                         "jun": "12",
-                        "sept": "13",
-                        "jan": ""
-                    }
+                        "sept": "12"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Algebra",
+                            "grades": {
+                                "jan": "10",
+                                "jun": "12",
+                                "sept": "13"
+                            }
+                        },
+                        {
+                            "subcourse": "Geometry",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "12",
+                                "sept": "12"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "jun": "15",
-                        "sept": "16",
-                        "jan": ""
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
+                    "course": "Info",
+                    "final_grades": {
+                        "jan": "15",
                         "jun": "14",
-                        "sept": "15",
-                        "jan": ""
-                    }
+                        "sept": "13"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Programming",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "13",
+                                "sept": "12"
+                            }
+                        },
+                        {
+                            "subcourse": "Networking",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "16",
+                                "sept": "14"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "Francais",
+                    "final_grades": {
+                        "jan": "14",
+                        "jun": "15",
+                        "sept": "15"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "Literature",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "15",
+                                "sept": "16"
+                            }
+                        },
+                        {
+                            "subcourse": "Grammar",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "16",
+                                "sept": "14"
+                            }
+                        }
+                    ]
                 }
             ]
         }
