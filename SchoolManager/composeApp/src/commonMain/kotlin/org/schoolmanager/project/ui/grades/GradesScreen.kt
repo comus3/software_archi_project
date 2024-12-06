@@ -23,8 +23,8 @@ import schoolmanager.composeapp.generated.resources.back
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyListScope
+import org.schoolmanager.project.viewmodel.GradesViewModel
 
-//import org.schoolmanager.project.viewmodel.GradesViewModel
 
 @Composable
 fun GradesScreen(BackProfile: () -> Unit) {
@@ -62,7 +62,9 @@ fun GradesScreen(BackProfile: () -> Unit) {
         item { AcademicYearRow("Année académique 2024-2025 4MIN") }
 
         // Grades Table
-        item { GradesTable() }
+        item {
+            GradesTable(GradesViewModel())
+        }
 
         // Spacer at the bottom
         item { Spacer(modifier = Modifier.height(64.dp)) }
