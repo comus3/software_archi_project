@@ -36,69 +36,45 @@ fun GradesTable(viewModel: GradesViewModel) {
     }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        results.forEach { studentCourse ->
+        // Header row for months
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
-                text = "Course: ${studentCourse.course}",
+                text = "",
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                modifier = Modifier.weight(2f)
             )
+            Text("janvier", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+            Text("juin", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+            Text("septembre", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+        }
 
-            // Afficher les notes finales du cours principal
-            val finalGrades = studentCourse.final_grades
-            Text(text = "Final Grades: Janvier - ${finalGrades.jan}, Juin - ${finalGrades.jun}, Septembre - ${finalGrades.sept}")
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(Color.Gray)
+        )
 
-            // Parcourir les sous-cours
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Each course row
+        results.forEach { studentCourse ->
+            // Display main course
+            GradeRow(courseTitle = studentCourse.course, finalGrades = studentCourse.final_grades)
+
+            // Display sub-courses
             studentCourse.subgrades.forEach { subGrade ->
-                Text(text = "SubCourse: ${subGrade.subcourse}")
-                Text(
-                    text = "SubCourse Grades: Janvier - ${subGrade.grades.jan}, Juin - ${subGrade.grades.jun}, Septembre - ${subGrade.grades.sept}"
+                SubGradeRow(
+                    subTitle = subGrade.subcourse,
+                    jan = subGrade.grades.jan,
+                    juin = subGrade.grades.jun,
+                    sept = subGrade.grades.sept
                 )
             }
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
-
-//    // UI
-//    Column(modifier = Modifier.padding(16.dp)) {
-//        // Affiche un message d'erreur si nécessaire
-//        if (errorMessage.isNotEmpty()) {
-//            Text(
-//                text = errorMessage,
-//                color = Color.Red,
-//                fontWeight = FontWeight.Bold,
-//                modifier = Modifier.padding(8.dp)
-//            )
-//        }
-//
-//        // Affichage brut des données JSON
-//        Text(
-//            text = results.toString(), // Transforme les données en texte brut
-//            fontSize = 14.sp,
-//            color = Color.Black,
-//            modifier = Modifier.padding(8.dp)
-//        )
-//    }
-
-
-//    Column(modifier = Modifier.padding(16.dp)) {
-//        student?.grades?.forEach { studentCourse ->
-//            // Afficher le cours principal
-//            GradeRow(
-//                courseTitle = studentCourse.course,
-//                jan = studentCourse.final_grades.jan ?: "",
-//                juin = studentCourse.final_grades.jun ?: "",
-//                sept = studentCourse.final_grades.sept ?: ""
-//            )
-//
-//            // Afficher les sous-cours
-//            studentCourse.subgrades.forEach { subgrade ->
-//                SubGradeRow(
-//                    subTitle = subgrade.subcourse,
-//                    jan = subgrade.grades.jan ?: "",
-//                    juin = subgrade.grades.jun ?: "",
-//                    sept = subgrade.grades.sept ?: ""
-//                )
-//            }
-//        }
-//    }
 }

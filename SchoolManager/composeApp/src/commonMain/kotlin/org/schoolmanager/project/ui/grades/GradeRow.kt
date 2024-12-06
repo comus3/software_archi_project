@@ -12,9 +12,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
+import org.schoolmanager.project.data.model.GradeDetails
 
 @Composable
-fun GradeRow(courseTitle: String, jan: String, juin: String, sept: String) {
+fun GradeRow(courseTitle: String, finalGrades: GradeDetails) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,26 +30,23 @@ fun GradeRow(courseTitle: String, jan: String, juin: String, sept: String) {
             modifier = Modifier.weight(2f)
         )
         Text(
-            text = if (jan.isNotEmpty()) jan else "-",
+            text = finalGrades.jan ?: "-",
             fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (jan.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (finalGrades.jan != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = if (juin.isNotEmpty()) juin else "-",
+            text = finalGrades.jun ?: "-",
             fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (juin.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (finalGrades.jun != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = if (sept.isNotEmpty()) sept else "-",
+            text = finalGrades.sept ?: "-",
             fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (sept.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (finalGrades.sept != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
@@ -56,18 +54,17 @@ fun GradeRow(courseTitle: String, jan: String, juin: String, sept: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(1.dp) // Épaisseur de la ligne
-            .background(Color.Gray) // Couleur de la ligne
+            .height(1.dp)
+            .background(Color.Gray)
     )
 }
 
-
 @Composable
-fun SubGradeRow(subTitle: String, jan: String, juin: String, sept: String) {
+fun SubGradeRow(subTitle: String, jan: String?, juin: String?, sept: String?) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-//            .padding(start = 16.dp, top = 4.dp, bottom = 4.dp),
+            //.padding(start = 16.dp, vertical = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -75,26 +72,27 @@ fun SubGradeRow(subTitle: String, jan: String, juin: String, sept: String) {
             text = subTitle,
             fontSize = 14.sp,
             color = Color.Gray,
+            fontWeight = FontWeight.Normal,
             modifier = Modifier.weight(2f)
         )
         Text(
-            text = if (jan.isNotEmpty()) jan else "-",
+            text = jan ?: "-",
             fontSize = 14.sp,
-            color = if (jan.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (jan != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = if (juin.isNotEmpty()) juin else "-",
+            text = juin ?: "-",
             fontSize = 14.sp,
-            color = if (juin.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (juin != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = if (sept.isNotEmpty()) sept else "-",
+            text = sept ?: "-",
             fontSize = 14.sp,
-            color = if (sept.isNotEmpty()) Color(0xFF4CAF50) else Color.Gray,
+            color = if (sept != null) Color(0xFF4CAF50) else Color.Gray,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
@@ -102,7 +100,7 @@ fun SubGradeRow(subTitle: String, jan: String, juin: String, sept: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(1.dp) // Épaisseur de la ligne
-            .background(Color.Gray) // Couleur de la ligne
+            .height(1.dp)
+            .background(Color.Gray)
     )
 }
