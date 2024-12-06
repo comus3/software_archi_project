@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.data.model.Course
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.addcourse
 import schoolmanager.composeapp.generated.resources.profilephoto
@@ -53,13 +55,14 @@ import schoolmanager.composeapp.generated.resources.administration_reseau
 @Composable
 fun CoursesScreen(
     GoToAddCourse: () -> Unit,
-    GoToCourseDetail: () -> Unit,
+    GoToCourseDetail: (Course) -> Unit,
     GoToProfile: () -> Unit,
-    GoToSyllabus: () -> Unit
+    GoToSyllabus: () -> Unit,
+    coursesViewModel: CoursesViewModel
 ) {
     var searchQuery by remember { mutableStateOf("") }
-    val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
-        course.title.contains(searchQuery, ignoreCase = true)
+    val filteredCourses = coursesViewModel.getAllCourses().filter { course ->
+        course.name.contains(searchQuery, ignoreCase = true)
     }
 
     Column(
@@ -67,16 +70,14 @@ fun CoursesScreen(
             .fillMaxSize()
             .padding(16.dp), // Fill the available size
         horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
+    ) {
         Row(
             Modifier
                 .fillMaxWidth()
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        )
-        {
+        ) {
             Text(
                 text = "COURSE A",
                 fontSize = 24.sp,
@@ -100,7 +101,7 @@ fun CoursesScreen(
         ) {
             OutlinedTextField(
                 value = searchQuery,
-                onValueChange = {searchQuery = it},
+                onValueChange = { searchQuery = it },
                 label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
@@ -109,8 +110,7 @@ fun CoursesScreen(
                         contentDescription = "Search Icon"
                     )
                 },
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             )
             Image(
                 painter = painterResource(Res.drawable.addcourse),
@@ -132,34 +132,33 @@ fun CoursesScreen(
                     .wrapContentWidth(),
             ) {
                 Row(
-                    verticalAlignment = Alignment.CenterVertically, // Aligne l'icône et le texte
-                    horizontalArrangement = Arrangement.spacedBy(8.dp) // Espace entre l'icône et le texte
+                    verticalAlignment = Alignment.CenterVertically, // Align icon and text
+                    horizontalArrangement = Arrangement.spacedBy(8.dp) // Space between icon and text
                 ) {
                     Icon(
-                        painter = painterResource(Res.drawable.shopping_cart), // Remplace par ton icône
+                        painter = painterResource(Res.drawable.shopping_cart),
                         contentDescription = "Syllabus Icon",
-                        modifier = Modifier.size(20.dp) // Taille de l'icône
+                        modifier = Modifier.size(20.dp)
                     )
-                    Text("Syllabus") // Texte du bouton
+                    Text("Syllabus")
                 }
             }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(filteredCourses) { course ->
                 CourseCard(
-                    title = course.title,
-                    resource = course.imageResId,
-                    GoToCourseDetail = course.onClick
+                    title = course.name,
+                    resource = course.image ?: Res.drawable.alternatif_monophase, // Provide a default image
+                    GoToCourseDetail = { GoToCourseDetail(course) }
                 )
             }
         }
     }
 }
+
 
 @Composable
 fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -> Unit) {
@@ -194,25 +193,8 @@ fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -
     }
 }
 
-data class Course(
-    val title: String,
-    val imageResId: DrawableResource,
-    val onClick: () -> Unit
-)
-
-fun getCourseList(GoToCourseDetail: () -> Unit): List<Course> {
-    return listOf(
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-    )
+fun getCourseList(viewModel: CoursesViewModel, GoToCourseDetail: (Course) -> Unit): List<Course> {
+    return viewModel.getAllCourses().map { course ->
+        course.copy(onClick = { GoToCourseDetail(course) })
+    }
 }

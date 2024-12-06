@@ -10,5 +10,6 @@ data class Course(
     val professor: String= "",
     val mail: String= "",
     val pdf_file: String= "",
-    val students: List<String>? = null
+    val students: List<String>? = null,
+    val onClick: (() -> Unit)? = null
 )

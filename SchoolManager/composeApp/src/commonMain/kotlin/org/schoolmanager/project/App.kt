@@ -26,6 +26,7 @@ import org.schoolmanager.project.ui.settings.SettingsScreen
 import org.schoolmanager.project.ui.settings.TermsScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
 import org.schoolmanager.project.viewmodel.CalendarViewModel
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 import org.schoolmanager.project.viewmodel.NewsViewModel
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
@@ -141,9 +142,14 @@ fun App() {
                 )
                 "Courses" -> CoursesScreen(
                     GoToAddCourse = { SelectedScreen = "AddCourse"; ScreenHistory.add("Courses") },
-                    GoToCourseDetail = { SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses") },
+                    GoToCourseDetail = { course ->
+                        SelectedCourse = course
+                        SelectedScreen = "DetailsCourse"
+                        ScreenHistory.add("Calendar")
+                    },
                     GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Courses") },
-                    GoToSyllabus = { SelectedScreen = "HomeSyllabus" }
+                    GoToSyllabus = { SelectedScreen = "HomeSyllabus" },
+                    coursesViewModel = CoursesViewModel()
                 )
                 "DetailsCourse" -> SelectedCourse?.let { course ->
                     CourseDetailsScreen(course = course, BackCourses = {
