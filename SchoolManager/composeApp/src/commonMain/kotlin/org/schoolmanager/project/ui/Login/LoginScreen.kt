@@ -33,6 +33,18 @@ fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
     // Fetch contacts or display them
     val contacts by viewModel.contacts.collectAsState()
 
+
+    LaunchedEffect(Unit) {
+        try {
+            viewModel.fetchContacts()
+        } catch (e: Exception) {
+            // Show an error message to the user
+            errorMessage = "Failed to fetch contacts."
+        }
+    }
+
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
