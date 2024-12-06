@@ -45,24 +45,22 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import kotlinx.datetime.minus
 import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 
 @Composable
 fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), goToProfile:()-> Unit, GoToDetailsCourse: (Course) -> Unit) {
 
-    // Obtenir la date actuelle
-    val currentDate = Clock.System.now()
-        .toLocalDateTime(TimeZone.currentSystemDefault())
-
-    // Récupérer le mois et l'année
-    val month = currentDate.month.name
-    val year = currentDate.year
-
-    var isMonthView by remember { mutableStateOf(true) }
     val timeZone = TimeZone.currentSystemDefault()
     // Date sélectionnée par défaut
     var selectedDate by remember { mutableStateOf(Clock.System.now().toLocalDateTime(timeZone).date) }
+    var isMonthView by remember { mutableStateOf(true) }
+    // Récupérer le mois et l'année
+    val month = selectedDate.month.name
+    val year = selectedDate.year
     val daysInMonth = calendarViewModel.getDaysInMonth(selectedDate)
     // Calculer le premier jour du mois
     val firstDayOfWeek = LocalDate(selectedDate.year, selectedDate.month, 1).dayOfWeek
@@ -126,26 +124,40 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
             }
             Divider()
             Spacer(modifier = Modifier.height(5.dp))
-            WeekDaysHeader(selectedDate = selectedDate)
+            WeekDaysHeader(selectedDate = selectedDate, isMonthView = isMonthView, onMonthChanged = { newDate ->
+                selectedDate = newDate
+            },)
             if (isMonthView) {
                 // Affichage de la grille des jours du mois
-                MonthlyCalendar(
-                    daysInMonth = daysInMonth,
-                    firstDayOfWeek = firstDayOfWeek,
-                    selectedDate = selectedDate,
-                    onDayClick = { day ->
-                        selectedDate = LocalDate(selectedDate.year, selectedDate.month, day)
-                    }
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f) // Réduction pour laisser des colonnes vides à gauche et droite
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    MonthlyCalendar(
+                        daysInMonth = daysInMonth,
+                        firstDayOfWeek = firstDayOfWeek,
+                        selectedDate = selectedDate,
+                        onDayClick = { day ->
+                            selectedDate = LocalDate(selectedDate.year, selectedDate.month, day)
+                        }
+                    )
+                }
                 // Divider entre le calendrier et la liste des cours
                 Divider()
                 Spacer(modifier = Modifier.height(13.dp))
                 // Affichage des cours du jour sélectionné
                 CourseList(selectedDateCourses, coursesViewModel, GoToDetailsCourse)
             } else {
-                // Affichage de la semaine courante avec les dates et les cours de chaque jour
-                WeeklyCalendar(weekDates, selectedDate) { date ->
-                    selectedDate = date
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f) // Réduction pour laisser des colonnes vides à gauche et droite
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    // Affichage de la semaine courante avec les dates et les cours de chaque jour
+                    WeeklyCalendar(weekDates, selectedDate) { date ->
+                        selectedDate = date
+                    }
                 }
                 // Divider entre le calendrier et la liste des cours
                 Divider()
@@ -282,7 +294,7 @@ fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -
         {
             Column{
                 Row(verticalAlignment= Alignment.CenterVertically) {
-                    course?.image?.let { painterResource(it) }?.let {
+                    course.image?.let { painterResource(it) }?.let {
                         Image(
                             painter = it,
                             contentDescription = "Course Image",
@@ -294,7 +306,7 @@ fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -
                     }
                     Spacer(modifier= Modifier.width(8.dp))
                     Text(
-                        text = course?.name ?: "Unknown Course",
+                        text = course.name ?: "Unknown Course",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
 
@@ -325,7 +337,7 @@ fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -
 }
 
 @Composable
-fun WeekDaysHeader(selectedDate: LocalDate) {
+fun WeekDaysHeader(selectedDate: LocalDate, isMonthView: Boolean, onMonthChanged: (LocalDate) -> Unit) {
     // Liste des jours de la semaine dans l'ordre
     val weekDays = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
@@ -336,6 +348,21 @@ fun WeekDaysHeader(selectedDate: LocalDate) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly // Distribution uniforme
     ) {
+        IconButton(onClick = {
+            // Aller au mois précédent
+            val newSelectedMont = if (isMonthView) {
+                selectedDate.minus(1, DateTimeUnit.MONTH)
+            } else {
+                selectedDate.minus(7, DateTimeUnit.DAY)
+            }
+            // Appeler la fonction onMonthChanged pour notifier le parent de la nouvelle date
+            onMonthChanged(newSelectedMont)
+        }) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                contentDescription = "Previous month"
+            )
+        }
         weekDays.forEachIndexed { index, day ->
             Text(
                 text = day,
@@ -344,6 +371,21 @@ fun WeekDaysHeader(selectedDate: LocalDate) {
                 modifier = Modifier.weight(1f, fill = true), // Chaque jour prend la même largeur
                 textAlign = TextAlign.Center, // Alignement centré pour un meilleur alignement
                 color = if (index == selectedDayOfWeekIndex) MaterialTheme.colors.primary  else MaterialTheme.colors.onBackground // Mettre en bleu si c'est le jour sélectionné
+            )
+        }
+        IconButton(onClick = {
+            // Aller au mois suivant
+            val newSelectedMont = if (isMonthView) {
+                selectedDate.plus(1, DateTimeUnit.MONTH)
+            } else {
+                selectedDate.plus(7, DateTimeUnit.DAY)
+            }
+            // Appeler la fonction onMonthChanged pour notifier le parent de la nouvelle date
+            onMonthChanged(newSelectedMont)
+        }) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "Next month"
             )
         }
     }
