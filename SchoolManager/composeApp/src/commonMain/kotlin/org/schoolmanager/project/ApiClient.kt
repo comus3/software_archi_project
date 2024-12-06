@@ -119,7 +119,7 @@ object ApiService {
 
     suspend fun fetchStudentGrades(): StudentGrade {
         return try {
-            val response: HttpResponse = client.get("http://172.17.38.18:5000/grades/20231")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades/20231")
             val jsonResponse = response.bodyAsText()
             Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {
