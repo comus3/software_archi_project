@@ -183,6 +183,6 @@ fun App() {
                     "Terms" -> TermsScreen(BackSettings = { SelectedScreen = "Settings" })
                 }
             }
-        }
-    }
+    }        }
+
 }
