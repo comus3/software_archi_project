@@ -57,8 +57,7 @@ fun CoursesScreen(
     GoToProfile: () -> Unit,
     GoToSyllabus: () -> Unit
 ) {
-    var searchQuery by remember { mutableStateOf("Hello") }
-    // Liste filtrée des cours
+    var searchQuery by remember { mutableStateOf("") }
     val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
         course.title.contains(searchQuery, ignoreCase = true)
     }
