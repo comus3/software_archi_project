@@ -9,6 +9,6 @@ data class Orientation(
 data class Syllabus(
     val idorientation: Int= 0,
     val syllabus: String,
-    val quantity: Int=1,
+    var quantity: Int= 1,
     val price: Double
 )

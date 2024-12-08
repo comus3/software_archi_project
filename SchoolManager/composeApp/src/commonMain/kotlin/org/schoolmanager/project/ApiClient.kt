@@ -62,7 +62,7 @@ object ApiService {
 
     suspend fun fetchContacts(): List<Contact> {
         return try {
-            val response: HttpResponse = client.get("http://172.17.38.18:5000/students")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -76,7 +76,7 @@ object ApiService {
 
     suspend fun fetchNews(): List<NewsHomePage> {
         return try {
-            val response: HttpResponse= client.get("http://172.17.38.18:5000/news")
+            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/news")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -87,10 +87,10 @@ object ApiService {
             emptyList()
         }
     }
-
+//http://172.17.38.18:5000/calendar
     suspend fun fetchCalendar(): List<Calendar> {
         return try {
-            val response: HttpResponse= client.get("http://172.17.38.18:5000/calendar")
+            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/calendar")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 val fetchedData = Json.decodeFromString<List<Calendar>>(jsonResponse)

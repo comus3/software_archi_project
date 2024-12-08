@@ -174,13 +174,9 @@ fun App() {
                     )
                 }
                 "CartSyllabus" -> CartSyllabusScreen(
-                    BackHomeSyllabus = {
-                        if (ScreenHistory.isNotEmpty()) {
-                            SelectedScreen = ScreenHistory.removeAt(ScreenHistory.lastIndex)
-                        } else {
-                            SelectedScreen = "HomeSyllabus"
-                        }
-                    })
+                    BackHomeSyllabus = { SelectedScreen = "HomeSyllabus" },
+                    syllabusviewModel = SyllabusViewModel()
+                    )
                 "AddCourse" -> AddCourseScreen(BackCourses = { SelectedScreen = "Courses"; ScreenHistory.add("AddCourse") })
                 "Contact" -> ContactsScreen(
                     viewModel = viewModel,

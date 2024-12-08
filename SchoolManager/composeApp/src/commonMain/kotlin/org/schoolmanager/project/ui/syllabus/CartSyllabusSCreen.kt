@@ -33,24 +33,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.*
 
 import org.jetbrains.compose.resources.painterResource
+import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.back
 import schoolmanager.composeapp.generated.resources.trash
 
 @Composable
-fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
-    val items = remember {
-        mutableStateListOf(
-            "Guide du dessinateur industriel" to "BLOC 1",
-            "Mathématiques appliquées" to "BLOC 1",
-            "Physique appliquée" to "BLOC 2",
-            "Mathématiques appliquées" to "BLOC 1",
-            "Mathématiques appliquées" to "BLOC 1",
-            "Mathématiques appliquées" to "BLOC 1"
-        )
-    }
-    val quantities = remember { mutableStateListOf(1, 2, 1, 1, 1, 1) }
-    val prices = remember { mutableStateListOf(29.99, 19.99, 15.99, 3.00, 3.00, 3.00) }
+fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit, syllabusviewModel: SyllabusViewModel) {
+    val cartItems = syllabusviewModel.cartItems
 
 
     Column(
@@ -86,48 +76,41 @@ fun CartSyllabusScreen(BackHomeSyllabus: () -> Unit) {
         modifier= Modifier.fillMaxSize().padding(5.dp, top= 13.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top
     ) {
         // Zone avec bordure contenant uniquement les articles
-        item {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, bottom=0.dp, end= 16.dp, top= 10.dp) // Padding externe ajouté ici pour espacer la zone de bordure
-                    .border(
-                        BorderStroke(2.dp, Color.Black),
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .padding(13.dp) // Padding interne (inchangé)
-            )  {
-                items.forEachIndexed { index, item ->
-                    val (title, description) = item
-                    val quantity = quantities[index]
-                    val price = prices[index]
+//        item {
+//            Column(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(16.dp, bottom=0.dp, end= 16.dp, top= 10.dp) // Padding externe ajouté ici pour espacer la zone de bordure
+//                    .border(
+//                        BorderStroke(2.dp, Color.Black),
+//                        shape = RoundedCornerShape(12.dp)
+//                    )
+//                    .padding(13.dp) // Padding interne (inchangé)
+//            )  {
+                items(cartItems.size) { index ->
+                    val item = cartItems[index]
                     CartItem(
-                        title = title,
-                        description = description,
-                        price = price,
-                        quantity = quantity,
+                        title = item.syllabus,
+                        description = "Bloc ${item.idorientation}",
+                        price = item.price,
+                        quantity = item.quantity,
                         onQuantityChange = { newQuantity ->
-                            if (newQuantity >= 1) {
-                                quantities[index] = newQuantity
+                            if (newQuantity > 0) {
+                                cartItems[index] = item.copy(quantity = newQuantity)
+                            } else {
+                                syllabusviewModel.removeFromCart(item)
                             }
                         },
-                        onRemove = {
-                            items.removeAt(index)
-                            quantities.removeAt(index)
-                            prices.removeAt(index)
-                        }
+                        onRemove = { syllabusviewModel.removeFromCart(item) }
                     )
-                    if (index < items.lastIndex) {
-                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre les articles
-                    }
                 }
-            }
-        }
+//            }
+//        }
 
         // Calcul du prix total et affichage avec le bouton "Order"
         item {
             Spacer(modifier = Modifier.height(12.dp))
-            val totalPrice = quantities.zip(prices).sumOf { (quantity, price) -> quantity * price }
+            val totalPrice = cartItems.sumOf { it.price * it.quantity }
             val formattedTotalPrice = (totalPrice * 100).toInt() / 100.0
 
             Row(

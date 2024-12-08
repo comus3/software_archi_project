@@ -1,5 +1,6 @@
 package org.schoolmanager.project.viewmodel
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.data.model.Syllabus
@@ -22,11 +23,29 @@ class SyllabusViewModel: ViewModel(){
     )
 
     val syllabus= listOf(
-        Syllabus(1, "Chimie Q1",1, 15.99),
-        Syllabus(1, "Calculus",1, 15.99),
+        Syllabus(1, "Chimie Q1", 1,15.99),
+        Syllabus(1, "Calculus",1 , 15.99),
         Syllabus(1, "Guide du dessinateur",1, 15.99),
         Syllabus(2, "Calculus",1, 15.99),
         Syllabus(2, "Guide du dessinateur",1, 15.99),
         Syllabus(3, "Encyclopedie",1, 15.99),
     )
+
+    // Liste mutable pour le panier
+    val cartItems = mutableStateListOf<Syllabus>()
+
+    fun addToCart(item: Syllabus) {
+        val existingItem = cartItems.find { it.syllabus == item.syllabus }
+        if (existingItem != null) {
+            val index = cartItems.indexOf(existingItem)
+            cartItems[index] = existingItem.copy(quantity = existingItem.quantity + item.quantity)
+        } else {
+            cartItems.add(item)
+        }
+    }
+
+    fun removeFromCart(item: Syllabus) {
+        cartItems.remove(item)
+    }
+
 }
