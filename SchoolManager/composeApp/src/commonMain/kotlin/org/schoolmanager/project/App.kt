@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.data.model.Course
 import org.schoolmanager.project.data.model.NewsHomePage
+import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
@@ -20,7 +21,9 @@ import org.schoolmanager.project.ui.grades.GradesScreen
 import org.schoolmanager.project.ui.homepage.HomePageDetailsNews
 import org.schoolmanager.project.ui.profile.ProfileScreen
 import org.schoolmanager.project.ui.settings.*
+import org.schoolmanager.project.ui.syllabus.CartSyllabusScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
+import org.schoolmanager.project.ui.syllabus.SyllabusScreen
 import org.schoolmanager.project.viewmodel.*
 import schoolmanager.composeapp.generated.resources.*
 
@@ -38,6 +41,7 @@ fun App() {
         var SelectedButton by remember { mutableStateOf("Today classes") }
         var SelectedCourse: Course? by remember { mutableStateOf(null) }
         var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
+        var SelectedOrientation by remember { mutableStateOf<Orientation?>(null) }
         var ScreenHistory = remember { mutableStateListOf<String>() }
 
         // Barre de navigation inférieure
@@ -129,7 +133,7 @@ fun App() {
                     GoToAddCourse = { SelectedScreen = "AddCourse"; ScreenHistory.add("Courses") },
                     GoToCourseDetail = { SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses") },
                     GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Courses") },
-                    GoToSyllabus = { SelectedScreen = "HomeSyllabus" }
+                    GoToSyllabus = { SelectedScreen = "HomeSyllabus"; ScreenHistory.add("Courses") }
                 )
                 "DetailsCourse" -> SelectedCourse?.let { course ->
                     CourseDetailsScreen(course = course, BackCourses = {
@@ -139,7 +143,26 @@ fun App() {
                         }
                     })
                 }
-                "HomeSyllabus" -> HomeSyllabusScreen(syllabusviewModel = SyllabusViewModel())
+                "HomeSyllabus" -> HomeSyllabusScreen(
+                    BackCourse = {SelectedScreen = "Courses"},
+                    GoToCart = {ScreenHistory.add("HomeSyllabus"); SelectedScreen = "CartSyllabus"},
+                    GoToSyllabus = {orientation ->
+                        SelectedOrientation = orientation
+                        SelectedScreen = "ListSyllabus"
+                    },
+                    syllabusviewModel = SyllabusViewModel())
+                "ListSyllabus" -> SelectedOrientation?.let { orientation ->
+                    SyllabusScreen(
+                        BackCourse = { SelectedScreen = "HomeSyllabus" },
+                        GoToCart = { SelectedScreen = "CartSyllabus" },
+                        orientation = orientation,
+                        syllabusviewModel = SyllabusViewModel()
+                    )
+                }
+                "CartSyllabus" -> CartSyllabusScreen(
+                    BackHomeSyllabus = { SelectedScreen = "HomeSyllabus" },
+                    syllabusviewModel = SyllabusViewModel()
+                    )
                 "AddCourse" -> AddCourseScreen(BackCourses = { SelectedScreen = "Courses"; ScreenHistory.add("AddCourse") })
                 "Contact" -> ContactsScreen(
                     viewModel = viewModel,
