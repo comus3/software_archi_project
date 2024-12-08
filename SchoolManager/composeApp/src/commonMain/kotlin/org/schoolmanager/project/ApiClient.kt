@@ -15,6 +15,8 @@ import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
 //import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.NewsHomePage
+import org.schoolmanager.project.data.model.Orientation
+import org.schoolmanager.project.data.model.Syllabus
 import org.schoolmanager.project.data.model.StudentGrade
 
 //import org.schoolmanager.project.data.model.StudentGradesResponse
@@ -90,7 +92,7 @@ object ApiService {
 
     suspend fun fetchNews(): List<NewsHomePage> {
         return try {
-            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/events")
+            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/news")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -101,7 +103,7 @@ object ApiService {
             emptyList()
         }
     }
-
+//http://172.17.38.18:5000/calendar
     suspend fun fetchCalendar(): List<Calendar> {
         return try {
             val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/calendar")
@@ -114,6 +116,84 @@ object ApiService {
             }
         } catch (e: Exception) {
             emptyList()
+        }
+    }
+
+
+
+
+    // Méthode pour récupérer les orientations
+    suspend fun fetchOrientations(): List<Orientation> {
+        return try {
+            val response: HttpResponse = client.get("http://localhost:3323/orientations")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    // Méthode pour récupérer les syllabus
+    suspend fun fetchSyllabus(): List<Syllabus> {
+        return try {
+            val response: HttpResponse = client.get("http://localhost:3323/syllabus")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+
+
+
+
+    suspend fun fetchCart(): List<Syllabus> {
+        return try {
+            val response: HttpResponse = client.get("http://localhost:3323/cart")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun addToCart(syllabus: Syllabus) {
+        try {
+            client.post("http://localhost:3323/cart") {
+                contentType(ContentType.Application.Json)
+                setBody(syllabus)
+            }
+        } catch (e: Exception) {
+            // Gérer les erreurs
+        }
+    }
+
+    suspend fun removeFromCart(syllabusId: Int) {
+        try {
+            client.delete("http://localhost:3323/cart/$syllabusId")
+        } catch (e: Exception) {
+            // Gérer les erreurs
+        }
+    }
+
+    suspend fun clearCart() {
+        try {
+            client.delete("http://localhost:3323/cart")
+        } catch (e: Exception) {
+            // Gérer les erreurs
         }
     }
 
