@@ -17,6 +17,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +37,8 @@ import schoolmanager.composeapp.generated.resources.shopping_cart
 
 @Composable
 fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, GoToSyllabus: (Orientation)-> Unit, syllabusviewModel: SyllabusViewModel) {
+    val orientations by syllabusviewModel.orientations.collectAsState()
+
     Column(modifier= Modifier.fillMaxSize().padding(0.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top){
         Row(
             Modifier.fillMaxWidth().padding(top= 15.dp),
@@ -85,22 +89,19 @@ fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, GoToSyllabus:
                 )
             }
 
-            items(syllabusviewModel.orientations.size) { index ->
-                val orientation = syllabusviewModel.orientations[index]
-
+            items(orientations.size) { index ->
+                val orientation = orientations[index]
                 Button(
-                    onClick = { GoToSyllabus(orientation) }, // Passe l'orientation sélectionnée
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp).height(65.dp),
+                    onClick = { GoToSyllabus(orientation) },
+                    modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))
                 ) {
                     Text(
                         text = orientation.name,
-                        style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        style = TextStyle(fontSize = 18.sp, color = Color.White)
                     )
                 }
             }
-            //SPACE NAVIGATION
-            item{Spacer(modifier= Modifier.height(100.dp))}
         }
     }
 }

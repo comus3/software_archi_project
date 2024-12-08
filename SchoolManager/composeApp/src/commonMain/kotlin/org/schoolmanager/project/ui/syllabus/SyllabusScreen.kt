@@ -18,6 +18,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -43,7 +45,9 @@ fun SyllabusScreen(
     orientation: Orientation,
     syllabusviewModel: SyllabusViewModel
 ) {
-    val filteredSyllabus = syllabusviewModel.syllabus.filter { it.idorientation == orientation.id }
+    val syllabusList by syllabusviewModel.syllabus.collectAsState()
+    val filteredSyllabus = syllabusList.filter { it.idorientation == orientation.id }
+
     val selectedItems = remember { mutableStateListOf<Boolean>().apply { addAll(List(filteredSyllabus.size) { false }) } }
     val quantities = remember { mutableStateListOf<Int>().apply { addAll(filteredSyllabus.map { it.quantity }) } }
 
@@ -180,6 +184,8 @@ fun SyllabusScreen(
 
                         Button(
                             onClick = {
+                                val syllabusItem = filteredSyllabus[index].copy(quantity = quantities[index])
+                                syllabusviewModel.addToCart(syllabusItem)
                             },
                             modifier = Modifier.size(width = 50.dp, height = 40.dp),
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))

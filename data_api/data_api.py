@@ -52,6 +52,64 @@ def get_grades(matricule):
     else:
         abort(404, description="Grades not found for the student")
 
+
+
+
+@app.route('/orientations', methods=['GET'])
+def get_orientations():
+    return jsonify(db.get("orientations", []))
+
+@app.route('/syllabus', methods=['GET'])
+def get_syllabus():
+    return jsonify(db.get("syllabus", []))
+
+
+
+
+# Route pour récupérer le panier
+@app.route('/cart', methods=['GET'])
+def get_cart():
+    return jsonify(db.get("cart", []))
+
+# Route pour ajouter un élément au panier
+@app.route('/cart', methods=['POST'])
+def add_to_cart():
+    from flask import request
+    item = request.json
+    cart = db.get("cart", [])
+    existing_item = next((c for c in cart if c["id"] == item["id"]), None)
+    if existing_item:
+        existing_item["quantity"] += item["quantity"]
+    else:
+        cart.append(item)
+    db["cart"] = cart
+    with open('db.json', 'w') as f:
+        json.dump(db, f, indent=4)
+    return jsonify(cart)
+
+@app.route('/cart/<int:syllabus_id>', methods=['DELETE'])
+def remove_from_cart(syllabus_id):
+    cart = db.get("cart", [])
+    cart = [item for item in cart if item["id"] != syllabus_id]
+    db["cart"] = cart
+    with open('db.json', 'w') as f:
+        json.dump(db, f, indent=4)
+    return jsonify(cart)
+
+
+
+# Route pour vider le panier
+@app.route('/cart', methods=['DELETE'])
+def clear_cart():
+    db["cart"] = []
+    with open('db.json', 'w') as f:
+        json.dump(db, f, indent=4)
+    return jsonify([])
+
+
+
+
+
 if __name__ == '__main__':
     # On tente d'utiliser le port 3323, mais si indisponible, Flask choisit un autre port
     try:

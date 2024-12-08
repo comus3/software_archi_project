@@ -2,50 +2,77 @@ package org.schoolmanager.project.viewmodel
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import org.schoolmanager.project.ApiService
 import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.data.model.Syllabus
 
 
 class SyllabusViewModel: ViewModel(){
-    val orientations= listOf(
-        Orientation(1, "BLOC 1"),
-        Orientation(2, "BLOC 2"),
-        Orientation(3, "BLOC 3"),
-        Orientation(4, "BLOC 4"),
-        Orientation(5, "BLOC 5"),
-        Orientation(6, "BLOC 6"),
-        Orientation(7, "BLOC 7"),
-        Orientation(8, "BLOC 8"),
-        Orientation(9, "BLOC 9"),
-        Orientation(10, "BLOC 10"),
+    private val _orientations = MutableStateFlow<List<Orientation>>(emptyList())
+    val orientations: StateFlow<List<Orientation>> get() = _orientations
 
+    private val _syllabus = MutableStateFlow<List<Syllabus>>(emptyList())
+    val syllabus: StateFlow<List<Syllabus>> get() = _syllabus
 
-    )
+    init {
+        fetchOrientations()
+        fetchSyllabus()
+    }
 
-    val syllabus= listOf(
-        Syllabus(1, "Chimie Q1", 1,15.99),
-        Syllabus(1, "Calculus",1 , 15.99),
-        Syllabus(1, "Guide du dessinateur",1, 15.99),
-        Syllabus(2, "Calculus",1, 15.99),
-        Syllabus(2, "Guide du dessinateur",1, 15.99),
-        Syllabus(3, "Encyclopedie",1, 15.99),
-    )
-
-    // Liste mutable pour le panier
-    val cartItems = mutableStateListOf<Syllabus>()
-
-    fun addToCart(item: Syllabus) {
-        val existingItem = cartItems.find { it.syllabus == item.syllabus }
-        if (existingItem != null) {
-            val index = cartItems.indexOf(existingItem)
-            cartItems[index] = existingItem.copy(quantity = existingItem.quantity + item.quantity)
-        } else {
-            cartItems.add(item)
+    // Récupérer les orientations depuis l'API
+    fun fetchOrientations() {
+        viewModelScope.launch {
+            val fetchedOrientations = ApiService.fetchOrientations()
+            _orientations.value = fetchedOrientations
         }
     }
 
-    fun removeFromCart(item: Syllabus) {
-        cartItems.remove(item)
+    // Récupérer les syllabus depuis l'API
+    fun fetchSyllabus() {
+        viewModelScope.launch {
+            val fetchedSyllabus = ApiService.fetchSyllabus()
+            _syllabus.value = fetchedSyllabus
+        }
+    }
+
+
+
+    private val _cartItems = MutableStateFlow<List<Syllabus>>(emptyList())
+    val cartItems: StateFlow<List<Syllabus>> get() = _cartItems
+
+    init {
+        fetchCart()
+    }
+
+    fun fetchCart() {
+        viewModelScope.launch {
+            _cartItems.value = ApiService.fetchCart()
+        }
+    }
+
+    fun addToCart(item: Syllabus) {
+        viewModelScope.launch {
+            ApiService.addToCart(item)
+            fetchCart()
+        }
+    }
+
+    fun removeFromCart(syllabusId: Int) {
+        viewModelScope.launch {
+            ApiService.removeFromCart(syllabusId)
+            fetchCart()
+        }
+    }
+
+    fun clearCart() {
+        viewModelScope.launch {
+            ApiService.clearCart()
+            fetchCart()
+        }
     }
 
 }
