@@ -226,7 +226,7 @@
                     "course": "4bamath30 Discrete Mathematics 5 ECTS",
                     "final_grades": {
                         "jan": "12",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -319,7 +319,7 @@
                         {
                             "subcourse": "4base3C Accounting 75%",
                             "grades": {
-                                "jan": "",
+                                "jan": "-",
                                 "jun": "15",
                                 "sept": "-"
                             }
@@ -382,7 +382,7 @@
                     "course": "4beal30 Electronic Design 5 ECTS",
                     "final_grades": {
                         "jan": "13.5",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -439,7 +439,7 @@
                     "course": "4bamath30 Discrete Mathematics 5 ECTS",
                     "final_grades": {
                         "jan": "14",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -491,15 +491,15 @@
                     "course": "4bachim30 Organic Chemistry 7 ECTS",
                     "final_grades": {
                         "jan": "-",
-                        "jun": "10",
-                        "sept": "13"
+                        "jun": "9",
+                        "sept": "11"
                     },
                     "subgrades": [
                         {
                             "subcourse": "4bachim3L Organic Chemistry Lab 30%",
                             "grades": {
                                 "jan": "-",
-                                "jun": "12",
+                                "jun": "11",
                                 "sept": "-"
                             }
                         },
@@ -532,7 +532,7 @@
                         {
                             "subcourse": "4base3C Accounting 75%",
                             "grades": {
-                                "jan": "",
+                                "jan": "-",
                                 "jun": "16",
                                 "sept": "-"
                             }
@@ -595,7 +595,7 @@
                     "course": "4beal30 Electronic Design 5 ECTS",
                     "final_grades": {
                         "jan": "14",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -653,7 +653,7 @@
                     "course": "4bamath30 Discrete Mathematics 5 ECTS",
                     "final_grades": {
                         "jan": "13",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -706,7 +706,7 @@
                     "final_grades": {
                         "jan": "-",
                         "jun": "11",
-                        "sept": "14"
+                        "sept": "-"
                     },
                     "subgrades": [
                         {
@@ -722,7 +722,7 @@
                             "grades": {
                                 "jan": "-",
                                 "jun": "10",
-                                "sept": "13"
+                                "sept": "-"
                             }
                         }
                     ]
@@ -746,7 +746,7 @@
                         {
                             "subcourse": "4base3C Accounting 75%",
                             "grades": {
-                                "jan": "",
+                                "jan": "-",
                                 "jun": "14",
                                 "sept": "-"
                             }
@@ -809,7 +809,7 @@
                     "course": "4beal30 Electronic Design 5 ECTS",
                     "final_grades": {
                         "jan": "12.5",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -866,7 +866,7 @@
                     "course": "4bamath30 Discrete Mathematics 5 ECTS",
                     "final_grades": {
                         "jan": "15",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
@@ -919,7 +919,7 @@
                     "final_grades": {
                         "jan": "-",
                         "jun": "12",
-                        "sept": "15"
+                        "sept": "-"
                     },
                     "subgrades": [
                         {
@@ -935,7 +935,7 @@
                             "grades": {
                                 "jan": "-",
                                 "jun": "11",
-                                "sept": "14"
+                                "sept": "-"
                             }
                         }
                     ]
@@ -1022,7 +1022,7 @@
                     "course": "4beal30 Electronic Design 5 ECTS",
                     "final_grades": {
                         "jan": "15",
-                        "jun": "",
+                        "jun": "-",
                         "sept": "-"
                     },
                     "subgrades": [
