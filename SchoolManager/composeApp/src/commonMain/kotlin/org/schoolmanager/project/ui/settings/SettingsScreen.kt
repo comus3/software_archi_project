@@ -33,8 +33,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.InternalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+
 import schoolmanager.composeapp.generated.resources.Res
+import schoolmanager.composeapp.generated.resources.Settings
 import schoolmanager.composeapp.generated.resources.arrowRight
 import schoolmanager.composeapp.generated.resources.back
 import schoolmanager.composeapp.generated.resources.darkMode
@@ -113,6 +117,7 @@ fun BannerButton(
     }
 }
 
+@OptIn(InternalResourceApi::class)
 @Composable
 fun SettingsScreen(
     BackProfile: () -> Unit = {},
@@ -149,7 +154,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.width(85.dp))
 
             Text(
-                "Settings",
+                text = stringResource(Res.string.Settings),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
