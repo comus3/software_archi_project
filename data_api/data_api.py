@@ -16,13 +16,13 @@ PORT = 5000
 def get_events():
     return jsonify(db.get("news", []))
 
-@app.route('orientations', methods=['GET'])
+@app.route('/orientations', methods=['GET'])
 def get_orientations():
     return jsonify(db.get("orientations", []))
-@app.route('syllabus', methods=['GET'])
+@app.route('/syllabus', methods=['GET'])
 def get_syllabus():
     return jsonify(db.get("syllabus", []))
-@app.route('cart', methods=['GET'])
+@app.route('/cart', methods=['GET'])
 def get_cart():
     return jsonify(db.get("cart", []))
 # Route pour récupérer le calendrier
