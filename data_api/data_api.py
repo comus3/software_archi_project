@@ -109,6 +109,48 @@ def clear_cart():
 
 
 
+# Route pour récupérer les cours non suivis par un étudiant
+@app.route('/get_unsubed_courses/<student_id>', methods=['GET'])
+def get_unsubed_courses(student_id):
+    courses = db.get("courses", [])
+    unsubscribed_courses = [course for course in courses if student_id not in course["students"]]
+    return jsonify(unsubscribed_courses)
+
+# Route pour récupérer les cours suivis par un étudiant
+@app.route('/get_subbed_courses/<student_id>', methods=['GET'])
+def get_subbed_courses(student_id):
+    courses = db.get("courses", [])
+    subscribed_courses = [course for course in courses if student_id in course["students"]]
+    return jsonify(subscribed_courses)
+
+# Route pour inscrire un étudiant à un cours
+@app.route('/sub_student/<int:course_id>', methods=['POST'])
+def sub_student(course_id):
+    from flask import request
+    student_id = request.json.get("student_id")
+    
+    if not student_id:
+        abort(400, description="Student ID is required")
+
+    courses = db.get("courses", [])
+    course = next((c for c in courses if c["id"] == course_id), None)
+
+    if not course:
+        abort(404, description="Course not found")
+
+    if student_id not in course["students"]:
+        course["students"].append(student_id)
+
+    # Save changes to the JSON file
+    db["courses"] = courses
+    with open('db.json', 'w') as f:
+        json.dump(db, f, indent=4)
+
+    return jsonify(course)
+
+
+
+
 
 if __name__ == '__main__':
     # On tente d'utiliser le port 3323, mais si indisponible, Flask choisit un autre port
