@@ -41,7 +41,7 @@ fun App() {
         var SelectedButton by remember { mutableStateOf("Today classes") }
         var SelectedCourse: Course? by remember { mutableStateOf(null) }
         var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
-        var SelectedOrientation by remember { mutableStateOf<Orientation?>(null) }
+        var SelectedOrientation: Orientation? by remember { mutableStateOf(null) }
         var ScreenHistory = remember { mutableStateListOf<String>() }
 
         // Barre de navigation inférieure
