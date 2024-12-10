@@ -8,7 +8,7 @@ import schoolmanager.composeapp.generated.resources.alternatif_monophase
 import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 
-class CoursesViewModel: ViewModel(){
+class CoursesViewModel : ViewModel() {
     private val courses = listOf(
         Course(1, "Electrical", Res.drawable.alternatif_monophase, "LURKIN Quentin", "lrk@ecam.be"),
         Course(2, "Motors", Res.drawable.motor, "LOUIS Jean-Guillaume", "j3l@ecam.be"),
@@ -17,7 +17,11 @@ class CoursesViewModel: ViewModel(){
     )
 
     //FCT TO GET THE COURSE BY ID
-    fun getCourseById(id: Int): Course?{
-        return courses.find{it.id==id}
+    fun getCourseById(id: Int): Course? {
+        return courses.find { it.id == id }
+    }
+
+    fun getAllCourses(): List<Course> {
+        return courses
     }
 }

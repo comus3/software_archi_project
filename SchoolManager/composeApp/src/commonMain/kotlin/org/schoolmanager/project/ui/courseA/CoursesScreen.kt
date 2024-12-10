@@ -48,18 +48,24 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 import schoolmanager.composeapp.generated.resources.administration_reseau
 
+import org.schoolmanager.project.viewmodel.CoursesViewModel
 
 
 @Composable
 fun CoursesScreen(
+    viewModel: CoursesViewModel = CoursesViewModel(),
+
     GoToAddCourse: () -> Unit,
     GoToCourseDetail: () -> Unit,
     GoToProfile: () -> Unit,
     GoToSyllabus: () -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
-    val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
-        course.title.contains(searchQuery, ignoreCase = true)
+//    val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
+//        course.title.contains(searchQuery, ignoreCase = true)
+//    }
+    val filteredCourses = viewModel.getAllCourses().filter { course ->
+        course.name.contains(searchQuery, ignoreCase = true)
     }
 
     Column(
@@ -100,7 +106,7 @@ fun CoursesScreen(
         ) {
             OutlinedTextField(
                 value = searchQuery,
-                onValueChange = {searchQuery = it},
+                onValueChange = { searchQuery = it },
                 label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
@@ -152,9 +158,9 @@ fun CoursesScreen(
         ) {
             items(filteredCourses) { course ->
                 CourseCard(
-                    title = course.title,
-                    resource = course.imageResId,
-                    GoToCourseDetail = course.onClick
+                    title = course.name,
+                    resource = course.image,
+                    GoToCourseDetail = GoToCourseDetail
                 )
             }
         }
@@ -162,7 +168,7 @@ fun CoursesScreen(
 }
 
 @Composable
-fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -> Unit) {
+fun CourseCard(title: String, resource: DrawableResource?, GoToCourseDetail: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -180,7 +186,7 @@ fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -
         ) {
             // Course image
             Image(
-                painter = painterResource(resource),
+                painter = painterResource(resource!!),
                 contentDescription = "$title Icon",
                 modifier = Modifier.size(40.dp)
             )
@@ -194,25 +200,25 @@ fun CourseCard(title: String, resource: DrawableResource, GoToCourseDetail: () -
     }
 }
 
-data class Course(
-    val title: String,
-    val imageResId: DrawableResource,
-    val onClick: () -> Unit
-)
-
-fun getCourseList(GoToCourseDetail: () -> Unit): List<Course> {
-    return listOf(
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-    )
-}
+//data class Course(
+//    val title: String,
+//    val imageResId: DrawableResource,
+//    val onClick: () -> Unit
+//)
+//
+//fun getCourseList(GoToCourseDetail: () -> Unit): List<Course> {
+//    return listOf(
+//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
+//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
+//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
+//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
+//    )
+//}
