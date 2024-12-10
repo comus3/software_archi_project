@@ -148,7 +148,30 @@ def sub_student(course_id):
 
     return jsonify(course)
 
+# Route pour désinscrire un étudiant d'un cours
+@app.route('/unsub_student/<int:course_id>', methods=['POST'])
+def unsub_student(course_id):
+    from flask import request
+    student_id = request.json.get("student_id")
 
+    if not student_id:
+        abort(400, description="Student ID is required")
+
+    courses = db.get("courses", [])
+    course = next((c for c in courses if c["id"] == course_id), None)
+
+    if not course:
+        abort(404, description="Course not found")
+
+    if student_id in course["students"]:
+        course["students"].remove(student_id)
+
+    # Save changes to the JSON file
+    db["courses"] = courses
+    with open('db.json', 'w') as f:
+        json.dump(db, f, indent=4)
+
+    return jsonify(course)
 
 
 
