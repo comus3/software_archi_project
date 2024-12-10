@@ -61,9 +61,6 @@ fun CoursesScreen(
     GoToSyllabus: () -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
-//    val filteredCourses = getCourseList(GoToCourseDetail).filter { course ->
-//        course.title.contains(searchQuery, ignoreCase = true)
-//    }
     val filteredCourses = viewModel.getAllCourses().filter { course ->
         course.name.contains(searchQuery, ignoreCase = true)
     }
@@ -199,26 +196,3 @@ fun CourseCard(title: String, resource: DrawableResource?, GoToCourseDetail: () 
         }
     }
 }
-
-//data class Course(
-//    val title: String,
-//    val imageResId: DrawableResource,
-//    val onClick: () -> Unit
-//)
-//
-//fun getCourseList(GoToCourseDetail: () -> Unit): List<Course> {
-//    return listOf(
-//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-//        Course("Elec Q1", Res.drawable.electronic_circuit, GoToCourseDetail),
-//        Course("Elec Q2", Res.drawable.alternatif_monophase, GoToCourseDetail),
-//        Course("Motors", Res.drawable.motor, GoToCourseDetail),
-//        Course("Network", Res.drawable.administration_reseau, GoToCourseDetail),
-//    )
-//}
