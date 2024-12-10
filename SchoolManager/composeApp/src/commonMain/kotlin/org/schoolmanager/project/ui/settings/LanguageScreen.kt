@@ -32,6 +32,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
+
+
 @Composable
 fun LanguageCard(text: String) {
     var showDialog by remember { mutableStateOf(false) } // Ensure mutableStateOf is properly imported
@@ -127,4 +129,13 @@ fun LanguageScreen(BackSettings:()-> Unit){
         LanguageCard("Neederlands")
         LanguageCard("Español")
         }
+}
+
+// Utility function to get language names
+fun getLanguageName(languageCode: String): String = when(languageCode) {
+    "en" -> "English"
+    "fr" -> "Français"
+    "es" -> "Español"
+    "de" -> "Deutsch"
+    else -> languageCode
 }

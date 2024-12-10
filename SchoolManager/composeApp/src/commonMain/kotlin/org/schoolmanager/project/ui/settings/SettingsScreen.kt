@@ -45,6 +45,7 @@ import schoolmanager.composeapp.generated.resources.darkMode
 import schoolmanager.composeapp.generated.resources.language
 import schoolmanager.composeapp.generated.resources.phoneIcon
 import schoolmanager.composeapp.generated.resources.termsAndConditions
+import org.schoolmanager.project.LanguageManager
 
 @Composable
 fun SettingsButton(
@@ -120,6 +121,7 @@ fun BannerButton(
 @OptIn(InternalResourceApi::class)
 @Composable
 fun SettingsScreen(
+    languageManager: LanguageManager,
     BackProfile: () -> Unit = {},
     GoToAbout: () -> Unit = {},
     GoToLanguage: () -> Unit = {},
@@ -175,13 +177,32 @@ fun SettingsScreen(
         )
 
 
+        // Add a state to track if language is manually set
+        var isLanguageManuallySet by remember { mutableStateOf(languageManager.isLanguageManuallySet()) }
+
         // Language Button
         SettingsButton(
-            text = "Language",
+            text = if (isLanguageManuallySet) "Language (Custom)" else "Language (System)",
             imageResource = Res.drawable.language,
             imageContentDescription = "Language Icon",
-            onClick = { GoToLanguage() }
+            onClick = {
+                // Navigate to language selection screen
+                GoToLanguage()
+            }
         )
+
+        // Add an option to reset to system language if manually set
+        if (isLanguageManuallySet) {
+            SettingsButton(
+                text = "Reset to System Language",
+                imageResource = Res.drawable.arrowRight, // You'll need to add this resource
+                imageContentDescription = "Reset Language",
+                onClick = {
+                    languageManager.resetToSystemLanguage()
+                    isLanguageManuallySet = false
+                }
+            )
+        }
 
         // Dark Mode
         // State to manage the toggle state
