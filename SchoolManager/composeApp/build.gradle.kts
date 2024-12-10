@@ -123,6 +123,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(libs.places)
     implementation(libs.androidx.ui.android)
+    implementation(libs.testng)
+    implementation(libs.androidx.ui.text.android)
     debugImplementation(compose.uiTooling)
 }
 

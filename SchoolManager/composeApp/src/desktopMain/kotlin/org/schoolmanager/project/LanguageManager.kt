@@ -1,7 +1,7 @@
 package org.schoolmanager.project
 
 
-actual class LanguageManager {
+actual class LanguageManager actual constructor() {
     actual var userLanguagePreference: String? = null
 
     actual fun getCurrentLanguage(): String {

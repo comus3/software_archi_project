@@ -1,6 +1,6 @@
 package org.schoolmanager.project
 
-actual class LanguageManager {
+actual class LanguageManager actual constructor() {
     actual var userLanguagePreference: String?
         get() = TODO("Not yet implemented")
         set(value) {}

@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import org.schoolmanager.project.LanguageManager
 import org.schoolmanager.project.ui.settings.SettingsScreen
 
 val DarkColorPalette = darkColors(
@@ -39,7 +40,8 @@ fun MyApp() {
 
     MyTheme(darkTheme = isDarkModeEnabled) {
         SettingsScreen(
-            onDarkModeToggle = { isDarkModeEnabled = it }
+            onDarkModeToggle = { isDarkModeEnabled = it },
+            languageManager = LanguageManager()
         )
     }
 }

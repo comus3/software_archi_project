@@ -27,15 +27,18 @@ import org.schoolmanager.project.ui.syllabus.SyllabusScreen
 import org.schoolmanager.project.viewmodel.*
 import schoolmanager.composeapp.generated.resources.*
 
+import org.schoolmanager.project.utils.LocalStrings
+import org.schoolmanager.project.utils.loadStringsForLanguage
+
 @Composable
 @Preview
 fun App() {
 
     val languageManager = remember { LanguageManager()}
     val currentLanguage by remember { derivedStateOf { languageManager.getCurrentLanguage() } }
+    var isDarkModeEnabled by remember { mutableStateOf(false) }
 
     CompositionLocalProvider(LocalStrings provides loadStringsForLanguage(currentLanguage)) {
-        var isDarkModeEnabled by remember { mutableStateOf(false) }
 
         MyTheme(darkTheme = isDarkModeEnabled) {
             var SelectedScreen by remember { mutableStateOf("Home") }
@@ -117,7 +120,8 @@ fun App() {
                         GoToLanguage = { SelectedScreen = "Language" },
                         GoToAbout = { SelectedScreen = "About" },
                         GoToTerms = { SelectedScreen = "Terms" },
-                        onDarkModeToggle = { isDarkModeEnabled = it }
+                        onDarkModeToggle = { isDarkModeEnabled = it },
+                        languageManager = LanguageManager()
                     )
                     "Grades" -> GradesScreen(BackProfile = { SelectedScreen = "Profile" })
                     "Calendar" -> CalendarScreen(

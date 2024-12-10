@@ -1,3 +1,3 @@
 package org.schoolmanager.project
 
-expect fun LanguageManager.getSystemLanguage(): String
+// expect fun LanguageManager.getSystemLanguage(): String

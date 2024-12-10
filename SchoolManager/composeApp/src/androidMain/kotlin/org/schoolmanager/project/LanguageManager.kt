@@ -29,7 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
-actual class LanguageManager {
+actual class LanguageManager actual constructor() {
     actual var userLanguagePreference: String? by mutableStateOf(null)
 
     actual fun getCurrentLanguage(): String {

@@ -4,8 +4,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
-expect class LanguageManager {
+expect class LanguageManager() {
     var userLanguagePreference: String?
+
 
     fun getCurrentLanguage(): String
     fun setLanguage(languageCode: String)
