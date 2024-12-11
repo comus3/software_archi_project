@@ -8,7 +8,7 @@ data class Course(
     val name: String= "",
     val image: DrawableResource?= null,
     val professor: String= "",
-    val mail: String= "",
+    val email: String= "",
     val pdf_file: String= "",
     val students: List<String>? = null
 )

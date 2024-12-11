@@ -13,6 +13,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
+import org.schoolmanager.project.data.model.Course
 //import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.data.model.Orientation
@@ -204,6 +205,20 @@ object ApiService {
             Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {
             StudentGrade(grades = emptyList(), student_id = "")
+        }
+    }
+
+    suspend fun fetchCourses(): List<Course> {
+        return try {
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/courses")
+            if (response.status == HttpStatusCode.OK) {
+                val jsonResponse = response.bodyAsText()
+                Json.decodeFromString(jsonResponse)
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
         }
     }
 

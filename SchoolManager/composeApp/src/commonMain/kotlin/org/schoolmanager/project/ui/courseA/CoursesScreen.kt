@@ -25,6 +25,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,10 +45,6 @@ import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.addcourse
 import schoolmanager.composeapp.generated.resources.profilephoto
 import schoolmanager.composeapp.generated.resources.shopping_cart
-import schoolmanager.composeapp.generated.resources.alternatif_monophase
-import schoolmanager.composeapp.generated.resources.electronic_circuit
-import schoolmanager.composeapp.generated.resources.motor
-import schoolmanager.composeapp.generated.resources.administration_reseau
 
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 
@@ -60,9 +58,17 @@ fun CoursesScreen(
     GoToProfile: () -> Unit,
     GoToSyllabus: () -> Unit
 ) {
-    var searchQuery by remember { mutableStateOf("") }
-    val filteredCourses = viewModel.getAllCourses().filter { course ->
-        course.name.contains(searchQuery, ignoreCase = true)
+    val courses by viewModel.api_courses.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val filteredCourses by viewModel.filteredCourses.collectAsState()
+
+//    var searchQuery by remember { mutableStateOf("") }
+//    val filteredCourses = viewModel.getAllCourses().filter { course ->
+//        course.name.contains(searchQuery, ignoreCase = true)
+//    }
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchCourses()
     }
 
     Column(
@@ -103,7 +109,7 @@ fun CoursesScreen(
         ) {
             OutlinedTextField(
                 value = searchQuery,
-                onValueChange = { searchQuery = it },
+                onValueChange = viewModel::onSearchQueryChanged,
                 label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
@@ -156,7 +162,7 @@ fun CoursesScreen(
             items(filteredCourses) { course ->
                 CourseCard(
                     title = course.name,
-                    resource = course.image,
+//                    resource = course.image,
                     GoToCourseDetail = GoToCourseDetail
                 )
             }
@@ -165,7 +171,11 @@ fun CoursesScreen(
 }
 
 @Composable
-fun CourseCard(title: String, resource: DrawableResource?, GoToCourseDetail: () -> Unit) {
+fun CourseCard(
+    title: String,
+//    resource: DrawableResource?,
+    GoToCourseDetail: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -182,11 +192,11 @@ fun CourseCard(title: String, resource: DrawableResource?, GoToCourseDetail: () 
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Course image
-            Image(
-                painter = painterResource(resource!!),
-                contentDescription = "$title Icon",
-                modifier = Modifier.size(40.dp)
-            )
+//            Image(
+//                painter = painterResource(resource!!),
+//                contentDescription = "$title Icon",
+//                modifier = Modifier.size(40.dp)
+//            )
             // Course title
             Text(
                 text = title,
