@@ -50,6 +50,7 @@ fun App() {
     var SelectedButton by remember { mutableStateOf("Today classes") }
     var SelectedCourse: Course? by remember { mutableStateOf(null) }
     var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
+    var SelectedOrientation: Orientation? by remember { mutableStateOf(null) }
     var ScreenHistory = remember { mutableStateListOf<String>() }
 
     // Global theme wrapper
@@ -120,12 +121,10 @@ fun App() {
                         }
                     )
                     "DetailsNews" -> SelectedNews?.let {
-                        HomePageDetailsNews(it,
-                            BackHomePage = { button ->
-                                SelectedButton = button
-                                SelectedScreen = "Home"
-                            }
-                        )
+                        HomePageDetailsNews(it, BackHomePage = { button ->
+                            SelectedButton = button
+                            SelectedScreen = "Home"
+                        })
                     }
                     "Profile" -> ProfileScreen(
                         BackHomePage = {
@@ -157,7 +156,7 @@ fun App() {
                         GoToAddCourse = { SelectedScreen = "AddCourse"; ScreenHistory.add("Courses") },
                         GoToCourseDetail = { SelectedScreen = "DetailsCourse"; ScreenHistory.add("Courses") },
                         GoToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Courses") },
-                        GoToSyllabus = { SelectedScreen = "HomeSyllabus" }
+                        GoToSyllabus = { SelectedScreen = "HomeSyllabus"; ScreenHistory.add("Courses") }
                     )
                     "DetailsCourse" -> SelectedCourse?.let { course ->
                         CourseDetailsScreen(course = course, BackCourses = {
@@ -167,7 +166,26 @@ fun App() {
                             }
                         })
                     }
-                    "HomeSyllabus" -> HomeSyllabusScreen(syllabusviewModel = SyllabusViewModel())
+                    "HomeSyllabus" -> HomeSyllabusScreen(
+                        BackCourse = {SelectedScreen = "Courses"},
+                        GoToCart = {ScreenHistory.add("HomeSyllabus"); SelectedScreen = "CartSyllabus"},
+                        GoToSyllabus = {orientation ->
+                            SelectedOrientation = orientation
+                            SelectedScreen = "ListSyllabus"
+                        },
+                        syllabusviewModel = SyllabusViewModel())
+                    "ListSyllabus" -> SelectedOrientation?.let { orientation ->
+                        SyllabusScreen(
+                            BackCourse = { SelectedScreen = "HomeSyllabus" },
+                            GoToCart = { SelectedScreen = "CartSyllabus" },
+                            orientation = orientation,
+                            syllabusviewModel = SyllabusViewModel()
+                        )
+                    }
+                    "CartSyllabus" -> CartSyllabusScreen(
+                        BackHomeSyllabus = { SelectedScreen = "HomeSyllabus" },
+                        syllabusviewModel = SyllabusViewModel()
+                    )
                     "AddCourse" -> AddCourseScreen(BackCourses = { SelectedScreen = "Courses"; ScreenHistory.add("AddCourse") })
                     "Contact" -> ContactsScreen(
                         viewModel = viewModel,
