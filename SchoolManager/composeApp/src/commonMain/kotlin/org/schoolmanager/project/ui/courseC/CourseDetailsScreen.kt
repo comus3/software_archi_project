@@ -68,7 +68,7 @@ fun CourseDetailsScreen(course: Course, BackCourses: () -> Unit) {
             modifier = Modifier.padding(8.dp)
         )
         Text(
-            text = "Email: ${course.mail}",
+            text = "Email: ${course.email}",
             fontSize = 18.sp,
             color = Color.Gray,
             modifier = Modifier.padding(8.dp)
