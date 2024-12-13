@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -23,6 +25,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,9 +48,19 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 import schoolmanager.composeapp.generated.resources.profilephoto
 import schoolmanager.composeapp.generated.resources.shopping_cart
+import org.schoolmanager.project.viewmodel.CoursesViewModel
+
 
 @Composable
-fun AddCourseScreen(BackCourses: ()-> Unit) {
+fun AddCourseScreen(
+    viewModel: CoursesViewModel = CoursesViewModel(),
+    BackCourses: () -> Unit
+) {
+    var searchQuery by remember { mutableStateOf("") }
+    val filteredCourses = viewModel.getAllCourses().filter { course ->
+        course.name.contains(searchQuery, ignoreCase = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +81,7 @@ fun AddCourseScreen(BackCourses: ()-> Unit) {
                 contentDescription = "Go back to course A",
                 modifier = Modifier
                     .size(75.dp)
-                    .clickable {BackCourses()}
+                    .clickable { BackCourses() }
                     .padding(bottom = 16.dp)
             )
             Image(
@@ -86,8 +102,8 @@ fun AddCourseScreen(BackCourses: ()-> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
                 label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
@@ -103,22 +119,24 @@ fun AddCourseScreen(BackCourses: ()-> Unit) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Course cards
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q1",Res.drawable.electronic_circuit) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Elec Q2",Res.drawable.alternatif_monophase) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Motors",Res.drawable.motor) // Remplacez par votre ressource d'image
-        Spacer(modifier = Modifier.height(16.dp))
-        org.schoolmanager.project.ui.courseB.CourseCard(title = "Network",Res.drawable.administration_reseau) // Remplacez par votre ressource d'image
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(filteredCourses) { course ->
+                CourseCard(
+                    title = course.name,
+                    resource = course.image
+                )
+            }
         }
     }
+}
 
 
 @Composable
 fun CourseCard(
     title: String,
-    resource: DrawableResource,
+    resource: DrawableResource?,
 ) {
     Card(
         modifier = Modifier
@@ -142,7 +160,7 @@ fun CourseCard(
             ) {
                 // Course image
                 Image(
-                    painter = painterResource(resource),
+                    painter = painterResource(resource!!),
                     contentDescription = "$title Icon",
                     modifier = Modifier.size(40.dp)
                 )

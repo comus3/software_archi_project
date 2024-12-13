@@ -4,7 +4,6 @@ import ContactDetailScreen
 import MyTheme
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
@@ -12,6 +11,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.data.model.Course
 import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.ui.Login.LoginScreen
+import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.ui.homepage.HomePageScreen
 import org.schoolmanager.project.ui.calendar.CalendarScreen
 import org.schoolmanager.project.ui.contacts.ContactsScreen
@@ -21,26 +21,18 @@ import org.schoolmanager.project.ui.courseC.CourseDetailsScreen
 import org.schoolmanager.project.ui.grades.GradesScreen
 import org.schoolmanager.project.ui.homepage.HomePageDetailsNews
 import org.schoolmanager.project.ui.profile.ProfileScreen
-import org.schoolmanager.project.ui.settings.AboutScreen
-import org.schoolmanager.project.ui.settings.LanguageScreen
-import org.schoolmanager.project.ui.settings.SettingsScreen
-import org.schoolmanager.project.ui.settings.TermsScreen
+import org.schoolmanager.project.ui.settings.*
+import org.schoolmanager.project.ui.syllabus.CartSyllabusScreen
 import org.schoolmanager.project.ui.syllabus.HomeSyllabusScreen
-import org.schoolmanager.project.viewmodel.CalendarViewModel
-import org.schoolmanager.project.viewmodel.NewsViewModel
-import org.schoolmanager.project.viewmodel.SyllabusViewModel
-import schoolmanager.composeapp.generated.resources.Res
-import schoolmanager.composeapp.generated.resources.iconhome
-import schoolmanager.composeapp.generated.resources.iconcalendar
-import schoolmanager.composeapp.generated.resources.iconcourses
-import schoolmanager.composeapp.generated.resources.iconcontact
+import org.schoolmanager.project.ui.syllabus.SyllabusScreen
+import org.schoolmanager.project.viewmodel.*
+import schoolmanager.composeapp.generated.resources.*
 
 @Composable
 @Preview
 fun App() {
     // Global theme state
     var isDarkModeEnabled by remember { mutableStateOf(false) }
-
     // Login state
     var isLoggedIn by remember { mutableStateOf(false) }
 

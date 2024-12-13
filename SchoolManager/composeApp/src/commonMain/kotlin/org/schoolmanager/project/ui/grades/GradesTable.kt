@@ -11,17 +11,31 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.material.Text
-import org.schoolmanager.project.data.model.Grade
+//import org.schoolmanager.project.data.model.Grade
 import org.schoolmanager.project.data.model.SubGrade
 import org.schoolmanager.project.viewmodel.GradesViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 @Composable
-fun GradesTable() {
-    val viewModel = GradesViewModel()  // Obtenez le ViewModel
+fun GradesTable(viewModel: GradesViewModel) {
+    var errorMessage by remember { mutableStateOf("") }
+
+    val results by viewModel._studentsCourses.collectAsState()
+
+    LaunchedEffect(Unit) {
+        try {
+            viewModel.fetchGrades()
+        } catch (e: Exception) {
+            errorMessage = "Failed to fetch grades"
+        }
+    }
+
     Column(modifier = Modifier.padding(16.dp)) {
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         // Header row for months
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -33,44 +47,34 @@ fun GradesTable() {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(2f)
             )
-
-            Text("janvier", fontSize = 14.sp, fontWeight = FontWeight.Bold,modifier = Modifier.weight(1f),textAlign = TextAlign.Center)
-            Text("juin", fontSize = 14.sp, fontWeight = FontWeight.Bold,modifier = Modifier.weight(1f),textAlign = TextAlign.Center)
-            Text("septembre", fontSize = 14.sp, fontWeight = FontWeight.Bold,modifier = Modifier.weight(1f),textAlign = TextAlign.Center)
+            Text("janvier", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+            Text("juin", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+            Text("septembre", fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
         }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(1.dp) // Épaisseur de la ligne
-                .background(Color.Gray) // Couleur de la ligne
+                .height(1.dp)
+                .background(Color.Gray)
         )
-
 
         Spacer(modifier = Modifier.height(8.dp))
 
         // Each course row
-        /*GradeRow("3base30 Comptabilité et entrepreneuriat 5 ECTS", "16", "", "")
-        SubGradeRow("3babm3T Entrepreneuriat 25%", "", "6", "")
-        SubGradeRow("3base3C Comptabilité 75%", "", "19", "")
+        results.forEach { studentCourse ->
+            // Display main course
+            GradeRow(courseTitle = studentCourse.course, finalGrades = studentCourse.final_grades)
 
-        GradeRow("3basg30 Stage 10 ECTS", "", "18", "")
-        SubGradeRow("3basg3X Stage 100%", "", "18", "")
-
-        GradeRow("3beal30 Electronic design 5 ECTS", "13.5", "13.5", "")
-        SubGradeRow("3beal3C Electronique analogique 75%", "13.5", "", "")
-        SubGradeRow("3beal3L Labo electronique analogique 25%", "", "", "14")*/
-
-
-        // Display each grade
-        viewModel.grades.value.forEach { grade ->
-            if (grade is Grade){
-                GradeRow(grade.subject, grade.jan, grade.jun, grade.sept)
-            }
-            if (grade is SubGrade) {
-                SubGradeRow(grade.subject, grade.jan, grade.jun, grade.sept)
+            // Display sub-courses
+            studentCourse.subgrades.forEach { subGrade ->
+                SubGradeRow(
+                    subTitle = subGrade.subcourse,
+                    jan = subGrade.grades.jan,
+                    juin = subGrade.grades.jun,
+                    sept = subGrade.grades.sept
+                )
             }
         }
     }
 }
-
-

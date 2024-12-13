@@ -218,209 +218,859 @@
 
     ],
     
-    "grades": [
+    "student_grades": [
         {
             "student_id": "20231",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bamath30 Discrete Mathematics 5 ECTS",
+                    "final_grades": {
+                        "jan": "12",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bamath3A Algebra 70%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bamath3B Graph Theory 30%",
+                            "grades": {
+                                "jan": "9",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bapro30 Advanced Programming 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "13",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bapro3P Java Project 60%",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bapro3L Programming Lab 40%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "14",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 10,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bachim30 Organic Chemistry 7 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "9",
+                        "sept": "12"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bachim3L Organic Chemistry Lab 30%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "11",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bachim3T Organic Chemistry Theory 70%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "8",
+                                "sept": "11.5"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4base30 Accounting and Entrepreneurship 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "14",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4babm3T Entrepreneurship 25%",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4base3C Accounting 75%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "15",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4batech30 Web Technology 8 ECTS",
+                    "final_grades": {
+                        "jan": "15",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4batech3P Web Project 40%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3D Front-End Development 30%",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3B Back-End Development 30%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4basg30 Internship 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "18",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4basg3X Internship 100%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "18",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4beal30 Electronic Design 5 ECTS",
+                    "final_grades": {
+                        "jan": "13.5",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4beal3C Analog Electronics 75%",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4beal3L Analog Electronics Lab 25%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4baeco30 Applied Economics 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "15",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4baeco3A Microeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "12",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4baeco3B Macroeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "18",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 }
             ]
-        },
+    },
         {
             "student_id": "20232",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bamath30 Discrete Mathematics 5 ECTS",
+                    "final_grades": {
+                        "jan": "14",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bamath3A Algebra 70%",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bamath3B Graph Theory 30%",
+                            "grades": {
+                                "jan": "10",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bapro30 Advanced Programming 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "14",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bapro3P Java Project 60%",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bapro3L Programming Lab 40%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "15",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 11,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bachim30 Organic Chemistry 7 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "9",
+                        "sept": "11"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bachim3L Organic Chemistry Lab 30%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "11",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bachim3T Organic Chemistry Theory 70%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "9",
+                                "sept": "12"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4base30 Accounting and Entrepreneurship 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "15",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4babm3T Entrepreneurship 25%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4base3C Accounting 75%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "16",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4batech30 Web Technology 8 ECTS",
+                    "final_grades": {
+                        "jan": "16",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4batech3P Web Project 40%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3D Front-End Development 30%",
+                            "grades": {
+                                "jan": "17",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3B Back-End Development 30%",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4basg30 Internship 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "19",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4basg3X Internship 100%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "19",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4beal30 Electronic Design 5 ECTS",
+                    "final_grades": {
+                        "jan": "14",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4beal3C Analog Electronics 75%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4beal3L Analog Electronics Lab 25%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4baeco30 Applied Economics 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "16",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4baeco3A Microeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "13",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4baeco3B Macroeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "19",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 }
             ]
+            
         },
         {
             "student_id": "20233",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bamath30 Discrete Mathematics 5 ECTS",
+                    "final_grades": {
+                        "jan": "13",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bamath3A Algebra 70%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bamath3B Graph Theory 30%",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bapro30 Advanced Programming 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "12",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bapro3P Java Project 60%",
+                            "grades": {
+                                "jan": "11",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bapro3L Programming Lab 40%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "13",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bachim30 Organic Chemistry 7 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "11",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bachim3L Organic Chemistry Lab 30%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "13",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bachim3T Organic Chemistry Theory 70%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "10",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4base30 Accounting and Entrepreneurship 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "13",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4babm3T Entrepreneurship 25%",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4base3C Accounting 75%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "14",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4batech30 Web Technology 8 ECTS",
+                    "final_grades": {
+                        "jan": "14",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4batech3P Web Project 40%",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3D Front-End Development 30%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3B Back-End Development 30%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4basg30 Internship 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "17",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4basg3X Internship 100%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "17",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4beal30 Electronic Design 5 ECTS",
+                    "final_grades": {
+                        "jan": "12.5",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4beal3C Analog Electronics 75%",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4beal3L Analog Electronics Lab 25%",
+                            "grades": {
+                                "jan": "13",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4baeco30 Applied Economics 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "14",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4baeco3A Microeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "11",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4baeco3B Macroeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "17",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 }
-            ]
+            ]            
         },
         {
             "student_id": "20234",
             "grades": [
                 {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 11,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bamath30 Discrete Mathematics 5 ECTS",
+                    "final_grades": {
+                        "jan": "15",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bamath3A Algebra 70%",
+                            "grades": {
+                                "jan": "17",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bamath3B Graph Theory 30%",
+                            "grades": {
+                                "jan": "12",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bapro30 Advanced Programming 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "15",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bapro3P Java Project 60%",
+                            "grades": {
+                                "jan": "14",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bapro3L Programming Lab 40%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "16",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
-                    }
+                    "course": "4bachim30 Organic Chemistry 7 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "12",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4bachim3L Organic Chemistry Lab 30%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "14",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4bachim3T Organic Chemistry Theory 70%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "11",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4base30 Accounting and Entrepreneurship 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "16",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4babm3T Entrepreneurship 25%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4base3C Accounting 75%",
+                            "grades": {
+                                "jan": "",
+                                "jun": "17",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4batech30 Web Technology 8 ECTS",
+                    "final_grades": {
+                        "jan": "17",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4batech3P Web Project 40%",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3D Front-End Development 30%",
+                            "grades": {
+                                "jan": "18",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4batech3B Back-End Development 30%",
+                            "grades": {
+                                "jan": "17",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4basg30 Internship 10 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "20",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4basg3X Internship 100%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "20",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4beal30 Electronic Design 5 ECTS",
+                    "final_grades": {
+                        "jan": "15",
+                        "jun": "-",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4beal3C Analog Electronics 75%",
+                            "grades": {
+                                "jan": "15",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4beal3L Analog Electronics Lab 25%",
+                            "grades": {
+                                "jan": "16",
+                                "jun": "-",
+                                "sept": "-"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "course": "4baeco30 Applied Economics 5 ECTS",
+                    "final_grades": {
+                        "jan": "-",
+                        "jun": "17",
+                        "sept": "-"
+                    },
+                    "subgrades": [
+                        {
+                            "subcourse": "4baeco3A Microeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "14",
+                                "sept": "-"
+                            }
+                        },
+                        {
+                            "subcourse": "4baeco3B Macroeconomics 50%",
+                            "grades": {
+                                "jan": "-",
+                                "jun": "20",
+                                "sept": "-"
+                            }
+                        }
+                    ]
                 }
-            ]
-        },
-        {
-            "student_id": "20235",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 10,
-                        "mark_sept": 12,
-                        "mark_janvier": -1
-                    }
-                }
-            ]
-        },
-        {
-            "student_id": "20236",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 16,
-                        "mark_sept": 17,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 13,
-                        "mark_sept": 14,
-                        "mark_janvier": -1
-                    }
-                }
-            ]
-        },
-        {
-            "student_id": "20237",
-            "grades": [
-                {
-                    "subject": "Math",
-                    "grade": {
-                        "mark_juin": 12,
-                        "mark_sept": 13,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Info",
-                    "grade": {
-                        "mark_juin": 15,
-                        "mark_sept": 16,
-                        "mark_janvier": -1
-                    }
-                },
-                {
-                    "subject": "Francais",
-                    "grade": {
-                        "mark_juin": 14,
-                        "mark_sept": 15,
-                        "mark_janvier": -1
-                    }
-                }
-            ]
+            ]            
         }
     ],
 
@@ -803,5 +1453,83 @@
             "hall": "EA11",
             "date": "2024-12-20"
         }
-    ]
+    ],
+  "orientations": [
+    {"id": 1, "name": "BLOC 1"},
+    {"id": 2, "name": "BLOC 2" },
+    { "id": 3, "name": "BLOC 3" },
+    { "id": 4, "name": "BLOC 4" },
+    { "id": 5, "name": "BLOC 5" },
+    { "id": 6, "name": "BLOC 6" }
+  ],
+
+  "syllabus": [
+    { "id": 1, "idorientation": 1, "syllabus": "Introduction to Chemistry", "quantity": 1, "price": 15.99 },
+    { "id": 2, "idorientation": 1, "syllabus": "Basic Calculus", "quantity": 1, "price": 14.99 },
+    { "id": 3, "idorientation": 1, "syllabus": "Physics Fundamentals", "quantity": 1, "price": 13.99 },
+    { "id": 4, "idorientation": 1, "syllabus": "Biology for Beginners", "quantity": 1, "price": 16.49 },
+    { "id": 5, "idorientation": 1, "syllabus": "Introduction to Programming", "quantity": 1, "price": 18.99 },
+    { "id": 6, "idorientation": 1, "syllabus": "Linear Algebra", "quantity": 1, "price": 14.49 },
+    { "id": 7, "idorientation": 1, "syllabus": "Organic Chemistry", "quantity": 1, "price": 17.99 },
+    { "id": 8, "idorientation": 1, "syllabus": "World History Overview", "quantity": 1, "price": 13.99 },
+    { "id": 9, "idorientation": 1, "syllabus": "English Literature I", "quantity": 1, "price": 11.99 },
+    { "id": 10, "idorientation": 1, "syllabus": "Introduction to Economics", "quantity": 1, "price": 19.49 },
+
+    { "id": 11, "idorientation": 2, "syllabus": "Advanced Physics", "quantity": 1, "price": 17.99 },
+    { "id": 12, "idorientation": 2, "syllabus": "Statistics and Probability", "quantity": 1, "price": 15.49 },
+    { "id": 13, "idorientation": 2, "syllabus": "Thermodynamics", "quantity": 1, "price": 18.99 },
+    { "id": 14, "idorientation": 2, "syllabus": "Discrete Mathematics", "quantity": 1, "price": 14.99 },
+    { "id": 15, "idorientation": 2, "syllabus": "Environmental Science", "quantity": 1, "price": 13.99 },
+    { "id": 16, "idorientation": 2, "syllabus": "Advanced Programming", "quantity": 1, "price": 19.99 },
+    { "id": 17, "idorientation": 2, "syllabus": "Ancient Civilizations", "quantity": 1, "price": 12.99 },
+    { "id": 18, "idorientation": 2, "syllabus": "Modern Art History", "quantity": 1, "price": 14.49 },
+    { "id": 19, "idorientation": 2, "syllabus": "Sociology Basics", "quantity": 1, "price": 13.99 },
+    { "id": 20, "idorientation": 2, "syllabus": "Physics Lab Guide", "quantity": 1, "price": 18.49 },
+
+    { "id": 21, "idorientation": 3, "syllabus": "Introduction to Philosophy", "quantity": 1, "price": 12.99 },
+    { "id": 22, "idorientation": 3, "syllabus": "Advanced Calculus", "quantity": 1, "price": 16.99 },
+    { "id": 23, "idorientation": 3, "syllabus": "Artificial Intelligence Basics", "quantity": 1, "price": 19.99 },
+    { "id": 24, "idorientation": 3, "syllabus": "Medical Physics", "quantity": 1, "price": 14.99 },
+    { "id": 25, "idorientation": 3, "syllabus": "Introduction to Robotics", "quantity": 1, "price": 17.99 },
+    { "id": 26, "idorientation": 3, "syllabus": "Creative Writing", "quantity": 1, "price": 11.99 },
+    { "id": 27, "idorientation": 3, "syllabus": "Machine Learning", "quantity": 1, "price": 18.99 },
+    { "id": 28, "idorientation": 3, "syllabus": "Chemical Engineering", "quantity": 1, "price": 19.99 },
+    { "id": 29, "idorientation": 3, "syllabus": "Advanced Biology", "quantity": 1, "price": 16.49 },
+    { "id": 30, "idorientation": 3, "syllabus": "History of Mathematics", "quantity": 1, "price": 13.99 },
+
+    { "id": 31, "idorientation": 4, "syllabus": "Astronomy Basics", "quantity": 1, "price": 15.99 },
+    { "id": 32, "idorientation": 4, "syllabus": "Electrical Circuits", "quantity": 1, "price": 17.99 },
+    { "id": 33, "idorientation": 4, "syllabus": "Signal Processing", "quantity": 1, "price": 19.99 },
+    { "id": 34, "idorientation": 4, "syllabus": "Introduction to AI", "quantity": 1, "price": 18.49 },
+    { "id": 35, "idorientation": 4, "syllabus": "Control Systems", "quantity": 1, "price": 16.99 },
+    { "id": 36, "idorientation": 4, "syllabus": "Data Structures", "quantity": 1, "price": 14.99 },
+    { "id": 37, "idorientation": 4, "syllabus": "Cultural Anthropology", "quantity": 1, "price": 13.99 },
+    { "id": 38, "idorientation": 4, "syllabus": "Music Theory", "quantity": 1, "price": 12.99 },
+    { "id": 39, "idorientation": 4, "syllabus": "French Literature", "quantity": 1, "price": 15.49 },
+    { "id": 40, "idorientation": 4, "syllabus": "Quantum Mechanics", "quantity": 1, "price": 19.49 },
+
+    { "id": 41, "idorientation": 5, "syllabus": "Hydraulics", "quantity": 1, "price": 14.99 },
+    { "id": 42, "idorientation": 5, "syllabus": "Introduction to Networks", "quantity": 1, "price": 13.99 },
+    { "id": 43, "idorientation": 5, "syllabus": "Digital Logic Design", "quantity": 1, "price": 16.49 },
+    { "id": 44, "idorientation": 5, "syllabus": "Introduction to Astronomy", "quantity": 1, "price": 17.99 },
+    { "id": 45, "idorientation": 5, "syllabus": "Signals and Systems", "quantity": 1, "price": 19.49 },
+    { "id": 46, "idorientation": 5, "syllabus": "Game Theory", "quantity": 1, "price": 15.99 },
+    { "id": 47, "idorientation": 5, "syllabus": "Introduction to Database Systems", "quantity": 1, "price": 14.49 },
+    { "id": 48, "idorientation": 5, "syllabus": "Mathematics for Engineers", "quantity": 1, "price": 18.99 },
+    { "id": 49, "idorientation": 5, "syllabus": "Geological Sciences", "quantity": 1, "price": 17.99 },
+    { "id": 50, "idorientation": 5, "syllabus": "English Grammar", "quantity": 1, "price": 12.99 },
+
+    { "id": 51, "idorientation": 6, "syllabus": "Cloud Computing", "quantity": 1, "price": 19.99 },
+    { "id": 52, "idorientation": 6, "syllabus": "Mobile App Development", "quantity": 1, "price": 18.49 },
+    { "id": 53, "idorientation": 6, "syllabus": "Advanced Software Engineering", "quantity": 1, "price": 17.99 },
+    { "id": 54, "idorientation": 6, "syllabus": "Cybersecurity Fundamentals", "quantity": 1, "price": 19.49 },
+    { "id": 55, "idorientation": 6, "syllabus": "3D Modelling", "quantity": 1, "price": 18.99 },
+    { "id": 56, "idorientation": 6, "syllabus": "Introduction to Cloud Systems", "quantity": 1, "price": 19.99 },
+    { "id": 57, "idorientation": 6, "syllabus": "Big Data Analysis", "quantity": 1, "price": 17.99 },
+    { "id": 58, "idorientation": 6, "syllabus": "Machine Learning for Beginners", "quantity": 1, "price": 18.99 },
+    { "id": 59, "idorientation": 6, "syllabus": "Computer Vision Basics", "quantity": 1, "price": 18.49 },
+    { "id": 60, "idorientation": 6, "syllabus": "Virtual Reality Systems", "quantity": 1, "price": 19.99 }
+  ],
+
+  "cart": []
 }
