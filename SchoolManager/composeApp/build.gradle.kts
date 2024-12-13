@@ -80,6 +80,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)  // Sérialisation JSON avec Ktor
             implementation(libs.kotlinx.serialization.json) // Bibliothèque de sérialisation JSON Kotlin
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.content.negotiation)
 
 
 

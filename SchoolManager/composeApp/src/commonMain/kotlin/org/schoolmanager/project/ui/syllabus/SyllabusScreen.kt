@@ -15,9 +15,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -32,11 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 import org.schoolmanager.project.data.model.Orientation
+import org.schoolmanager.project.data.model.Syllabus
 import org.schoolmanager.project.viewmodel.SyllabusViewModel
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.back
 import schoolmanager.composeapp.generated.resources.shopping_cart
-
 
 @Composable
 fun SyllabusScreen(
@@ -45,16 +47,26 @@ fun SyllabusScreen(
     orientation: Orientation,
     syllabusviewModel: SyllabusViewModel
 ) {
-    val syllabusList by syllabusviewModel.syllabus.collectAsState()
-    val filteredSyllabus = syllabusList.filter { it.idorientation == orientation.id }
+    LaunchedEffect(Unit) {
+        syllabusviewModel.fetchSyllabus()
+    }
 
-    val selectedItems = remember { mutableStateListOf<Boolean>().apply { addAll(List(filteredSyllabus.size) { false }) } }
-    val quantities = remember { mutableStateListOf<Int>().apply { addAll(filteredSyllabus.map { it.quantity }) } }
+    val AllSyllabus by syllabusviewModel.syllabus.collectAsState()
+    val syllabusList = remember(AllSyllabus) {
+        syllabusviewModel.getSyllabusByOrientationId(orientation.id)
+    }
+
+    if (syllabusList.isEmpty()) {
+        Text("No syllabus found for this orientation", color = Color.Gray, fontSize = 16.sp)
+        return
+    }
+
+    val selectedItems = remember { mutableStateListOf<Boolean>().apply { addAll(List(syllabusList.size) { false }) } }
+    val quantities = remember { mutableStateListOf<Int>().apply { addAll(syllabusList.map { it.quantity }) } }
 
     val allSelected = selectedItems.all { it }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        // Haut de la page
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -102,9 +114,16 @@ fun SyllabusScreen(
                 )
             }
 
+
+
             Button(
                 onClick = {
-
+                    syllabusList
+                        .filterIndexed { index, _ -> selectedItems[index] }
+                        .forEach { syllabus ->
+                            val updatedSyllabus = syllabus.copy(quantity = quantities[syllabusList.indexOf(syllabus)])
+                            syllabusviewModel.addToCart(updatedSyllabus)
+                        }
                 },
                 modifier = Modifier.size(width = 140.dp, height = 50.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))
@@ -117,7 +136,7 @@ fun SyllabusScreen(
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                     Text(
-                        text = "Panier",
+                        text = "Ajouter",
                         style = TextStyle(color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold),
                         modifier = Modifier.padding(start = 8.dp)
                     )
@@ -125,76 +144,54 @@ fun SyllabusScreen(
             }
         }
 
-        // Liste des syllabus avec bordure
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .border(BorderStroke(2.dp, Color.Black), shape = RoundedCornerShape(12.dp))
-                .padding(16.dp)
-        ) {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                items(filteredSyllabus.size) { index ->
-                    val syllabus = filteredSyllabus[index]
-
-                    Row(
-                        Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+        // Liste des syllabus
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            items(syllabusList.size) { index ->
+                val syllabus = syllabusList[index]
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(8.dp))
+                        .padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Checkbox(
+                        checked = selectedItems[index],
+                        onCheckedChange = { isChecked -> selectedItems[index] = isChecked }
+                    )
+                    Column(
+                        Modifier.weight(1f).padding(start = 8.dp)
                     ) {
-                        Checkbox(
-                            checked = selectedItems[index],
-                            onCheckedChange = { isChecked -> selectedItems[index] = isChecked },
-                            modifier = Modifier.padding(end = 16.dp)
+                        Text(
+                            text = syllabus.syllabus,
+                            style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                         )
-
-                        Column(Modifier.weight(1f)) {
-                            Text(
-                                text = syllabus.syllabus,
-                                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                            )
-                            Text(
-                                text = "${syllabus.price}€",
-                                style = TextStyle(fontSize = 14.sp, color = Color.Black)
-                            )
-                        }
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        ) {
-                            Button(
-                                onClick = { if (quantities[index] > 1) quantities[index] -= 1 },
-                                modifier = Modifier.size(30.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
-                            ) { Text("-", style = TextStyle(fontSize = 18.sp, color = Color.Black)) }
-                            Text(
-                                text = quantities[index].toString(),
-                                modifier = Modifier.padding(horizontal = 8.dp),
-                                style = TextStyle(fontSize = 16.sp)
-                            )
-                            Button(
-                                onClick = { quantities[index] += 1 },
-                                modifier = Modifier.size(30.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
-                            ) { Text("+", style = TextStyle(fontSize = 18.sp, color = Color.Black)) }
-                        }
-
+                        Text(
+                            text = "${syllabus.price}€",
+                            style = TextStyle(fontSize = 16.sp, color = Color.Gray)
+                        )
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Button(
-                            onClick = {
-                                val syllabusItem = filteredSyllabus[index].copy(quantity = quantities[index])
-                                syllabusviewModel.addToCart(syllabusItem)
-                            },
-                            modifier = Modifier.size(width = 50.dp, height = 40.dp),
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))
+                            onClick = { if (quantities[index] > 1) quantities[index] -= 1 },
+                            modifier = Modifier.size(30.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
                         ) {
-                            Image(
-                                painter = painterResource(Res.drawable.shopping_cart),
-                                contentDescription = "Add to Cart",
-                                colorFilter = ColorFilter.tint(Color.White)
-                            )
+                            Text("-", style = TextStyle(fontSize = 18.sp, color = Color.Black))
+                        }
+                        Text(
+                            text = quantities[index].toString(),
+                            style = TextStyle(fontSize = 16.sp),
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        Button(
+                            onClick = { quantities[index] += 1 },
+                            modifier = Modifier.size(30.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
+                        ) {
+                            Text("+", style = TextStyle(fontSize = 18.sp, color = Color.Black))
                         }
                     }
                 }
@@ -202,5 +199,4 @@ fun SyllabusScreen(
         }
     }
 }
-
 

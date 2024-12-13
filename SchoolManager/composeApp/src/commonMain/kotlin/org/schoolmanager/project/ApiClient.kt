@@ -5,9 +5,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -36,6 +38,15 @@ class SharedViewModel {
     private val _calendar= MutableStateFlow<List<Calendar>>(emptyList())
     val calendar: StateFlow<List<Calendar>> get()= _calendar
 
+    private val _orientations= MutableStateFlow<List<Orientation>>(emptyList())
+    val orientation: StateFlow<List<Orientation>> get()= _orientations
+
+    private val _syllabus= MutableStateFlow<List<Syllabus>>(emptyList())
+    val syllabus: StateFlow<List<Syllabus>> get()= _syllabus
+
+    private val _cart= MutableStateFlow<List<Syllabus>>(emptyList())
+    val cart: StateFlow<List<Syllabus>> get()= _cart
+
 //    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
 //    val grade: StateFlow<List<Grade>> get() = _grades
 
@@ -61,12 +72,73 @@ class SharedViewModel {
         }
     }
 
-//    fun fetchGrades() {
+    fun fetchOrientations() {
+        coroutineScope.launch {
+            val fetchedOrientations = ApiService.fetchOrientations()
+            _orientations.value = fetchedOrientations
+        }
+    }
+
+    fun fetchSyllabus() {
+        coroutineScope.launch {
+            val fetchedSyllabus = ApiService.fetchSyllabus()
+            _syllabus.value = fetchedSyllabus
+        }
+    }
+
+    fun fetchCart() {
+        coroutineScope.launch {
+            val fetchedCart = ApiService.fetchCart()
+            _cart.value = fetchedCart
+        }
+    }
+
+
+    //addToCart
+    //removeFromCart
+    //clearCart
+//    fun addToCart() {
 //        coroutineScope.launch {
-//            val fetchedGrades = ApiService.fetchGrades()
-//            _grades.value = fetchedGrades
+//            val addedToCart = ApiService.addToCart()
+//            _cart.value = addedToCart
 //        }
 //    }
+
+    fun addToCart(syllabus: Syllabus) {
+        coroutineScope.launch {
+            try {
+                ApiService.addToCart(syllabus)
+                println("Article ajouté au panier : $syllabus")
+                fetchCart() // Rafraîchit le panier après l'ajout
+            } catch (e: Exception) {
+                println("Erreur lors de l'ajout au panier : ${e.message}")
+            }
+        }
+    }
+
+    fun removeFromCart(syllabusId: Int) {
+        coroutineScope.launch {
+            try {
+                ApiService.removeFromCart(syllabusId)
+                println("Article supprimé du panier : $syllabusId")
+                fetchCart() // Rafraîchit le panier après la suppression
+            } catch (e: Exception) {
+                println("Erreur lors de la suppression du panier : ${e.message}")
+            }
+        }
+    }
+
+    fun clearCart() {
+        coroutineScope.launch {
+            try {
+                ApiService.clearCart()
+                println("Panier vidé")
+                fetchCart() // Rafraîchit le panier après le nettoyage
+            } catch (e: Exception) {
+                println("Erreur lors du nettoyage du panier : ${e.message}")
+            }
+        }
+    }
 
 
     fun onClear() {
@@ -76,7 +148,15 @@ class SharedViewModel {
 
 object ApiService {
 
-    private val client = HttpClient(CIO)
+    private val client = HttpClient(CIO){
+        install(ContentNegotiation) {
+            json(Json {
+                ignoreUnknownKeys = true // Ignore les champs inconnus
+                isLenient = true // Accepte des formats JSON plus souples
+                prettyPrint = false // Désactive l'impression formatée
+            })
+        }
+    }
 
     suspend fun fetchContacts(): List<Contact> {
         return try {
@@ -105,7 +185,7 @@ object ApiService {
             emptyList()
         }
     }
-//http://172.17.38.18:5000/calendar
+
     suspend fun fetchCalendar(): List<Calendar> {
         return try {
             val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/calendar")
@@ -127,7 +207,7 @@ object ApiService {
     // Méthode pour récupérer les orientations
     suspend fun fetchOrientations(): List<Orientation> {
         return try {
-            val response: HttpResponse = client.get("http://localhost:3323/orientations")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/orientations")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -142,7 +222,7 @@ object ApiService {
     // Méthode pour récupérer les syllabus
     suspend fun fetchSyllabus(): List<Syllabus> {
         return try {
-            val response: HttpResponse = client.get("http://localhost:3323/syllabus")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/syllabus")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -153,14 +233,13 @@ object ApiService {
             emptyList()
         }
     }
-
 
 
 
 
     suspend fun fetchCart(): List<Syllabus> {
         return try {
-            val response: HttpResponse = client.get("http://localhost:3323/cart")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/cart")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -172,30 +251,66 @@ object ApiService {
         }
     }
 
+//    suspend fun addToCart(syllabus: Syllabus): Boolean {
+//        return try {
+//            val response: HttpResponse = client.post("http://pat.infolab.ecam.be:61818/cart") {
+//                contentType(ContentType.Application.Json)
+//                setBody(syllabus)
+//            }
+//            if (response.status == HttpStatusCode.OK) {
+//                println("Requête POST réussie : $syllabus")
+//                true
+//            } else {
+//                println("Erreur lors de la requête POST : ${response.status}")
+//                false
+//            }
+//        } catch (e: Exception) {
+//            println("Exception lors de l'ajout au panier : ${e.message}")
+//            false
+//        }
+//    }
+
     suspend fun addToCart(syllabus: Syllabus) {
         try {
-            client.post("http://localhost:3323/cart") {
+            val response: HttpResponse = client.post("http://pat.infolab.ecam.be:61818/cart") {
                 contentType(ContentType.Application.Json)
-                setBody(syllabus)
+                setBody(syllabus) // Ici, `syllabus` sera automatiquement sérialisé en JSON
+            }
+            println("Requête POST réussie pour ajouter au panier : ${response.status}")
+        } catch (e: Exception) {
+            println("Erreur lors de la requête POST : ${e.message}")
+        }
+    }
+
+    suspend fun removeFromCart(syllabusId: Int): Boolean {
+        return try {
+            val response: HttpResponse = client.delete("http://pat.infolab.ecam.be:61818/cart/$syllabusId")
+            if (response.status == HttpStatusCode.OK) {
+                println("Requête DELETE réussie pour l'article $syllabusId")
+                true
+            } else {
+                println("Erreur lors de la requête DELETE : ${response.status}")
+                false
             }
         } catch (e: Exception) {
-            // Gérer les erreurs
+            println("Exception lors de la suppression du panier : ${e.message}")
+            false
         }
     }
 
-    suspend fun removeFromCart(syllabusId: Int) {
-        try {
-            client.delete("http://localhost:3323/cart/$syllabusId")
+    suspend fun clearCart(): Boolean {
+        return try {
+            val response: HttpResponse = client.delete("http://pat.infolab.ecam.be:61818/cart")
+            if (response.status == HttpStatusCode.OK) {
+                println("Panier vidé avec succès")
+                true
+            } else {
+                println("Erreur lors de la requête DELETE : ${response.status}")
+                false
+            }
         } catch (e: Exception) {
-            // Gérer les erreurs
-        }
-    }
-
-    suspend fun clearCart() {
-        try {
-            client.delete("http://localhost:3323/cart")
-        } catch (e: Exception) {
-            // Gérer les erreurs
+            println("Exception lors du nettoyage du panier : ${e.message}")
+            false
         }
     }
 

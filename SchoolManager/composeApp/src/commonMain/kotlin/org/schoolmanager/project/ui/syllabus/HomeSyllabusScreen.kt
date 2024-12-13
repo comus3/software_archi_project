@@ -17,6 +17,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -37,6 +38,9 @@ import schoolmanager.composeapp.generated.resources.shopping_cart
 
 @Composable
 fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, GoToSyllabus: (Orientation)-> Unit, syllabusviewModel: SyllabusViewModel) {
+    LaunchedEffect(Unit){
+        syllabusviewModel.fetchOrientations()
+    }
     val orientations by syllabusviewModel.orientations.collectAsState()
 
     Column(modifier= Modifier.fillMaxSize().padding(0.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement= Arrangement.Top){
@@ -93,12 +97,12 @@ fun HomeSyllabusScreen(BackCourse: ()-> Unit, GoToCart: ()-> Unit, GoToSyllabus:
                 val orientation = orientations[index]
                 Button(
                     onClick = { GoToSyllabus(orientation) },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier= Modifier.fillMaxWidth().padding(horizontal= 23.dp).height(60.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3E61A0))
                 ) {
                     Text(
                         text = orientation.name,
-                        style = TextStyle(fontSize = 18.sp, color = Color.White)
+                        style= TextStyle(fontSize= 30.sp, fontWeight= FontWeight.Bold, color= Color.White)
                     )
                 }
             }
