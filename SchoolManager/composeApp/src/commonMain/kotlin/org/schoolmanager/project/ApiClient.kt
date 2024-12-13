@@ -11,6 +11,7 @@ import io.ktor.http.*
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import org.schoolmanager.project.data.model.API_Course
 import org.schoolmanager.project.data.model.Calendar
 import org.schoolmanager.project.data.model.Contact
 import org.schoolmanager.project.data.model.Course
@@ -208,7 +209,7 @@ object ApiService {
         }
     }
 
-    suspend fun fetchCourses(): List<Course> {
+    suspend fun fetchCourses(): List<API_Course> {
         return try {
             val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/courses")
             if (response.status == HttpStatusCode.OK) {

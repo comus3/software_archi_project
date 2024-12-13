@@ -17,6 +17,7 @@ import schoolmanager.composeapp.generated.resources.electronic_circuit
 import schoolmanager.composeapp.generated.resources.motor
 
 import kotlinx.coroutines.flow.stateIn
+import org.schoolmanager.project.data.model.API_Course
 import org.schoolmanager.project.data.model.Contact
 
 
@@ -39,19 +40,17 @@ class CoursesViewModel : ViewModel() {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
-    val api_courses = MutableStateFlow<List<Course>>(emptyList())
+    val api_courses = MutableStateFlow<List<API_Course>>(emptyList())
     var searchQuery = MutableStateFlow("")
 
     fun fetchCourses() {
         coroutineScope.launch {
-            // Appeler l'API pour obtenir les contacts
             val fetchedCourses = ApiService.fetchCourses()
-            // Mettre à jour la liste des contacts dans l'état
             api_courses.value = fetchedCourses
         }
     }
 
-    val filteredCourses: StateFlow<List<Course>>
+    val filteredCourses: StateFlow<List<API_Course>>
         get() = api_courses.map { coursesList ->
             coursesList.filter { it.name.contains(searchQuery.value, ignoreCase = true) }
         }.stateIn(
@@ -59,6 +58,7 @@ class CoursesViewModel : ViewModel() {
             SharingStarted.Lazily,
             emptyList()
         )
+
 
     fun onSearchQueryChanged(query: String) {
         searchQuery.value = query

@@ -45,6 +45,7 @@ import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.addcourse
 import schoolmanager.composeapp.generated.resources.profilephoto
 import schoolmanager.composeapp.generated.resources.shopping_cart
+import schoolmanager.composeapp.generated.resources.ESSchool
 
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 
@@ -110,7 +111,6 @@ fun CoursesScreen(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = viewModel::onSearchQueryChanged,
-                label = { Text("Course") },
                 placeholder = { Text("Search here...") },
                 leadingIcon = {
                     Icon(
@@ -192,11 +192,11 @@ fun CourseCard(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Course image
-//            Image(
-//                painter = painterResource(resource!!),
-//                contentDescription = "$title Icon",
-//                modifier = Modifier.size(40.dp)
-//            )
+            Image(
+                painter = painterResource(Res.drawable.ESSchool),
+                contentDescription = "$title Icon",
+                modifier = Modifier.size(40.dp)
+            )
             // Course title
             Text(
                 text = title,
