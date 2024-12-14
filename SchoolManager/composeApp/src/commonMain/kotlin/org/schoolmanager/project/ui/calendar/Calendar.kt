@@ -54,6 +54,11 @@ import org.schoolmanager.project.viewmodel.CoursesViewModel
 @Composable
 fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), goToProfile:()-> Unit, GoToDetailsCourse: (Course) -> Unit) {
 
+    // CALENDAR DATA FROM VIEWMODELS
+    LaunchedEffect(Unit){
+        calendarViewModel.fetchCalendar()
+    }
+
     val timeZone = TimeZone.currentSystemDefault()
     // Date sélectionnée par défaut
     var selectedDate by remember { mutableStateOf(Clock.System.now().toLocalDateTime(timeZone).date) }
@@ -74,7 +79,7 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
     val weekDates = (0 until 7).map { dayOffset ->
         startOfWeek.plus(dayOffset, DateTimeUnit.DAY)
     }
-    val selectedDateCourses = calendarViewModel.getCoursesForDate(selectedDate)
+    //val selectedDateCourses = calendarViewModel.getCoursesForDate(selectedDate)
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -94,11 +99,17 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
             ) {
                 IconButton(onClick = { isMonthView = !isMonthView }) {
                     if (isMonthView) {
+                        LaunchedEffect(Unit){
+                            calendarViewModel.fetchCalendar()
+                        }
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowUp, // Icône pour vue hebdomadaire
                             contentDescription = "Switch to weekly view"
                         )
                     } else {
+                        LaunchedEffect(Unit){
+                            calendarViewModel.fetchCalendar()
+                        }
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowDown, // Icône pour vue mensuelle
                             contentDescription = "Switch to monthly view"
@@ -146,8 +157,6 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
                 // Divider entre le calendrier et la liste des cours
                 Divider()
                 Spacer(modifier = Modifier.height(13.dp))
-                // Affichage des cours du jour sélectionné
-                CourseList(selectedDateCourses, coursesViewModel, GoToDetailsCourse)
             } else {
                 Box(
                     modifier = Modifier
@@ -162,9 +171,9 @@ fun CalendarScreen(calendarViewModel: CalendarViewModel = CalendarViewModel(), c
                 // Divider entre le calendrier et la liste des cours
                 Divider()
                 Spacer(modifier = Modifier.height(13.dp))
-                // Affichage des cours du jour sélectionné dans la vue hebdomadaire
-                CourseList(selectedDateCourses, coursesViewModel, GoToDetailsCourse)
             }
+            // Affichage des cours du jour sélectionné
+            todayClassesContent(calendarViewModel, coursesViewModel, GoToDetailsCourse)
         }
     }
 }
@@ -181,7 +190,6 @@ fun MonthlyCalendar(
     val gridModifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()
-
     Column( modifier = Modifier.background(MaterialTheme.colors.background))  {
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -249,19 +257,32 @@ fun WeeklyCalendar(
         }
     }
 }
-
+/*
 @Composable
 fun CourseList(courses: List<Calendar>, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course) -> Unit) {
     LazyColumn {
-        items(courses) { courseCalendar ->
-            val course = coursesViewModel.getCourseById(courseCalendar.idcourse)
-            course?.let {
-                CourseItem(courseCalendar, it, GoToDetailsCourse)
+        if (courses.isEmpty()) {
+            item {
+                Text(
+                    text= "No courses for today.",
+                    fontSize= 20.sp,
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.h4,
+                    textAlign = TextAlign.Center
+                )
             }
+        } else {
+            items(courses) { courseCalendar ->
+                val course = coursesViewModel.getCourseById(courseCalendar.idcourse) // Associe le cours via son ID
+                course?.let {
+                    CourseItem(courseCalendar, it, GoToDetailsCourse)
+                }
+            }
+            item { Spacer(modifier = Modifier.height(40.dp)) }
         }
-        item{Spacer(modifier= Modifier.height(40.dp))}
     }
 }
+
 
 @Composable
 fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -> Unit) {
@@ -306,7 +327,7 @@ fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -
                     }
                     Spacer(modifier= Modifier.width(8.dp))
                     Text(
-                        text = course.name ?: "Unknown Course",
+                        text = course.name,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
 
@@ -335,7 +356,7 @@ fun CourseItem(calendar: Calendar, course: Course, GoToDetailsCourse: (Course) -
         }
     }
 }
-
+*/
 @Composable
 fun WeekDaysHeader(selectedDate: LocalDate, isMonthView: Boolean, onMonthChanged: (LocalDate) -> Unit) {
     // Liste des jours de la semaine dans l'ordre
@@ -387,6 +408,100 @@ fun WeekDaysHeader(selectedDate: LocalDate, isMonthView: Boolean, onMonthChanged
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Next month"
             )
+        }
+    }
+}
+
+@Composable
+fun todayClassesContent(calendarViewModel: CalendarViewModel, coursesViewModel: CoursesViewModel, GoToDetailsCourse: (Course)-> Unit){
+    //DATAS FROM VIEWMODEL
+    val AllCourses by calendarViewModel.courses.collectAsState()
+    //DATE TODAY
+    val TodayDate= Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+    //TODAY COURSE
+    val TodayCourses= AllCourses.filter {LocalDate.parse(it.date)==TodayDate}
+
+    LazyColumn(modifier= Modifier.fillMaxWidth().padding(5.dp), horizontalAlignment= Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top){
+        //IF MINIMUM 1 COURSE
+        if (TodayCourses.isNotEmpty()){
+            items(TodayCourses){courseCalendar->
+                val course= coursesViewModel.getCourseById(courseCalendar.idcourse)
+                course?.let{
+                    Card(
+                        modifier= Modifier.fillMaxWidth().height(130.dp).padding(vertical= 5.dp)
+                            .clickable{GoToDetailsCourse(course)},
+                        elevation= 8.dp,
+                        shape= RoundedCornerShape(16.dp)
+                    )
+                    {
+                        Row(
+                            modifier= Modifier.fillMaxWidth().padding(10.dp),
+                            horizontalArrangement= Arrangement.SpaceBetween,
+                            verticalAlignment= Alignment.CenterVertically
+                        )
+                        {
+                            //NAME COURSE
+                            Column{
+                                Row(verticalAlignment= Alignment.CenterVertically){
+                                    course.image?.let{painterResource(it)}?.let{
+                                        Image(
+                                            painter= it,
+                                            contentDescription= "Course Image",
+                                            modifier= Modifier
+                                                .clip(CircleShape)
+                                                .size(40.dp),
+                                            contentScale= ContentScale.Crop
+                                        )
+                                    }
+                                    Spacer(modifier= Modifier.width(8.dp))
+                                    Text(
+                                        text= course.name,
+                                        fontSize= 28.sp,
+                                        fontWeight= FontWeight.Bold,
+
+                                        )
+                                }
+                                Spacer(modifier= Modifier.height(4.dp))
+                                //TIME OF THE COURSE
+                                Text(
+                                    text= courseCalendar.startTime +" - " +courseCalendar.endTime,
+                                    fontSize= 20.sp,
+
+                                    )
+                            }
+                            //ROOM
+                            Column(horizontalAlignment= Alignment.End){
+                                Text(
+                                    text= "Room",
+                                    fontSize= 24.sp,
+                                    fontWeight= FontWeight.Bold,
+
+                                    )
+                                Spacer(modifier= Modifier.height(4.dp))
+                                Text(
+                                    text= courseCalendar.hall,
+                                    fontSize= 20.sp,
+
+                                    )
+                            }
+                        }
+                    }
+                }
+            }
+            //SPACE NAVIGATION
+            item{Spacer(modifier= Modifier.height(70.dp))}
+        }
+        //IF NOT COURSE
+        else{
+            item{
+                Text(
+                    text= "No courses for today.",
+                    fontSize= 20.sp,
+                    modifier= Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.h4,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
