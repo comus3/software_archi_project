@@ -160,7 +160,7 @@ object ApiService {
 
     suspend fun fetchContacts(): List<Contact> { // 172.17.38.18   port 5000
         return try {
-            val response: HttpResponse = client.get("http://172.17.38.18:5000/students")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 Json.decodeFromString(jsonResponse)
@@ -189,7 +189,7 @@ object ApiService {
 
     suspend fun fetchCalendar(): List<Calendar> {
         return try {
-            val response: HttpResponse= client.get("http://172.17.38.18:5000/calendar")
+            val response: HttpResponse= client.get("http://pat.infolab.ecam.be:61818/calendar")
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
                 val fetchedData = Json.decodeFromString<List<Calendar>>(jsonResponse)
