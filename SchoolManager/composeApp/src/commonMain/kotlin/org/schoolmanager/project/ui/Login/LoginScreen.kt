@@ -29,17 +29,19 @@ import org.schoolmanager.project.ContactsViewModel
 fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
     var textValue by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
-
     // Fetch contacts or display them
     val contacts by viewModel.contacts.collectAsState()
 
-
     LaunchedEffect(Unit) {
         try {
+            println("Attempting to fetch contacts...")
             viewModel.fetchContacts()
+            println("Contacts fetched: ${contacts.size}")
         } catch (e: Exception) {
             // Show an error message to the user
+            println("Error fetching contacts: ${e.message}")
             errorMessage = "Failed to fetch contacts."
+
         }
     }
 
@@ -52,17 +54,19 @@ fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        println("Rendering LoginScreen UI")
         Text("Enter your student ID", style = MaterialTheme.typography.h4)
         // TextField for input
         OutlinedTextField(
             value = textValue,
-            onValueChange = { textValue = it },
+            onValueChange = { textValue = it  },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true, // Restrict to a single line of input
             isError = errorMessage.isNotEmpty() // Show error state for TextField when there is an error
         )
         // Display error message if the ID is not found
         if (errorMessage.isNotEmpty()) {
+            println("Displaying error message: $errorMessage")
             Text(
                 text = errorMessage,
                 color = MaterialTheme.colors.error,
@@ -73,12 +77,16 @@ fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
         // Button for login, only enable if the student ID is valid
         Button(
             onClick = {
+                println("Login button clicked with ID: $textValue")
                 if (contacts.any { it.id == textValue }) {
                     // Proceed with login
+                    viewModel.setLoggedInUserId(textValue)
+                    println("Login successful for ID: $textValue")
                     onLoginSuccess()
                 } else {
                     // Show error message if the ID doesn't exist in the contacts list
                     errorMessage = "Student ID not found!"
+                    println("Login failed: $errorMessage")
                 }
             },
             shape = RoundedCornerShape(16.dp), // Add rounded corners with a 16.dp radius

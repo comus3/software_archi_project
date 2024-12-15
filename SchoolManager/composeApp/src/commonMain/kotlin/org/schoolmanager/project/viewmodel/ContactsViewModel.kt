@@ -19,6 +19,8 @@ class ContactsViewModel {
     val contacts = MutableStateFlow<List<Contact>>(emptyList())
     var searchQuery = MutableStateFlow("")
     var selectedContact = MutableStateFlow<Contact?>(null)
+    var loggedInUserId = MutableStateFlow("")
+        private set
 
     // Fonction pour récupérer les contacts depuis l'API
     fun fetchContacts() {
@@ -28,6 +30,11 @@ class ContactsViewModel {
             // Mettre à jour la liste des contacts dans l'état
             contacts.value = fetchedContacts
         }
+    }
+
+    fun setLoggedInUserId(userId: String) {
+        println("Setting loggedInUserId to: $userId")
+        loggedInUserId.value = userId
     }
 
     val filteredContacts: StateFlow<List<Contact>>

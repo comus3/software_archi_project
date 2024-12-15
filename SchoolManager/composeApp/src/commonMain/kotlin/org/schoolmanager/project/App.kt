@@ -44,6 +44,7 @@ fun App() {
     var SelectedNews: NewsHomePage? by remember { mutableStateOf(null) }
     var SelectedOrientation: Orientation? by remember { mutableStateOf(null) }
     var ScreenHistory = remember { mutableStateListOf<String>() }
+    val sharedViewModel = remember { ContactsViewModel() }
 
     // Global theme wrapper
     MyTheme(darkTheme = isDarkModeEnabled) {
@@ -51,7 +52,7 @@ fun App() {
             // Login Page
             LoginScreen(
                 onLoginSuccess = { isLoggedIn = true }, // Set isLoggedIn to true after successful login
-                viewModel = viewModel
+                viewModel = sharedViewModel
             )
         } else {
             // Main App with Bottom Navigation
@@ -110,7 +111,9 @@ fun App() {
                             SelectedNews = news
                             SelectedScreen = "DetailsNews"
                             ScreenHistory.add("Home")
-                        }
+                        },
+                        contactsviewModel = sharedViewModel,
+                        coursesViewModel = CoursesViewModel()
                     )
                     "DetailsNews" -> SelectedNews?.let {
                         HomePageDetailsNews(it, BackHomePage = { button ->

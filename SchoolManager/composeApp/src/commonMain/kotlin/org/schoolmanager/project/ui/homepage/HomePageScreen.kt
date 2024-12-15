@@ -40,6 +40,8 @@ import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 import org.schoolmanager.project.viewmodel.NewsViewModel
+import org.schoolmanager.project.ContactsViewModel
+
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
 
@@ -47,8 +49,11 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 
 //HOMEPAGE
 @Composable
-fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
+fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), contactsviewModel: ContactsViewModel= ContactsViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
     //LOAD NEWS+CALENDAR DATA FROM VIEWMODELS
+
+    val loggedInUserId by contactsviewModel.loggedInUserId.collectAsState()
+    println("Logged in user ID in HomePageScreen: $loggedInUserId")
     LaunchedEffect(Unit){
         newsViewModel.fetchNews()
         calendarViewModel.fetchCalendar()
@@ -70,7 +75,7 @@ fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Uni
         }
 
         //WELCOME+USERNAME
-        Welcome("Zlatann The best")
+        Welcome(loggedInUserId)
 
         //2 BUTTONS: LIST OF TODAY'S CLASSES +LAST NEWS
         var CurrentSelectedButton by remember {mutableStateOf(SelectedButton)}
