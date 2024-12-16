@@ -24,11 +24,12 @@ import androidx.compose.runtime.setValue
 @Composable
 fun GradesTable(viewModel: GradesViewModel) {
     var errorMessage by remember { mutableStateOf("") }
-
+    //val studentId by viewModel.studentId.collectAsState()
     val results by viewModel._studentsCourses.collectAsState()
 
     LaunchedEffect(Unit) {
         try {
+            println("call of function fetchGrades from viewmodel (student)")
             viewModel.fetchGrades()
         } catch (e: Exception) {
             errorMessage = "Failed to fetch grades"

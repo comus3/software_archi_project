@@ -328,9 +328,10 @@ object ApiService {
         }
     }
 
-    suspend fun fetchStudentGrades(): StudentGrade {
+    suspend fun fetchStudentGrades(id_student: String): StudentGrade {
         return try {
-            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades/20231")
+            println("Id student in route : $id_student")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades/$id_student")
             val jsonResponse = response.bodyAsText()
             Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {

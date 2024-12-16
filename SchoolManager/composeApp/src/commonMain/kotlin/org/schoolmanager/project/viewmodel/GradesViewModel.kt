@@ -22,17 +22,21 @@ class GradesViewModel : ViewModel() {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     val _studentsCourses = MutableStateFlow<List<StudentCourse>>(emptyList())
-    //val studentsCourses: StateFlow<List<StudentCourse>> get() = _studentsCourses
+    private val _studentId = MutableStateFlow<String>("")
+    val studentId: StateFlow<String> get() = _studentId
+
+    fun setStudentId(id: String) {
+        _studentId.value = id
+        println("Student ID set in GradesViewModel: $id")
+    }
+
 
     fun fetchGrades() {
         coroutineScope.launch {
-            val fetchedGrades = ApiService.fetchStudentGrades()
+            val fetchedGrades = ApiService.fetchStudentGrades(_studentId.value)
+            println("student id in viewmodel: $studentId")
             _studentsCourses.value = fetchedGrades.grades
         }
     }
-
-//    fun getStudentGrades(studentId: String): StudentGrade? {
-//        return studentsCourses.value.find { it.student_id == studentId }
-//    }
 }
 

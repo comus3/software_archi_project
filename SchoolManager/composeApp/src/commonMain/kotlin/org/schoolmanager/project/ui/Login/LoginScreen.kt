@@ -23,10 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 import org.schoolmanager.project.ContactsViewModel
+import org.schoolmanager.project.viewmodel.GradesViewModel
 
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
+fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel, viewModelGrades: GradesViewModel) {
     var textValue by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
     // Fetch contacts or display them
@@ -82,6 +83,8 @@ fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: ContactsViewModel) {
                     // Proceed with login
                     viewModel.setLoggedInUserId(textValue)
                     println("Login successful for ID: $textValue")
+                    viewModelGrades.setStudentId(textValue)
+                    println("call of function setStudentId from viewmodel (student) : $textValue")
                     onLoginSuccess()
                 } else {
                     // Show error message if the ID doesn't exist in the contacts list

@@ -52,7 +52,8 @@ fun App() {
             // Login Page
             LoginScreen(
                 onLoginSuccess = { isLoggedIn = true }, // Set isLoggedIn to true after successful login
-                viewModel = sharedViewModel
+                viewModel = sharedViewModel,
+                viewModelGrades = GradesViewModel()
             )
         } else {
             // Main App with Bottom Navigation
