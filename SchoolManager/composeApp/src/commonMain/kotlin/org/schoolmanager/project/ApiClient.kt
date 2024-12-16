@@ -158,16 +158,29 @@ object ApiService {
         }
     }
 
-    suspend fun fetchContacts(): List<Contact> { // 172.17.38.18   port 5000
+    suspend fun fetchContacts(): List<Contact> {
+        println("fetchContacts: Starting request to fetch contacts")
         return try {
             val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
+            println("fetchContacts: Response status = ${response.status}")
+
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
-                Json.decodeFromString(jsonResponse)
+                println("fetchContacts: Successfully fetched JSON response: $jsonResponse")
+
+                val decodedResponse = Json.decodeFromString<List<Contact>>(jsonResponse)
+                println("fetchContacts: Decoded response into List<Contact> with size: ${decodedResponse.size}")
+
+                decodedResponse
             } else {
+                println("fetchContacts: Unexpected response status: ${response.status}")
                 emptyList()
             }
         } catch (e: Exception) {
+            println("fetchContacts: Exception occurred of type: ${e::class.simpleName}")
+            println("fetchContacts: Exception message: ${e.message ?: "No message"}")
+            println("fetchContacts: Exception toString: $e")
+            e.printStackTrace() // Pour capturer toute la trace de l'erreur
             emptyList()
         }
     }
