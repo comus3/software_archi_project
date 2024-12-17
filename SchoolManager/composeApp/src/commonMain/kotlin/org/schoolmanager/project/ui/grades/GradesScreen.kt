@@ -23,11 +23,13 @@ import schoolmanager.composeapp.generated.resources.back
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyListScope
+import org.schoolmanager.project.ContactsViewModel
 import org.schoolmanager.project.viewmodel.GradesViewModel
 
 
 @Composable
-fun GradesScreen(BackProfile: () -> Unit) {
+fun GradesScreen(BackProfile: () -> Unit, viewModel: ContactsViewModel, GradesViewModel: GradesViewModel) {
+    val loggedInUserId = viewModel.loggedInUserId.value
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +65,7 @@ fun GradesScreen(BackProfile: () -> Unit) {
 
         // Grades Table
         item {
-            GradesTable(GradesViewModel())
+            GradesTable(GradesViewModel(), ContactsViewModel(), loggedInUserId)
         }
 
         // Spacer at the bottom

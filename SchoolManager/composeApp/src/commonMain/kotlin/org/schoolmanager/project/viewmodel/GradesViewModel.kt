@@ -31,10 +31,10 @@ class GradesViewModel : ViewModel() {
     }
 
 
-    fun fetchGrades() {
+    fun fetchGrades(id_student: String) {
         coroutineScope.launch {
-            val fetchedGrades = ApiService.fetchStudentGrades(_studentId.value)
-            println("student id in viewmodel: $studentId")
+            val fetchedGrades = ApiService.fetchStudentGrades(id_student)
+            println("student id in viewmodel: $id_student")
             _studentsCourses.value = fetchedGrades.grades
         }
     }

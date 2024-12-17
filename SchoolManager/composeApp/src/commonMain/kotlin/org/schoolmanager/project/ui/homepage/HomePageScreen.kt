@@ -41,6 +41,7 @@ import org.schoolmanager.project.viewmodel.CalendarViewModel
 import org.schoolmanager.project.viewmodel.CoursesViewModel
 import org.schoolmanager.project.viewmodel.NewsViewModel
 import org.schoolmanager.project.ContactsViewModel
+import org.schoolmanager.project.viewmodel.GradesViewModel
 
 import schoolmanager.composeapp.generated.resources.Res
 import schoolmanager.composeapp.generated.resources.profilephoto
@@ -49,10 +50,11 @@ import schoolmanager.composeapp.generated.resources.profilephoto
 
 //HOMEPAGE
 @Composable
-fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), contactsviewModel: ContactsViewModel= ContactsViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
+fun HomePageScreen(SelectedButton: String= "Today classes", GoToProfile:()-> Unit, newsViewModel: NewsViewModel= NewsViewModel(), calendarViewModel: CalendarViewModel= CalendarViewModel(), contactsviewModel: ContactsViewModel= ContactsViewModel(), gradesViewModel: GradesViewModel = GradesViewModel(), coursesViewModel: CoursesViewModel = CoursesViewModel(), GoToDetailsCourse: (Course)-> Unit, GoToDetailsNews: (NewsHomePage)-> Unit){
     //LOAD NEWS+CALENDAR DATA FROM VIEWMODELS
 
     val loggedInUserId by contactsviewModel.loggedInUserId.collectAsState()
+    val _studentId by gradesViewModel.studentId.collectAsState()
     println("Logged in user ID in HomePageScreen: $loggedInUserId")
     LaunchedEffect(Unit){
         newsViewModel.fetchNews()

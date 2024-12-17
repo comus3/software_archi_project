@@ -22,6 +22,7 @@ import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.data.model.Syllabus
 import org.schoolmanager.project.data.model.StudentGrade
+import org.schoolmanager.project.ContactsViewModel
 
 //import org.schoolmanager.project.data.model.StudentGradesResponse
 
@@ -47,8 +48,7 @@ class SharedViewModel {
     private val _cart= MutableStateFlow<List<Syllabus>>(emptyList())
     val cart: StateFlow<List<Syllabus>> get()= _cart
 
-//    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
-//    val grade: StateFlow<List<Grade>> get() = _grades
+    //val loggedInUserId by contactsviewModel.loggedInUserId.collectAsState()
 
 
     fun fetchContacts() {
@@ -147,7 +147,6 @@ class SharedViewModel {
 }
 
 object ApiService {
-
     private val client = HttpClient(CIO){
         install(ContentNegotiation) {
             json(Json {
