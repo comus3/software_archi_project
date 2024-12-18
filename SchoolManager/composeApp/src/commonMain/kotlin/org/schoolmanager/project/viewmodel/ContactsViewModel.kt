@@ -25,10 +25,12 @@ class ContactsViewModel {
     // Fonction pour récupérer les contacts depuis l'API
     fun fetchContacts() {
         coroutineScope.launch {
+            println("Fetching contacts in viewmodel ")
             // Appeler l'API pour obtenir les contacts
             val fetchedContacts = ApiService.fetchContacts()
             // Mettre à jour la liste des contacts dans l'état
             contacts.value = fetchedContacts
+            println("Fetched contacts: ${contacts.value.size}")
         }
     }
 

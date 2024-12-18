@@ -22,6 +22,7 @@ import org.schoolmanager.project.data.model.NewsHomePage
 import org.schoolmanager.project.data.model.Orientation
 import org.schoolmanager.project.data.model.Syllabus
 import org.schoolmanager.project.data.model.StudentGrade
+import org.schoolmanager.project.ContactsViewModel
 
 //import org.schoolmanager.project.data.model.StudentGradesResponse
 
@@ -47,8 +48,7 @@ class SharedViewModel {
     private val _cart= MutableStateFlow<List<Syllabus>>(emptyList())
     val cart: StateFlow<List<Syllabus>> get()= _cart
 
-//    private val _grades = MutableStateFlow<List<Grade>>(emptyList())
-//    val grade: StateFlow<List<Grade>> get() = _grades
+    //val loggedInUserId by contactsviewModel.loggedInUserId.collectAsState()
 
 
     fun fetchContacts() {
@@ -147,7 +147,6 @@ class SharedViewModel {
 }
 
 object ApiService {
-
     private val client = HttpClient(CIO){
         install(ContentNegotiation) {
             json(Json {
@@ -158,16 +157,29 @@ object ApiService {
         }
     }
 
-    suspend fun fetchContacts(): List<Contact> { // 172.17.38.18   port 5000
+    suspend fun fetchContacts(): List<Contact> {
+        println("fetchContacts: Starting request to fetch contacts")
         return try {
             val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/students")
+            println("fetchContacts: Response status = ${response.status}")
+
             if (response.status == HttpStatusCode.OK) {
                 val jsonResponse = response.bodyAsText()
-                Json.decodeFromString(jsonResponse)
+                println("fetchContacts: Successfully fetched JSON response: $jsonResponse")
+
+                val decodedResponse = Json.decodeFromString<List<Contact>>(jsonResponse)
+                println("fetchContacts: Decoded response into List<Contact> with size: ${decodedResponse.size}")
+
+                decodedResponse
             } else {
+                println("fetchContacts: Unexpected response status: ${response.status}")
                 emptyList()
             }
         } catch (e: Exception) {
+            println("fetchContacts: Exception occurred of type: ${e::class.simpleName}")
+            println("fetchContacts: Exception message: ${e.message ?: "No message"}")
+            println("fetchContacts: Exception toString: $e")
+            e.printStackTrace() // Pour capturer toute la trace de l'erreur
             emptyList()
         }
     }
@@ -315,9 +327,10 @@ object ApiService {
         }
     }
 
-    suspend fun fetchStudentGrades(): StudentGrade {
+    suspend fun fetchStudentGrades(id_student: String): StudentGrade {
         return try {
-            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades/20231")
+            println("Id student in route : $id_student")
+            val response: HttpResponse = client.get("http://pat.infolab.ecam.be:61818/grades/$id_student")
             val jsonResponse = response.bodyAsText()
             Json.decodeFromString(jsonResponse)
         } catch (e: Exception) {

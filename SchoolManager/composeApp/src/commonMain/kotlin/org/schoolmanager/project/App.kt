@@ -45,6 +45,7 @@ fun App() {
     var SelectedOrientation: Orientation? by remember { mutableStateOf(null) }
     var ScreenHistory = remember { mutableStateListOf<String>() }
     val sharedViewModel = remember { ContactsViewModel() }
+    val sharedViewModelGrades = remember { GradesViewModel() }
 
     // Global theme wrapper
     MyTheme(darkTheme = isDarkModeEnabled) {
@@ -52,7 +53,8 @@ fun App() {
             // Login Page
             LoginScreen(
                 onLoginSuccess = { isLoggedIn = true }, // Set isLoggedIn to true after successful login
-                viewModel = sharedViewModel
+                viewModel = sharedViewModel,
+                viewModelGrades = sharedViewModelGrades
             )
         } else {
             // Main App with Bottom Navigation
@@ -138,7 +140,7 @@ fun App() {
                         GoToTerms = { SelectedScreen = "Terms" },
                         onDarkModeToggle = { isDarkModeEnabled = it }
                     )
-                    "Grades" -> GradesScreen(BackProfile = { SelectedScreen = "Profile" })
+                    "Grades" -> GradesScreen(BackProfile = { SelectedScreen = "Profile" }, viewModel = sharedViewModel, GradesViewModel = GradesViewModel())
                     "Calendar" -> CalendarScreen(
                         goToProfile = { SelectedScreen = "Profile"; ScreenHistory.add("Calendar") },
                         GoToDetailsCourse = { course ->

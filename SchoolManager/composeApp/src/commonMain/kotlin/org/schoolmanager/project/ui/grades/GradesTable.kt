@@ -20,16 +20,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import org.schoolmanager.project.ContactsViewModel
 
 @Composable
-fun GradesTable(viewModel: GradesViewModel) {
+fun GradesTable(viewModel: GradesViewModel, contactsViewModel: ContactsViewModel, loggedInUserId: String) {
     var errorMessage by remember { mutableStateOf("") }
-
     val results by viewModel._studentsCourses.collectAsState()
 
     LaunchedEffect(Unit) {
         try {
-            viewModel.fetchGrades()
+            println("call of function fetchGrades from viewmodel (student)")
+            viewModel.fetchGrades(loggedInUserId)
         } catch (e: Exception) {
             errorMessage = "Failed to fetch grades"
         }
