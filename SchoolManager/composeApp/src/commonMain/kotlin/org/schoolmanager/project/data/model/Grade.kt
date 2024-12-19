@@ -23,8 +23,8 @@ data class SubGrade(
 
 @Serializable
 data class GradeDetails(
-    val jan: String?, // Note en janvier
-    val jun: String?, // Note en juin
-    val sept: String? // Note en septembre
+    val jan: String, // Note en janvier
+    val jun: String, // Note en juin
+    val sept: String // Note en septembre
 )
 
