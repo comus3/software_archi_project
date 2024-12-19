@@ -30,23 +30,38 @@ fun GradeRow(courseTitle: String, finalGrades: GradeDetails) {
             modifier = Modifier.weight(2f)
         )
         Text(
-            text = finalGrades.jan ?: "-",
+            text = finalGrades.jan,
             fontSize = 14.sp,
-            color = if (finalGrades.jan != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                finalGrades.jan == "-" -> Color.Gray
+                finalGrades.jan.toDoubleOrNull() != null && finalGrades.jan.toDouble() < 10 -> Color(0xFFFF0000)
+                finalGrades.jan.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = finalGrades.jun ?: "-",
+            text = finalGrades.jun,
             fontSize = 14.sp,
-            color = if (finalGrades.jun != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                finalGrades.jun == "-" -> Color.Gray
+                finalGrades.jun.toDoubleOrNull() != null && finalGrades.jun.toDouble() < 10 -> Color(0xFFFF0000)
+                finalGrades.jun.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = finalGrades.sept ?: "-",
+            text = finalGrades.sept,
             fontSize = 14.sp,
-            color = if (finalGrades.sept != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                finalGrades.sept == "-" -> Color.Gray
+                finalGrades.sept.toDoubleOrNull() != null && finalGrades.sept.toDouble() < 10 -> Color(0xFFFF0000)
+                finalGrades.sept.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
@@ -60,7 +75,7 @@ fun GradeRow(courseTitle: String, finalGrades: GradeDetails) {
 }
 
 @Composable
-fun SubGradeRow(subTitle: String, jan: String?, juin: String?, sept: String?) {
+fun SubGradeRow(subTitle: String, jan: String, juin: String, sept: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -76,23 +91,38 @@ fun SubGradeRow(subTitle: String, jan: String?, juin: String?, sept: String?) {
             modifier = Modifier.weight(2f)
         )
         Text(
-            text = jan ?: "-",
+            text = jan,
             fontSize = 14.sp,
-            color = if (jan != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                jan == "-" -> Color.Gray
+                jan.toDoubleOrNull() != null && jan.toDouble() < 10 -> Color(0xFFFF0000)
+                jan.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = juin ?: "-",
+            text = juin,
             fontSize = 14.sp,
-            color = if (juin != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                juin == "-" -> Color.Gray
+                juin.toDoubleOrNull() != null && juin.toDouble() < 10 -> Color(0xFFFF0000)
+                juin.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = sept ?: "-",
+            text = sept ,
             fontSize = 14.sp,
-            color = if (sept != null) Color(0xFF4CAF50) else Color.Gray,
+            color = when {
+                sept == "-" -> Color.Gray
+                sept.toDoubleOrNull() != null && sept.toDouble() < 10 -> Color(0xFFFF0000)
+                sept.toDoubleOrNull() != null -> Color(0xFF4CAF50)
+                else -> Color.Gray
+            },
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
