@@ -41,7 +41,10 @@ class ContactsViewModel {
 
     val filteredContacts: StateFlow<List<Contact>>
         get() = contacts.map { contactList ->
-            contactList.filter { it.name.contains(searchQuery.value, ignoreCase = true) }
+            contactList.filter {
+                it.name.contains(searchQuery.value, ignoreCase = true) ||
+                        it.id.contains(searchQuery.value, ignoreCase = true)
+            }
         }.stateIn(
             coroutineScope,
             SharingStarted.Lazily,
